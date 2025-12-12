@@ -775,6 +775,7 @@
                 </button>
             `).join('');
             document.getElementById('departmentTabs').innerHTML = tabsHTML;
+            bindTabListeners();
         }
 
         function renderPositionSubtabs() {
@@ -785,6 +786,7 @@
                 </button>
             `).join('');
             document.getElementById('positionSubtabs').innerHTML = subtabsHTML;
+            bindPositionListeners();
         }
 
         function renderEmployees() {
@@ -880,7 +882,7 @@
             document.getElementById('leadsList').innerHTML = leadsHTML;
         }
 
-        function setupEventListeners() {
+        function bindTabListeners() {
             document.querySelectorAll('.tab-button').forEach(btn => {
                 btn.addEventListener('click', (e) => {
                     currentDepartment = e.currentTarget.dataset.department;
@@ -889,7 +891,9 @@
                     renderLeads();
                 });
             });
+        }
 
+        function bindPositionListeners() {
             document.querySelectorAll('.subtab-button').forEach(btn => {
                 btn.addEventListener('click', (e) => {
                     currentPosition = e.currentTarget.dataset.position;
@@ -897,40 +901,66 @@
                     renderEmployees();
                 });
             });
+        }
 
-            document.getElementById('addEmployeeBtn').addEventListener('click', () => {
-                document.getElementById('addEmployeeModal').classList.add('show');
-                populateDepartmentDropdown();
-                populatePositionDropdown();
-            });
+        function setupEventListeners() {
+            bindTabListeners();
+            bindPositionListeners();
 
-            document.getElementById('closeModal').addEventListener('click', () => {
-                document.getElementById('addEmployeeModal').classList.remove('show');
-            });
+            const addEmployeeBtn = document.getElementById('addEmployeeBtn');
+            const closeModal = document.getElementById('closeModal');
+            const cancelBtn = document.getElementById('cancelBtn');
 
-            document.getElementById('cancelBtn').addEventListener('click', () => {
-                document.getElementById('addEmployeeModal').classList.remove('show');
-            });
+            if (addEmployeeBtn) {
+                addEmployeeBtn.addEventListener('click', () => {
+                    document.getElementById('addEmployeeModal').classList.add('show');
+                    populateDepartmentDropdown();
+                    populatePositionDropdown();
+                });
+            }
 
-            document.getElementById('employeePosition').addEventListener('change', (e) => {
-                const position = e.target.value;
-                const managerGroup = document.getElementById('managerGroup');
-                const teamLeaderGroup = document.getElementById('teamLeaderGroup');
+            if (closeModal) {
+                closeModal.addEventListener('click', () => {
+                    document.getElementById('addEmployeeModal').classList.remove('show');
+                });
+            }
 
-                if (position === 'agent') {
-                    managerGroup.style.display = 'block';
-                    teamLeaderGroup.style.display = 'block';
-                } else if (position === 'team_leader') {
-                    managerGroup.style.display = 'block';
-                    teamLeaderGroup.style.display = 'none';
-                } else {
-                    managerGroup.style.display = 'none';
-                    teamLeaderGroup.style.display = 'none';
-                }
-            });
+            if (cancelBtn) {
+                cancelBtn.addEventListener('click', () => {
+                    document.getElementById('addEmployeeModal').classList.remove('show');
+                });
+            }
 
-            document.getElementById('searchInput').addEventListener('input', filterEmployees);
-            document.getElementById('performanceFilter').addEventListener('change', filterEmployees);
+            const employeePosition = document.getElementById('employeePosition');
+            if (employeePosition) {
+                employeePosition.addEventListener('change', (e) => {
+                    const position = e.target.value;
+                    const managerGroup = document.getElementById('managerGroup');
+                    const teamLeaderGroup = document.getElementById('teamLeaderGroup');
+
+                    if (position === 'agent') {
+                        managerGroup.style.display = 'block';
+                        teamLeaderGroup.style.display = 'block';
+                    } else if (position === 'team_leader') {
+                        managerGroup.style.display = 'block';
+                        teamLeaderGroup.style.display = 'none';
+                    } else {
+                        managerGroup.style.display = 'none';
+                        teamLeaderGroup.style.display = 'none';
+                    }
+                });
+            }
+
+            const searchInput = document.getElementById('searchInput');
+            const performanceFilter = document.getElementById('performanceFilter');
+
+            if (searchInput) {
+                searchInput.addEventListener('input', filterEmployees);
+            }
+
+            if (performanceFilter) {
+                performanceFilter.addEventListener('change', filterEmployees);
+            }
         }
 
         function populateDepartmentDropdown() {
