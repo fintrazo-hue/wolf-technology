@@ -14,7 +14,39 @@ const mockData = {
     departments: [
         { id: 1, name: 'Accounts' },
         { id: 2, name: 'Technical' },
-        { id: 3, name: 'Marketing' }
+        { id: 3, name: 'Marketing' },
+        { id: 4, name: 'BD' },
+        { id: 5, name: 'Sales' }
+    ],
+
+    managers: [
+        { id: 1, firstName: 'Michael', lastName: 'Roberts', email: 'michael.r@wolftech.com', phone: '555-0201', employeeCode: 'MGR001', department: 'Technical', status: 'Active', incentive: 5.5, discountAllowed: true },
+        { id: 2, firstName: 'Jennifer', lastName: 'Martinez', email: 'jennifer.m@wolftech.com', phone: '555-0202', employeeCode: 'MGR002', department: 'Sales', status: 'Active', incentive: 6.0, discountAllowed: true },
+        { id: 3, firstName: 'David', lastName: 'Anderson', email: 'david.a@wolftech.com', phone: '555-0203', employeeCode: 'MGR003', department: 'Marketing', status: 'Active', incentive: 5.0, discountAllowed: false }
+    ],
+
+    teamLeaders: [
+        { id: 1, name: 'Sarah Thompson', email: 'sarah.t@wolftech.com', phone: '555-0301', employeeCode: 'TL001', department: 'Technical', managerId: 1, managerName: 'Michael Roberts', status: 'Active' },
+        { id: 2, name: 'Robert Wilson', email: 'robert.w@wolftech.com', phone: '555-0302', employeeCode: 'TL002', department: 'Sales', managerId: 2, managerName: 'Jennifer Martinez', status: 'Active' },
+        { id: 3, name: 'Lisa Chen', email: 'lisa.c@wolftech.com', phone: '555-0303', employeeCode: 'TL003', department: 'Marketing', managerId: 3, managerName: 'David Anderson', status: 'Active' }
+    ],
+
+    agents: [
+        { id: 1, firstName: 'Alex', lastName: 'Johnson', email: 'alex.j@wolftech.com', phone: '555-0401', employeeCode: 'AGT001', department: 'Technical', tlId: 1, tlName: 'Sarah Thompson', managerId: 1, managerName: 'Michael Roberts', status: 'Active' },
+        { id: 2, firstName: 'Emma', lastName: 'Davis', email: 'emma.d@wolftech.com', phone: '555-0402', employeeCode: 'AGT002', department: 'Sales', tlId: 2, tlName: 'Robert Wilson', managerId: 2, managerName: 'Jennifer Martinez', status: 'Active' },
+        { id: 3, firstName: 'James', lastName: 'Brown', email: 'james.b@wolftech.com', phone: '555-0403', employeeCode: 'AGT003', department: 'Marketing', tlId: 3, tlName: 'Lisa Chen', managerId: 3, managerName: 'David Anderson', status: 'Active' }
+    ],
+
+    crmLeads: [
+        { id: 1, leadName: 'LEAD-001', clientName: 'Tech Corp Inc', email: 'contact@techcorp.com', phone: '555-1001', linkedin: 'linkedin.com/in/techcorp', visa: 'H1B', source: 'Website', dealStage: 'Qualified', assignedTo: 'Alex Johnson', createdBy: 'Michael Roberts', lastActivity: '2 hours ago', createdDate: '2024-01-15' },
+        { id: 2, leadName: 'LEAD-002', clientName: 'Global Solutions', email: 'info@globalsol.com', phone: '555-1002', linkedin: 'linkedin.com/company/global', visa: 'L1', source: 'Referral', dealStage: 'Contacted', assignedTo: 'Emma Davis', createdBy: 'Jennifer Martinez', lastActivity: '1 day ago', createdDate: '2024-01-14' },
+        { id: 3, leadName: 'LEAD-003', clientName: 'Innovation Labs', email: 'hello@innovlabs.com', phone: '555-1003', linkedin: 'linkedin.com/company/innovlabs', visa: 'OPT', source: 'LinkedIn', dealStage: 'Proposal Sent', assignedTo: 'James Brown', createdBy: 'David Anderson', lastActivity: '3 hours ago', createdDate: '2024-01-13' }
+    ],
+
+    products: [
+        { id: 1, name: 'Training Program - Full Stack', price: 5000, departments: ['Technical'], status: 'Active', description: 'Complete full stack development training' },
+        { id: 2, name: 'Marketing Package - Premium', price: 3500, departments: ['Marketing', 'Sales'], status: 'Active', description: 'Premium marketing consultation package' },
+        { id: 3, name: 'Business Development - Starter', price: 2500, departments: ['BD', 'Sales'], status: 'Active', description: 'Business development starter package' }
     ],
 
     employees: [
@@ -705,4 +737,200 @@ function getTimeAgo(date) {
     if (interval > 1) return Math.floor(interval) + ' minutes ago';
 
     return Math.floor(seconds) + ' seconds ago';
+}
+
+// ============================================
+// Managers Page Functions
+// ============================================
+if (window.location.pathname.includes('managers.html')) {
+    $(document).ready(function() {
+        if (!localStorage.getItem('isLoggedIn')) {
+            window.location.href = 'index.html';
+            return;
+        }
+        
+        initSidebar();
+        
+        window.managersTable = $('#managersTable').DataTable({
+            data: mockData.managers,
+            columns: [
+                { data: 'id' },
+                { data: null, render: (data) => `${data.firstName} ${data.lastName}` },
+                { data: 'email' },
+                { data: 'department' },
+                { data: 'employeeCode' },
+                { data: 'phone' },
+                { data: 'status', render: (data) => `<span class="badge badge-${data === 'Active' ? 'success' : 'secondary'}">${data}</span>` },
+                { data: null, render: (data) => `
+                    <button class="action-btn action-btn-edit" onclick="editManager(${data.id})"><i class="fas fa-edit"></i></button>
+                    <button class="action-btn action-btn-delete" onclick="deleteManager(${data.id})"><i class="fas fa-trash"></i></button>
+                `}
+            ]
+        });
+        
+        $('#addManagerBtn').on('click', function() {
+            $('#managerForm')[0].reset();
+            $('#managerId').val('');
+            $('#managerModalLabel').html('<i class="fas fa-user-plus"></i> Add Manager');
+            $('#managerModal').modal('show');
+        });
+        
+        $('#saveManagerBtn').on('click', function() {
+            const id = $('#managerId').val();
+            const manager = {
+                id: id ? parseInt(id) : mockData.managers.length + 1,
+                firstName: $('#managerFirstName').val(),
+                lastName: $('#managerLastName').val(),
+                email: $('#managerEmail').val(),
+                phone: $('#managerPhone').val(),
+                employeeCode: $('#managerCode').val(),
+                department: $('#managerDepartment').val(),
+                incentive: parseFloat($('#managerIncentive').val() || 0),
+                discountAllowed: $('#managerDiscountAllowed').is(':checked'),
+                status: $('#managerStatus').val()
+            };
+            
+            if (id) {
+                const index = mockData.managers.findIndex(m => m.id === parseInt(id));
+                mockData.managers[index] = manager;
+                toastr.success('Manager updated successfully!');
+            } else {
+                mockData.managers.push(manager);
+                toastr.success('Manager added successfully!');
+            }
+            
+            $('#managerModal').modal('hide');
+            window.managersTable.clear().rows.add(mockData.managers).draw();
+        });
+        
+        window.editManager = function(id) {
+            const manager = mockData.managers.find(m => m.id === id);
+            if (manager) {
+                $('#managerId').val(manager.id);
+                $('#managerFirstName').val(manager.firstName);
+                $('#managerLastName').val(manager.lastName);
+                $('#managerEmail').val(manager.email);
+                $('#managerPhone').val(manager.phone);
+                $('#managerCode').val(manager.employeeCode);
+                $('#managerDepartment').val(manager.department);
+                $('#managerIncentive').val(manager.incentive);
+                $('#managerDiscountAllowed').prop('checked', manager.discountAllowed);
+                $('#managerStatus').val(manager.status);
+                $('#managerModalLabel').html('<i class="fas fa-edit"></i> Edit Manager');
+                $('#managerModal').modal('show');
+            }
+        };
+        
+        window.deleteManager = function(id) {
+            if (confirm('Are you sure you want to delete this manager?')) {
+                const index = mockData.managers.findIndex(m => m.id === id);
+                mockData.managers.splice(index, 1);
+                window.managersTable.clear().rows.add(mockData.managers).draw();
+                toastr.success('Manager deleted successfully!');
+            }
+        };
+        
+        $('#logoutBtn').on('click', handleLogout);
+    });
+}
+
+// ============================================
+// Team Leaders Page Functions
+// ============================================
+if (window.location.pathname.includes('team-leaders.html')) {
+    $(document).ready(function() {
+        if (!localStorage.getItem('isLoggedIn')) {
+            window.location.href = 'index.html';
+            return;
+        }
+        
+        initSidebar();
+        
+        window.teamLeadersTable = $('#teamLeadersTable').DataTable({
+            data: mockData.teamLeaders,
+            columns: [
+                { data: 'id' },
+                { data: 'name' },
+                { data: 'email' },
+                { data: 'department' },
+                { data: 'employeeCode' },
+                { data: 'managerName' },
+                { data: 'status', render: (data) => `<span class="badge badge-${data === 'Active' ? 'success' : 'secondary'}">${data}</span>` },
+                { data: null, render: (data) => `
+                    <button class="action-btn action-btn-edit" onclick="editTL(${data.id})"><i class="fas fa-edit"></i></button>
+                    <button class="action-btn action-btn-delete" onclick="deleteTL(${data.id})"><i class="fas fa-trash"></i></button>
+                `}
+            ]
+        });
+        
+        // Populate managers dropdown
+        const managerSelect = $('#tlManager');
+        mockData.managers.forEach(m => {
+            managerSelect.append(`<option value="${m.id}">${m.firstName} ${m.lastName}</option>`);
+        });
+        
+        $('#addTLBtn').on('click', function() {
+            $('#tlForm')[0].reset();
+            $('#tlId').val('');
+            $('#tlModalLabel').html('<i class="fas fa-user-plus"></i> Add Team Leader');
+            $('#tlModal').modal('show');
+        });
+        
+        $('#saveTLBtn').on('click', function() {
+            const id = $('#tlId').val();
+            const managerId = parseInt($('#tlManager').val());
+            const manager = mockData.managers.find(m => m.id === managerId);
+            
+            const tl = {
+                id: id ? parseInt(id) : mockData.teamLeaders.length + 1,
+                name: $('#tlName').val(),
+                email: $('#tlEmail').val(),
+                phone: $('#tlPhone').val(),
+                employeeCode: $('#tlCode').val(),
+                department: $('#tlDepartment').val(),
+                managerId: managerId,
+                managerName: `${manager.firstName} ${manager.lastName}`,
+                status: $('#tlStatus').val()
+            };
+            
+            if (id) {
+                const index = mockData.teamLeaders.findIndex(t => t.id === parseInt(id));
+                mockData.teamLeaders[index] = tl;
+                toastr.success('Team Leader updated successfully!');
+            } else {
+                mockData.teamLeaders.push(tl);
+                toastr.success('Team Leader added successfully!');
+            }
+            
+            $('#tlModal').modal('hide');
+            window.teamLeadersTable.clear().rows.add(mockData.teamLeaders).draw();
+        });
+        
+        window.editTL = function(id) {
+            const tl = mockData.teamLeaders.find(t => t.id === id);
+            if (tl) {
+                $('#tlId').val(tl.id);
+                $('#tlName').val(tl.name);
+                $('#tlEmail').val(tl.email);
+                $('#tlPhone').val(tl.phone);
+                $('#tlCode').val(tl.employeeCode);
+                $('#tlDepartment').val(tl.department);
+                $('#tlManager').val(tl.managerId);
+                $('#tlStatus').val(tl.status);
+                $('#tlModalLabel').html('<i class="fas fa-edit"></i> Edit Team Leader');
+                $('#tlModal').modal('show');
+            }
+        };
+        
+        window.deleteTL = function(id) {
+            if (confirm('Are you sure you want to delete this team leader?')) {
+                const index = mockData.teamLeaders.findIndex(t => t.id === id);
+                mockData.teamLeaders.splice(index, 1);
+                window.teamLeadersTable.clear().rows.add(mockData.teamLeaders).draw();
+                toastr.success('Team Leader deleted successfully!');
+            }
+        };
+        
+        $('#logoutBtn').on('click', handleLogout);
+    });
 }
