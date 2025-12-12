@@ -8,10 +8,13 @@
     <link rel="stylesheet" href="../../assets/css/style.css">
     <link rel="stylesheet" href="../../assets/css/profiles-accounts.css">
     <style>
-      body { background: #F3F4F6; }
-      .container { max-width: 1400px; margin: 0 auto; padding: 24px; }
+      body { background: #F3F4F6; margin: 0; padding: 0; }
+      .container { max-width: calc(100% - 260px); margin-left: 260px; padding: 24px; box-sizing: border-box; }
       .page-title { font-size: 24px; font-weight: 600; margin-bottom: 24px; color: #1F2937; }
       .section { background: #FFFFFF; border-radius: 8px; margin-bottom: 24px; border: 1px solid #E5E7EB; }
+      @media (max-width: 768px) {
+        .container { margin-left: 0; max-width: 100%; }
+      }
     </style>
 </head>
 <body data-page-type="agent">
