@@ -104,15 +104,22 @@ $(document).ready(function() {
 function initializeApp() {
     const currentPage = window.location.pathname;
 
-    if (currentPage.includes('dashboard.html')) {
-        // Check if user is logged in
+    // Check if we're on the login page
+    if (currentPage.includes('index.html') || currentPage.endsWith('/')) {
+        initLogin();
+    } else {
+        // All other pages require authentication
         if (!localStorage.getItem('isLoggedIn')) {
-            window.location.href = 'index.html';
+            // Redirect to login - handle both root and pages subdirectory
+            const isInPagesDir = currentPage.includes('/pages/');
+            window.location.href = isInPagesDir ? '../../index.html' : 'index.html';
             return;
         }
-        initDashboard();
-    } else {
-        initLogin();
+
+        // Initialize dashboard functionality for authenticated pages
+        if (currentPage.includes('dashboard.html')) {
+            initDashboard();
+        }
     }
 }
 
