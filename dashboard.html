@@ -731,7 +731,7 @@
             const tabsHTML = MOCK_DATA.departments.map(dept => `
                 <button class="tab-button ${dept.id === currentDepartment ? 'active' : ''}"
                         data-department="${dept.id}">
-                    ${dept.icon} ${dept.name}
+                    ${dept.icon} <span>${dept.name}</span>
                 </button>
             `).join('');
             document.getElementById('departmentTabs').innerHTML = tabsHTML;

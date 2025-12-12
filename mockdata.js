@@ -1,10 +1,10 @@
 const MOCK_DATA = {
   departments: [
-    { id: 'accounts', name: 'Accounts', color: '#10B981', icon: '💰' },
-    { id: 'technical', name: 'Technical', color: '#3B82F6', icon: '⚙️' },
-    { id: 'marketing', name: 'Marketing', color: '#F59E0B', icon: '📢' },
-    { id: 'business_development', name: 'Business Development', color: '#8B5CF6', icon: '🤝' },
-    { id: 'sales', name: 'Sales', color: '#EF4444', icon: '💼' }
+    { id: 'accounts', name: 'Accounts', color: '#10B981', icon: '<i class="fas fa-calculator"></i>' },
+    { id: 'technical', name: 'Technical', color: '#3B82F6', icon: '<i class="fas fa-cogs"></i>' },
+    { id: 'marketing', name: 'Marketing', color: '#F59E0B', icon: '<i class="fas fa-bullhorn"></i>' },
+    { id: 'business_development', name: 'Business Development', color: '#8B5CF6', icon: '<i class="fas fa-handshake"></i>' },
+    { id: 'sales', name: 'Sales', color: '#EF4444', icon: '<i class="fas fa-briefcase"></i>' }
   ],
 
   positions: [
