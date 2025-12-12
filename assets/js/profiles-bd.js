@@ -9,6 +9,17 @@ const BDProfileModule = (() => {
 
   const loadMockData = async () => {
     try {
+      if (typeof mockData !== 'undefined') {
+        return {
+          employees: [
+            ...mockData.agents.map(a => ({ ...a, id: a.id, position: 'agent', name: a.firstName + ' ' + a.lastName })),
+            ...mockData.teamLeaders.map(tl => ({ ...tl, position: 'team_leader' })),
+            ...mockData.managers.map(m => ({ ...m, id: m.id, position: 'manager', name: m.firstName + ' ' + m.lastName }))
+          ],
+          leads: mockData.leads || [],
+          activityLogs: mockData.activityLogs || []
+        };
+      }
       if (typeof MOCK_DATA !== 'undefined') {
         return MOCK_DATA;
       }
@@ -17,7 +28,7 @@ const BDProfileModule = (() => {
       return await response.json();
     } catch (error) {
       console.warn('Mock data not found, using demo fallback:', error);
-      return MOCK_DATA || {
+      return {
         employees: [],
         leads: [],
         activityLogs: []
