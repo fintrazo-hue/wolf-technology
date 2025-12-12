@@ -570,7 +570,7 @@ const SalesProfileModule = (() => {
           <td><span style="color: ${metrics.inactivityCount > 3 ? '#EF4444' : '#10B981'};">${metrics.inactivityCount}</span></td>
           <td><strong>${Math.round(metrics.activityScore)}</strong></td>
           <td>
-            <button class="sales-view-agent" data-user-id="${user.id}" style="padding: 6px 12px; font-size: 12px;" title="View Profile">
+            <button class="sales-action-btn sales-view-agent" data-user-id="${user.id}" title="View Profile">
               <i class="fas fa-user-circle"></i>
             </button>
           </td>

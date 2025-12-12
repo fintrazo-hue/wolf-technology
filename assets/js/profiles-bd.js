@@ -653,7 +653,7 @@ const BDProfileModule = (() => {
           <td><span style="color: ${metrics.inactivityCount > 3 ? '#EF4444' : '#10B981'};">${metrics.inactivityCount}</span></td>
           <td><strong>${Math.round(metrics.activityScore)}</strong></td>
           <td>
-            <button class="bd-view-agent" data-user-id="${user.id}" style="padding: 6px 12px; font-size: 12px;" title="View Profile">
+            <button class="bd-action-btn bd-view-agent" data-user-id="${user.id}" title="View Profile">
               <i class="fas fa-user-circle"></i>
             </button>
           </td>
@@ -846,7 +846,7 @@ const BDProfileModule = (() => {
   const renderDepartmentStats = (container, data) => {
     if (!container) return;
 
-    const bdLeads = data.leads.filter(l => l.department === 'business_development');
+    const bdLeads = data.leads.filter(l => l.department === 'business_development' || l.department === 'BD');
     const openLeads = bdLeads.filter(l => l.stage !== 'closing').length;
     const closedLeads = bdLeads.filter(l => l.stage === 'closing').length;
     const avgResTime = bdLeads.length > 0
@@ -890,7 +890,7 @@ const BDProfileModule = (() => {
   const renderDepartmentHealth = (container, data) => {
     if (!container) return;
 
-    const bdLeads = data.leads.filter(l => l.department === 'business_development');
+    const bdLeads = data.leads.filter(l => l.department === 'business_development' || l.department === 'BD');
     const totalValue = bdLeads.reduce((sum, l) => sum + (l.value || 0), 0);
     const inactiveCount = bdLeads.filter(l => computeInactivity(l) > 48).length;
 
@@ -951,7 +951,7 @@ const BDProfileModule = (() => {
 
   const initializeBDManager = async () => {
     const data = await loadMockData();
-    const manager = data.employees.find(e => e.department === 'business_development' && e.position === 'manager');
+    const manager = data.employees.find(e => (e.department === 'business_development' || e.department === 'BD') && e.position === 'manager');
 
     if (!manager) {
       console.error('BD Manager not found');
@@ -960,7 +960,7 @@ const BDProfileModule = (() => {
 
     renderProfileHeader(manager);
 
-    const teamLeaders = data.employees.filter(e => e.department === 'business_development' && e.position === 'team_leader');
+    const teamLeaders = data.employees.filter(e => (e.department === 'business_development' || e.department === 'BD') && e.position === 'team_leader');
 
     renderDepartmentStats(document.getElementById('dept-stats'), data);
     renderTeamTable(document.querySelector('.bd-manager-tl-table'), teamLeaders, data.leads);
