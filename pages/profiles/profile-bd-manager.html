@@ -5,16 +5,60 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Business Development Manager - Wolf Technologies</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../../assets/css/style.css">
     <link rel="stylesheet" href="../../assets/css/profiles.css">
 </head>
 <body>
-    <div class="profile-container">
-        <aside class="profile-sidebar"></aside>
-        <main class="profile-main">
-            <div class="profile-header"></div>
-            <div class="profile-content"></div>
-        </main>
+    <div class="bd-profile">
+        <!-- Header -->
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 32px;">
+            <div>
+                <h1 id="profile-name" style="font-size: 28px; font-weight: 700; margin-bottom: 4px;"></h1>
+                <p id="profile-role" style="color: #6B6B6B; font-size: 14px;"></p>
+            </div>
+            <div style="display: flex; gap: 12px;">
+                <button id="profile-message" class="bd-btn-primary" style="display: flex; align-items: center; gap: 8px;">
+                    <i class="fas fa-envelope"></i> Message
+                </button>
+            </div>
+        </div>
+
+        <!-- Department Stats -->
+        <div id="dept-stats" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 24px; margin-bottom: 32px;">
+        </div>
+
+        <!-- Team Leaders Comparison -->
+        <div class="bd-section">
+            <h2 class="bd-section-title"><i class="fas fa-users"></i> Team Leaders Comparison</h2>
+            <div class="bd-manager-tl-table"></div>
+        </div>
+
+        <!-- Department Health -->
+        <div class="bd-section" style="display: grid; grid-template-columns: 1fr 1fr; gap: 32px;">
+            <div>
+                <h2 class="bd-section-title"><i class="fas fa-heartbeat"></i> Department Health</h2>
+                <div id="dept-health"></div>
+            </div>
+
+            <div>
+                <h2 class="bd-section-title"><i class="fas fa-exclamation-triangle"></i> Escalation Panel</h2>
+                <div id="escalation-panel"></div>
+            </div>
+        </div>
     </div>
-    <script src="../../assets/js/profiles.js"></script>
+
+    <script src="../../assets/js/mockdata.js"></script>
+    <script src="../../assets/js/profiles-bd.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const profileName = document.getElementById('profile-name');
+            const profileRole = document.getElementById('profile-role');
+            if (profileRole) profileRole.textContent = 'BD Manager';
+
+            document.getElementById('profile-message')?.addEventListener('click', () => {
+                if (profileName) alert('Message sent to ' + profileName.textContent);
+            });
+        });
+    </script>
 </body>
 </html>

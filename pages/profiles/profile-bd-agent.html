@@ -5,16 +5,89 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Business Development Agent - Wolf Technologies</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../../assets/css/style.css">
     <link rel="stylesheet" href="../../assets/css/profiles.css">
 </head>
 <body>
-    <div class="profile-container">
-        <aside class="profile-sidebar"></aside>
-        <main class="profile-main">
-            <div class="profile-header"></div>
-            <div class="profile-content"></div>
-        </main>
+    <div class="bd-profile">
+        <!-- Header -->
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 32px;">
+            <div>
+                <h1 id="profile-name" style="font-size: 28px; font-weight: 700; margin-bottom: 4px;"></h1>
+                <p id="profile-role" style="color: #6B6B6B; font-size: 14px;"></p>
+            </div>
+            <div style="display: flex; gap: 12px;">
+                <button id="profile-message" class="bd-btn-primary" style="display: flex; align-items: center; gap: 8px;">
+                    <i class="fas fa-envelope"></i> Message
+                </button>
+                <button id="profile-export" class="bd-btn-secondary" style="display: flex; align-items: center; gap: 8px;">
+                    <i class="fas fa-download"></i> Export CSV
+                </button>
+            </div>
+        </div>
+
+        <!-- Profile Info -->
+        <div id="profile-info" style="background: white; border-radius: 12px; padding: 24px; margin-bottom: 32px; box-shadow: 0 4px 20px rgba(0,0,0,0.08);">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 24px;">
+                <div>
+                    <p style="font-size: 12px; color: #6B6B6B; font-weight: 600; text-transform: uppercase; margin-bottom: 6px;">Email</p>
+                    <p id="info-email" style="font-size: 14px; color: #0F0F0F;"></p>
+                </div>
+                <div>
+                    <p style="font-size: 12px; color: #6B6B6B; font-weight: 600; text-transform: uppercase; margin-bottom: 6px;">Phone</p>
+                    <p id="info-phone" style="font-size: 14px; color: #0F0F0F;"></p>
+                </div>
+                <div>
+                    <p style="font-size: 12px; color: #6B6B6B; font-weight: 600; text-transform: uppercase; margin-bottom: 6px;">Joined</p>
+                    <p id="info-joined" style="font-size: 14px; color: #0F0F0F;"></p>
+                </div>
+                <div>
+                    <p style="font-size: 12px; color: #6B6B6B; font-weight: 600; text-transform: uppercase; margin-bottom: 6px;">Status</p>
+                    <p id="info-status" style="font-size: 14px; color: #0F0F0F;"></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Performance Cards -->
+        <div class="bd-section">
+            <h2 class="bd-section-title"><i class="fas fa-chart-line"></i> Key Metrics</h2>
+            <div class="bd-performance-cards"></div>
+        </div>
+
+        <!-- Stage Chart -->
+        <div class="bd-section" style="display: grid; grid-template-columns: 1fr 1fr; gap: 32px;">
+            <div>
+                <h2 class="bd-section-title"><i class="fas fa-chart-bar"></i> Pipeline By Stage</h2>
+                <div class="bd-stage-chart"></div>
+            </div>
+
+            <!-- Targets Module -->
+            <div>
+                <h2 class="bd-section-title"><i class="fas fa-bullseye"></i> Monthly Target</h2>
+                <div class="bd-targets-module"></div>
+            </div>
+        </div>
+
+        <!-- Inactivity Tracker -->
+        <div class="bd-section">
+            <h2 class="bd-section-title"><i class="fas fa-bell"></i> Inactivity Alerts</h2>
+            <div class="bd-inactivity-tracker"></div>
+        </div>
+
+        <!-- Leads Table -->
+        <div class="bd-section">
+            <h2 class="bd-section-title"><i class="fas fa-list"></i> Assigned Leads</h2>
+            <div class="bd-leads-table"></div>
+        </div>
+
+        <!-- Recent Activity Timeline -->
+        <div class="bd-section">
+            <h2 class="bd-section-title"><i class="fas fa-history"></i> Recent Activity</h2>
+            <div class="bd-activity-timeline"></div>
+        </div>
     </div>
-    <script src="../../assets/js/profiles.js"></script>
+
+    <script src="../../assets/js/mockdata.js"></script>
+    <script src="../../assets/js/profiles-bd.js"></script>
 </body>
 </html>
