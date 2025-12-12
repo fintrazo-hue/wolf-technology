@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Suno — HTML/CSS/JS Starter</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <h1>Suno</h1>
+    <p class="tagline">A minimal HTML / CSS / JS starter</p>
+  </header>
+
+  <main class="container">
+    <section class="card">
+      <h2>Welcome</h2>
+      <p>Click the button below to see a small JavaScript interaction.</p>
+      <button id="greetBtn" class="btn">Click to say Hello</button>
+
+      <hr>
+      <h3>Audio (optional)</h3>
+      <p>Drop an audio file onto the box to load it, or use the controls if your browser supports it.</p>
+      <div id="dropArea" class="drop-area">Drop audio file here</div>
+      <audio id="player" controls></audio>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>

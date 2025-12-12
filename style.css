@@ -1,0 +1,18 @@
+:root{
+  --bg:#f5f7fb;
+  --card:#ffffff;
+  --accent:#5b6cff;
+  --text:#0f1720;
+}
+*{box-sizing:border-box}
+html,body{height:100%;margin:0;font-family:Inter,Segoe UI,Arial,sans-serif;background:var(--bg);color:var(--text)}
+.site-header{background:linear-gradient(90deg,var(--accent),#7f8bff);color:white;padding:24px 16px;text-align:center}
+.site-header h1{margin:0;font-size:1.6rem}
+.tagline{margin:6px 0 0;opacity:0.95}
+.container{max-width:900px;margin:28px auto;padding:0 16px}
+.card{background:var(--card);border-radius:8px;padding:20px;box-shadow:0 6px 18px rgba(16,24,40,0.06)}
+.btn{background:var(--accent);color:white;border:0;padding:10px 14px;border-radius:6px;cursor:pointer}
+.btn:active{transform:translateY(1px)}
+.drop-area{margin-top:12px;padding:18px;border:2px dashed #dbe5ff;border-radius:8px;text-align:center;color:#334155;background:linear-gradient(180deg,rgba(91,108,255,0.04),transparent)}
+.drop-area.dragover{border-color:var(--accent);background:#eef2ff}
+@media (max-width:520px){.site-header h1{font-size:1.25rem}.container{margin:16px}}
