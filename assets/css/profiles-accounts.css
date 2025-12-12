@@ -869,35 +869,668 @@
   color: #92400E;
 }
 
-@media (max-width: 768px) {
-  .profile-header-content {
-    flex-direction: column;
-    text-align: center;
+@media (max-width: 1024px) {
+  .container {
+    padding: 16px;
+  }
+
+  .page-title {
+    font-size: 20px;
+    margin-bottom: 16px;
   }
 
   .perf-cards-grid {
-    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 12px;
   }
 
   .dept-kpis-grid {
-    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  }
+
+  .profile-header-content {
+    gap: 20px;
+    padding: 20px;
+  }
+
+  .profile-avatar img {
+    width: 100px;
+    height: 100px;
+  }
+
+  .profile-info h1 {
+    font-size: 24px;
+  }
+
+  .target-widget {
+    gap: 24px;
+  }
+
+  .target-circle {
+    width: 120px;
+    height: 120px;
+  }
+
+  .workflow-table {
+    font-size: 12px;
+  }
+
+  .workflow-table th,
+  .workflow-table td {
+    padding: 8px;
+  }
+
+  .team-table th,
+  .team-table td {
+    padding: 8px;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 12px;
+  }
+
+  .page-title {
+    font-size: 18px;
+    margin-bottom: 12px;
+  }
+
+  .profile-header-content {
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+    gap: 16px;
+    padding: 16px;
+  }
+
+  .profile-avatar img {
+    width: 90px;
+    height: 90px;
+  }
+
+  .profile-info h1 {
+    font-size: 20px;
+    margin-bottom: 4px;
+  }
+
+  .profile-role {
+    font-size: 13px;
+  }
+
+  .profile-email,
+  .profile-phone {
+    font-size: 13px;
+  }
+
+  .profile-meta {
+    justify-content: center;
+    gap: 12px;
+    font-size: 12px;
+  }
+
+  .perf-cards-grid {
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    gap: 10px;
+  }
+
+  .perf-card {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 8px;
+    padding: 12px;
+  }
+
+  .perf-card-icon {
+    width: 36px;
+    height: 36px;
+    font-size: 14px;
+  }
+
+  .perf-label {
+    font-size: 10px;
+  }
+
+  .perf-value {
+    font-size: 18px;
+  }
+
+  .dept-kpis-grid {
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 12px;
+  }
+
+  .kpi-card {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 16px;
+    gap: 8px;
+  }
+
+  .kpi-icon {
+    width: 40px;
+    height: 40px;
+    font-size: 16px;
+  }
+
+  .kpi-value {
+    font-size: 18px;
+  }
+
+  .workflow-summary {
+    padding: 16px;
+    margin-bottom: 16px;
+  }
+
+  .workflow-summary h3 {
+    font-size: 14px;
+    margin-bottom: 12px;
   }
 
   .workflow-stats {
     flex-direction: column;
     gap: 8px;
+    font-size: 12px;
+  }
+
+  .workflow-table-container {
+    padding: 16px;
+    margin-bottom: 16px;
+    overflow-x: auto;
+  }
+
+  .workflow-table-container h3 {
+    font-size: 14px;
+    margin-bottom: 12px;
+  }
+
+  .workflow-table {
+    font-size: 11px;
+  }
+
+  .workflow-table th {
+    padding: 8px 4px;
+    font-size: 10px;
+  }
+
+  .workflow-table td {
+    padding: 8px 4px;
+  }
+
+  .team-table {
+    font-size: 11px;
+  }
+
+  .team-table th {
+    padding: 8px 4px;
+    font-size: 10px;
+  }
+
+  .team-table td {
+    padding: 8px 4px;
+  }
+
+  .pending-work-tracker {
+    padding: 16px;
+    margin-bottom: 16px;
+  }
+
+  .pending-work-tracker h3 {
+    font-size: 14px;
+    margin-bottom: 12px;
+  }
+
+  .tracker-grid {
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    gap: 10px;
+  }
+
+  .tracker-item {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 12px;
+    gap: 8px;
+  }
+
+  .tracker-icon {
+    width: 36px;
+    height: 36px;
+    font-size: 14px;
+  }
+
+  .tracker-label {
+    font-size: 10px;
+  }
+
+  .tracker-value {
+    font-size: 16px;
+  }
+
+  .activity-timeline {
+    padding: 16px;
+    margin-bottom: 16px;
+  }
+
+  .activity-timeline h3 {
+    font-size: 14px;
+    margin-bottom: 12px;
+  }
+
+  .timeline-item {
+    gap: 12px;
+  }
+
+  .timeline-marker {
+    width: 32px;
+    height: 32px;
+    font-size: 12px;
+  }
+
+  .timeline-description {
+    font-size: 12px;
+  }
+
+  .timeline-time {
+    font-size: 10px;
+  }
+
+  .team-performance {
+    padding: 16px;
+    margin-bottom: 16px;
+  }
+
+  .team-performance h3 {
+    font-size: 14px;
+    margin-bottom: 12px;
+  }
+
+  .targets-section {
+    padding: 16px;
+    margin-bottom: 16px;
+  }
+
+  .targets-section h3 {
+    font-size: 14px;
+    margin-bottom: 16px;
   }
 
   .target-widget {
     flex-direction: column;
+    gap: 16px;
+    align-items: center;
+  }
+
+  .target-circle {
+    width: 120px;
+    height: 120px;
+  }
+
+  .target-details {
+    width: 100%;
+    text-align: center;
+  }
+
+  .target-label {
+    font-size: 11px;
+  }
+
+  .target-value {
+    font-size: 18px;
+  }
+
+  .target-remaining {
+    font-size: 12px;
+  }
+
+  .target-actions {
+    width: 100%;
+    flex-direction: column;
+  }
+
+  .target-edit-btn,
+  .target-export-btn {
+    width: 100%;
+    padding: 10px 12px;
+    font-size: 11px;
+  }
+
+  .escalation-panel {
+    padding: 16px;
+    margin-bottom: 16px;
+  }
+
+  .escalation-panel h3 {
+    font-size: 14px;
+    margin-bottom: 12px;
+  }
+
+  .escalation-item {
+    padding: 10px;
+    gap: 10px;
+  }
+
+  .escalation-icon {
+    width: 28px;
+    height: 28px;
+    font-size: 12px;
+  }
+
+  .escalation-message {
+    font-size: 12px;
   }
 
   .modal-content {
     width: 95%;
-    max-height: 90vh;
+    max-height: 85vh;
+  }
+
+  .modal-header {
+    padding: 16px;
+  }
+
+  .modal-header h2 {
+    font-size: 16px;
+  }
+
+  .modal-body {
+    padding: 16px;
+  }
+
+  .modal-section h3 {
+    font-size: 11px;
+  }
+
+  .modal-section p {
+    font-size: 12px;
   }
 
   .modal-workflow {
     flex-direction: column;
+    gap: 6px;
+  }
+
+  .modal-step {
+    min-width: 70px;
+    padding: 6px;
+    font-size: 11px;
+  }
+
+  .step-number {
+    font-size: 12px;
+  }
+
+  .step-name {
+    font-size: 9px;
+  }
+
+  .doc-row {
+    padding: 8px 10px;
+    font-size: 12px;
+    flex-direction: column;
+    gap: 8px;
+    align-items: flex-start;
+  }
+
+  .doc-status {
+    font-size: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 8px;
+  }
+
+  .page-title {
+    font-size: 16px;
+    margin-bottom: 12px;
+  }
+
+  .profile-header-content {
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+    gap: 12px;
+    padding: 12px;
+  }
+
+  .profile-avatar img {
+    width: 80px;
+    height: 80px;
+  }
+
+  .profile-info h1 {
+    font-size: 18px;
+  }
+
+  .profile-role {
+    font-size: 12px;
+  }
+
+  .profile-email,
+  .profile-phone {
+    font-size: 12px;
+  }
+
+  .profile-meta {
+    flex-direction: column;
+    gap: 6px;
+    align-items: center;
+  }
+
+  .perf-cards-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+  }
+
+  .perf-card {
+    padding: 10px;
+    gap: 6px;
+  }
+
+  .perf-card-icon {
+    width: 32px;
+    height: 32px;
+    font-size: 12px;
+  }
+
+  .perf-label {
+    font-size: 9px;
+  }
+
+  .perf-value {
+    font-size: 16px;
+  }
+
+  .dept-kpis-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+  }
+
+  .kpi-card {
+    padding: 12px;
+  }
+
+  .kpi-icon {
+    width: 36px;
+    height: 36px;
+    font-size: 14px;
+  }
+
+  .kpi-value {
+    font-size: 16px;
+  }
+
+  .workflow-summary {
+    padding: 12px;
+  }
+
+  .workflow-summary h3 {
+    font-size: 13px;
+  }
+
+  .workflow-table-container,
+  .pending-work-tracker,
+  .activity-timeline,
+  .team-performance,
+  .targets-section,
+  .escalation-panel {
+    padding: 12px;
+    margin-bottom: 12px;
+  }
+
+  .workflow-table-container h3,
+  .pending-work-tracker h3,
+  .activity-timeline h3,
+  .team-performance h3,
+  .targets-section h3,
+  .escalation-panel h3 {
+    font-size: 13px;
+    margin-bottom: 10px;
+  }
+
+  .workflow-table,
+  .team-table {
+    font-size: 10px;
+  }
+
+  .workflow-table th,
+  .team-table th {
+    padding: 6px 3px;
+    font-size: 9px;
+  }
+
+  .workflow-table td,
+  .team-table td {
+    padding: 6px 3px;
+  }
+
+  .tracker-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+  }
+
+  .tracker-item {
+    padding: 10px;
+  }
+
+  .tracker-icon {
+    width: 32px;
+    height: 32px;
+    font-size: 12px;
+  }
+
+  .tracker-label {
+    font-size: 9px;
+  }
+
+  .tracker-value {
+    font-size: 14px;
+  }
+
+  .timeline-item {
+    gap: 10px;
+  }
+
+  .timeline-marker {
+    width: 28px;
+    height: 28px;
+    font-size: 10px;
+  }
+
+  .timeline-description {
+    font-size: 11px;
+  }
+
+  .timeline-time {
+    font-size: 9px;
+  }
+
+  .target-widget {
+    gap: 12px;
+  }
+
+  .target-circle {
+    width: 100px;
+    height: 100px;
+  }
+
+  .target-value {
+    font-size: 16px;
+  }
+
+  .target-actions {
+    gap: 8px;
+  }
+
+  .target-edit-btn,
+  .target-export-btn {
+    padding: 8px 10px;
+    font-size: 10px;
+  }
+
+  .escalation-item {
+    padding: 8px;
+  }
+
+  .escalation-icon {
+    width: 24px;
+    height: 24px;
+    font-size: 10px;
+  }
+
+  .escalation-message {
+    font-size: 11px;
+  }
+
+  .modal-content {
+    width: 98%;
+    max-height: 80vh;
+  }
+
+  .modal-header {
+    padding: 12px;
+  }
+
+  .modal-header h2 {
+    font-size: 14px;
+  }
+
+  .modal-body {
+    padding: 12px;
+  }
+
+  .modal-section h3 {
+    font-size: 10px;
+  }
+
+  .modal-section p {
+    font-size: 11px;
+  }
+
+  .modal-workflow {
+    gap: 4px;
+  }
+
+  .modal-step {
+    min-width: 60px;
+    padding: 4px;
+    font-size: 9px;
+  }
+
+  .step-number {
+    font-size: 10px;
+  }
+
+  .step-name {
+    font-size: 8px;
+  }
+
+  .doc-row {
+    padding: 6px 8px;
+    font-size: 11px;
   }
 }
