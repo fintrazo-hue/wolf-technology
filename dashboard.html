@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wolf Technologies - Super Admin Dashboard</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- DataTables CSS -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
+
+    <!-- Toastr CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+
+    <!-- Select2 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.min.css" />
+
+    <!-- Date Picker CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="dashboard-page">
+
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <div class="logo">
+                <i class="fas fa-paw"></i>
+                <span class="logo-text">WOLF TECH</span>
+            </div>
+            <button class="sidebar-toggle" id="sidebarToggle">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+
+        <nav class="sidebar-nav">
+            <ul class="nav-list">
+                <li class="nav-item active">
+                    <a href="dashboard.html" class="nav-link">
+                        <i class="fas fa-chart-line"></i>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="fas fa-users"></i>
+                        <span>Employees</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="fas fa-user-friends"></i>
+                        <span>Leads</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span>Orders</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="fas fa-building"></i>
+                        <span>Departments</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="fas fa-chart-bar"></i>
+                        <span>Reports</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="fas fa-cog"></i>
+                        <span>Settings</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
+        <div class="sidebar-footer">
+            <button class="btn btn-logout" id="logoutBtn">
+                <i class="fas fa-sign-out-alt"></i>
+                <span>Logout</span>
+            </button>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Header -->
+        <header class="dashboard-header">
+            <div class="header-left">
+                <button class="mobile-menu-toggle" id="mobileMenuToggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <h1 class="page-title">Super Admin Dashboard</h1>
+            </div>
+
+            <div class="header-right">
+                <!-- Search -->
+                <div class="header-search">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Search..." class="search-input">
+                </div>
+
+                <!-- Notifications -->
+                <div class="header-item notification-icon" id="notificationIcon">
+                    <i class="fas fa-bell"></i>
+                    <span class="badge" id="notificationBadge">5</span>
+                </div>
+
+                <!-- Profile -->
+                <div class="header-item profile-dropdown" id="profileDropdown">
+                    <div class="profile-info">
+                        <img src="https://ui-avatars.com/api/?name=Admin+User&background=F4D03F&color=0F0F0F&bold=true" alt="Admin" class="profile-avatar">
+                        <div class="profile-details">
+                            <span class="profile-name" id="userName">Admin User</span>
+                            <span class="profile-role">Super Admin</span>
+                        </div>
+                    </div>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+            </div>
+        </header>
+
+        <!-- Dashboard Content -->
+        <div class="dashboard-content">
+            <!-- KPI Cards -->
+            <div class="kpi-section">
+                <div class="row g-3">
+                    <div class="col-xl-3 col-lg-6 col-md-6">
+                        <div class="kpi-card">
+                            <div class="kpi-icon users-icon">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <div class="kpi-content">
+                                <h3 class="kpi-value" id="totalUsers">0</h3>
+                                <p class="kpi-label">Total Users</p>
+                                <span class="kpi-trend positive">
+                                    <i class="fas fa-arrow-up"></i> 12% this month
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xl-3 col-lg-6 col-md-6">
+                        <div class="kpi-card">
+                            <div class="kpi-icon purchase-icon">
+                                <i class="fas fa-shopping-bag"></i>
+                            </div>
+                            <div class="kpi-content">
+                                <h3 class="kpi-value" id="newPurchase">0</h3>
+                                <p class="kpi-label">New Purchases</p>
+                                <span class="kpi-trend positive">
+                                    <i class="fas fa-arrow-up"></i> 8% this week
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xl-3 col-lg-6 col-md-6">
+                        <div class="kpi-card">
+                            <div class="kpi-icon fail-icon">
+                                <i class="fas fa-times-circle"></i>
+                            </div>
+                            <div class="kpi-content">
+                                <h3 class="kpi-value" id="orderFail">0</h3>
+                                <p class="kpi-label">Failed Orders</p>
+                                <span class="kpi-trend negative">
+                                    <i class="fas fa-arrow-down"></i> 3% reduction
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xl-3 col-lg-6 col-md-6">
+                        <div class="kpi-card">
+                            <div class="kpi-icon employees-icon">
+                                <i class="fas fa-user-tie"></i>
+                            </div>
+                            <div class="kpi-content">
+                                <h3 class="kpi-value" id="employeesCount">0</h3>
+                                <p class="kpi-label">Total Employees</p>
+                                <span class="kpi-trend neutral">
+                                    <i class="fas fa-minus"></i> No change
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Employee List Section -->
+            <div class="data-section">
+                <div class="section-header">
+                    <h2 class="section-title">Employee List</h2>
+                    <button class="btn btn-primary" id="addEmployeeBtn">
+                        <i class="fas fa-plus"></i> Add Employee
+                    </button>
+                </div>
+
+                <div class="data-table-container">
+                    <table id="employeeTable" class="table table-striped table-hover">
+                        <thead>
+                            <tr>
+                                <th>Employee Code</th>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Department</th>
+                                <th>Designation</th>
+                                <th>Joining Date</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Leads List Section -->
+            <div class="data-section">
+                <div class="section-header">
+                    <h2 class="section-title">Leads List</h2>
+                    <button class="btn btn-primary" id="addLeadBtn">
+                        <i class="fas fa-plus"></i> Add Lead
+                    </button>
+                </div>
+
+                <div class="data-table-container">
+                    <table id="leadsTable" class="table table-striped table-hover">
+                        <thead>
+                            <tr>
+                                <th>Customer Name</th>
+                                <th>Email</th>
+                                <th>Phone</th>
+                                <th>Company</th>
+                                <th>Product</th>
+                                <th>Status</th>
+                                <th>Priority</th>
+                                <th>Assigned To</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notification Drawer -->
+    <div class="notification-drawer" id="notificationDrawer">
+        <div class="drawer-header">
+            <h3 class="drawer-title">
+                <i class="fas fa-bell"></i> Notifications
+            </h3>
+            <button class="drawer-close" id="closeDrawer">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+
+        <div class="drawer-tabs">
+            <button class="drawer-tab active" data-tab="all">All</button>
+            <button class="drawer-tab" data-tab="unread">Unread</button>
+        </div>
+
+        <div class="drawer-content" id="notificationList">
+        </div>
+    </div>
+
+    <!-- Profile Dropdown Menu -->
+    <div class="profile-menu" id="profileMenu">
+        <a href="#" class="profile-menu-item">
+            <i class="fas fa-user"></i> My Profile
+        </a>
+        <a href="#" class="profile-menu-item" id="settingsBtn">
+            <i class="fas fa-cog"></i> Settings
+        </a>
+        <a href="#" class="profile-menu-item" id="activityBtn">
+            <i class="fas fa-history"></i> Activity Log
+        </a>
+        <div class="profile-menu-divider"></div>
+        <a href="#" class="profile-menu-item" id="logoutBtnMenu">
+            <i class="fas fa-sign-out-alt"></i> Logout
+        </a>
+    </div>
+
+    <!-- Add/Edit Employee Modal -->
+    <div class="modal fade" id="employeeModal" tabindex="-1" aria-labelledby="employeeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="employeeModalLabel">
+                        <i class="fas fa-user-plus"></i> Add New Employee
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="employeeForm">
+                        <input type="hidden" id="employeeId">
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label for="employeeFullName" class="form-label">Full Name *</label>
+                                <input type="text" class="form-control" id="employeeFullName" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="employeeEmail" class="form-label">Email *</label>
+                                <input type="email" class="form-control" id="employeeEmail" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="employeePhone" class="form-label">Phone</label>
+                                <input type="tel" class="form-control" id="employeePhone">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="employeeCode" class="form-label">Employee Code *</label>
+                                <input type="text" class="form-control" id="employeeCode" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="employeeDepartment" class="form-label">Department *</label>
+                                <select class="form-select select2" id="employeeDepartment" required>
+                                    <option value="">Select Department</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="employeeDesignation" class="form-label">Designation *</label>
+                                <input type="text" class="form-control" id="employeeDesignation" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="employeeJoiningDate" class="form-label">Joining Date *</label>
+                                <input type="text" class="form-control datepicker" id="employeeJoiningDate" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="employeeSalary" class="form-label">Salary</label>
+                                <input type="number" class="form-control" id="employeeSalary" step="0.01">
+                            </div>
+                            <div class="col-md-12">
+                                <label for="employeeStatus" class="form-label">Status *</label>
+                                <select class="form-select" id="employeeStatus" required>
+                                    <option value="active">Active</option>
+                                    <option value="inactive">Inactive</option>
+                                    <option value="on_leave">On Leave</option>
+                                </select>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary" id="saveEmployeeBtn">
+                        <i class="fas fa-save"></i> Save Employee
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add/Edit Lead Modal -->
+    <div class="modal fade" id="leadModal" tabindex="-1" aria-labelledby="leadModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="leadModalLabel">
+                        <i class="fas fa-user-plus"></i> Add New Lead
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="leadForm">
+                        <input type="hidden" id="leadId">
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label for="leadCustomerName" class="form-label">Customer Name *</label>
+                                <input type="text" class="form-control" id="leadCustomerName" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="leadEmail" class="form-label">Email *</label>
+                                <input type="email" class="form-control" id="leadEmail" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="leadPhone" class="form-label">Phone *</label>
+                                <input type="tel" class="form-control" id="leadPhone" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="leadCompany" class="form-label">Company</label>
+                                <input type="text" class="form-control" id="leadCompany">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="leadProduct" class="form-label">Product</label>
+                                <input type="text" class="form-control" id="leadProduct">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="leadSource" class="form-label">Source *</label>
+                                <select class="form-select" id="leadSource" required>
+                                    <option value="website">Website</option>
+                                    <option value="referral">Referral</option>
+                                    <option value="cold_call">Cold Call</option>
+                                    <option value="social_media">Social Media</option>
+                                    <option value="email">Email Campaign</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="leadStatus" class="form-label">Status *</label>
+                                <select class="form-select" id="leadStatus" required>
+                                    <option value="new">New</option>
+                                    <option value="contacted">Contacted</option>
+                                    <option value="qualified">Qualified</option>
+                                    <option value="converted">Converted</option>
+                                    <option value="lost">Lost</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="leadPriority" class="form-label">Priority *</label>
+                                <select class="form-select" id="leadPriority" required>
+                                    <option value="low">Low</option>
+                                    <option value="medium" selected>Medium</option>
+                                    <option value="high">High</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="leadAssignedTo" class="form-label">Assign To</label>
+                                <select class="form-select select2" id="leadAssignedTo">
+                                    <option value="">Select Agent</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="leadDepartment" class="form-label">Department</label>
+                                <select class="form-select select2" id="leadDepartment">
+                                    <option value="">Select Department</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="leadValue" class="form-label">Lead Value ($)</label>
+                                <input type="number" class="form-control" id="leadValue" step="0.01">
+                            </div>
+                            <div class="col-md-12">
+                                <label for="leadNotes" class="form-label">Notes</label>
+                                <textarea class="form-control" id="leadNotes" rows="3"></textarea>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary" id="saveLeadBtn">
+                        <i class="fas fa-save"></i> Save Lead
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Profile View Modal -->
+    <div class="modal fade" id="profileViewModal" tabindex="-1" aria-labelledby="profileViewModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="profileViewModalLabel">
+                        <i class="fas fa-user"></i> Profile Details
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="profile-view-content">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="profile-sidebar">
+                                    <div class="profile-avatar-large">
+                                        <img src="" alt="Profile" id="profileViewAvatar">
+                                    </div>
+                                    <h3 id="profileViewName"></h3>
+                                    <p id="profileViewRole"></p>
+                                    <div class="profile-info-list" id="profileViewInfo"></div>
+                                </div>
+                            </div>
+                            <div class="col-md-8">
+                                <div class="profile-tabs">
+                                    <ul class="nav nav-tabs" role="tablist">
+                                        <li class="nav-item">
+                                            <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#workflowTab">Workflow Steps</button>
+                                        </li>
+                                        <li class="nav-item">
+                                            <button class="nav-link" data-bs-toggle="tab" data-bs-target="#activityTab">Activity Log</button>
+                                        </li>
+                                    </ul>
+                                    <div class="tab-content">
+                                        <div class="tab-pane fade show active" id="workflowTab">
+                                            <div class="workflow-steps" id="workflowSteps"></div>
+                                        </div>
+                                        <div class="tab-pane fade" id="activityTab">
+                                            <div class="activity-log" id="activityLog"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Settings Modal -->
+    <div class="modal fade" id="settingsModal" tabindex="-1" aria-labelledby="settingsModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="settingsModalLabel">
+                        <i class="fas fa-cog"></i> Settings
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="settings-section">
+                        <h6 class="settings-subtitle">General Settings</h6>
+                        <div class="settings-item">
+                            <label class="form-label">Dashboard Theme</label>
+                            <select class="form-select" id="themeSelect">
+                                <option value="light">Light</option>
+                                <option value="dark">Dark</option>
+                            </select>
+                        </div>
+                        <div class="settings-item">
+                            <label class="form-label">Notifications</label>
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" id="emailNotifications" checked>
+                                <label class="form-check-label" for="emailNotifications">Email Notifications</label>
+                            </div>
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" id="pushNotifications" checked>
+                                <label class="form-check-label" for="pushNotifications">Push Notifications</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="saveSettingsBtn">
+                        <i class="fas fa-save"></i> Save Changes
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- DataTables JS -->
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
+
+    <!-- Toastr JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
+    <!-- Select2 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+    <!-- Flatpickr JS -->
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
+    <!-- Supabase -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <!-- Custom Scripts -->
+    <script src="script.js"></script>
+
+    <script>
+        // Initialize Toastr options
+        toastr.options = {
+            "closeButton": true,
+            "progressBar": true,
+            "positionClass": "toast-top-right",
+            "timeOut": "3000"
+        };
+    </script>
+</body>
+</html>
