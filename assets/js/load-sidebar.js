@@ -10,6 +10,7 @@ function loadSidebar() {
                 container.innerHTML = html;
                 setActiveNav(currentPage);
                 setupLogoutButton();
+                fixNavigationLinks();
             }
         })
         .catch(error => console.error('Error loading sidebar:', error));
@@ -27,11 +28,34 @@ function setActiveNav(currentPage) {
     });
 }
 
+function fixNavigationLinks() {
+    const isInPagesDir = window.location.pathname.includes('/pages/');
+    const navLinks = document.querySelectorAll('.nav-link');
+
+    navLinks.forEach(link => {
+        let href = link.getAttribute('href');
+
+        if (isInPagesDir) {
+            if (href === '../dashboard.html') {
+                href = '../../dashboard.html';
+            } else if (!href.includes('../../') && !href.startsWith('../')) {
+                href = '../' + href;
+            }
+        }
+
+        link.setAttribute('href', href);
+    });
+}
+
 function setupLogoutButton() {
     const logoutBtn = document.getElementById('logoutBtn');
     if (logoutBtn) {
-        logoutBtn.addEventListener('click', () => {
-            window.location.href = 'index.html';
+        logoutBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            localStorage.removeItem('isLoggedIn');
+            localStorage.removeItem('userEmail');
+            const isInPagesDir = window.location.pathname.includes('/pages/');
+            window.location.href = isInPagesDir ? '../../index.html' : '../index.html';
         });
     }
 }
