@@ -1,0 +1,84 @@
+<div class="workflow-table-container">
+  <h3>Workflow Management</h3>
+  <table class="workflow-table">
+    <thead>
+      <tr>
+        <th>Billing ID</th>
+        <th>Customer Name</th>
+        <th>Service</th>
+        <th>Current Step</th>
+        <th>Progress</th>
+        <th>Days</th>
+        <th>Status</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody id="workflow-table-body">
+      <!-- Populated by JavaScript -->
+    </tbody>
+  </table>
+</div>
+
+<script>
+const AccountWorkflowTable = {
+  render: function(container, data, userRole, userId) {
+    if (!container) return;
+
+    let filtered = data;
+    if (userRole === 'agent') {
+      filtered = data.filter(o => o.assignedAgent === userId);
+    } else if (userRole === 'team_leader') {
+      filtered = data.filter(o => o.assignedTL === userId);
+    }
+
+    const tbody = document.getElementById('workflow-table-body');
+    tbody.innerHTML = '';
+
+    filtered.forEach(billing => {
+      const steps = [
+        'Welcome to Wolf Technologies',
+        'Candidate Onboard',
+        'Get Documents',
+        'Agreement Sent',
+        'Agreement Signed'
+      ];
+
+      const stepIndex = steps.indexOf(billing.currentStep);
+      const progressPct = stepIndex >= 0 ? Math.round(((stepIndex + 1) / steps.length) * 100) : 0;
+
+      const statusClass = billing.status === 'completed' ? 'completed'
+                        : billing.status === 'in_progress' ? 'in-progress'
+                        : 'pending';
+
+      const row = document.createElement('tr');
+      row.innerHTML = `
+        <td><strong>${billing.billingId}</strong></td>
+        <td>${billing.customerName}</td>
+        <td>${billing.serviceName}</td>
+        <td><span class="step-badge">${billing.currentStep.substring(0, 20)}...</span></td>
+        <td>
+          <div class="progress-bar">
+            <div class="progress-fill" style="width: ${progressPct}%"></div>
+          </div>
+          <span class="progress-text">${progressPct}%</span>
+        </td>
+        <td>${billing.daysInProcess}</td>
+        <td><span class="status-badge ${statusClass}">${billing.status.toUpperCase()}</span></td>
+        <td>
+          <button class="workflow-view-btn" data-billing-id="${billing.id}">
+            <i class="fas fa-eye"></i>
+          </button>
+        </td>
+      `;
+
+      row.querySelector('.workflow-view-btn').addEventListener('click', () => {
+        if (typeof AccountUserViewModal !== 'undefined') {
+          AccountUserViewModal.open(billing);
+        }
+      });
+
+      tbody.appendChild(row);
+    });
+  }
+};
+</script>

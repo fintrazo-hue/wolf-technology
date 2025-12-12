@@ -1,0 +1,92 @@
+<div id="workflow-modal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.5); z-index: 1000; align-items: center; justify-content: center;">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h2 id="modal-customer-name"></h2>
+      <button class="modal-close" onclick="document.getElementById('workflow-modal').style.display='none';">&times;</button>
+    </div>
+    <div class="modal-body">
+      <div class="modal-section">
+        <h3>Billing Details</h3>
+        <div id="billing-details"></div>
+      </div>
+      <div class="modal-section">
+        <h3>Workflow Progress</h3>
+        <div id="modal-workflow-steps" class="modal-workflow"></div>
+      </div>
+      <div class="modal-section">
+        <h3>Documents</h3>
+        <div id="modal-documents" class="modal-documents"></div>
+      </div>
+      <div class="modal-section">
+        <h3>Agreement Status</h3>
+        <div id="modal-agreement"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+const AccountUserViewModal = {
+  open: function(billing) {
+    const modal = document.getElementById('workflow-modal');
+    document.getElementById('modal-customer-name').textContent = billing.customerName;
+
+    document.getElementById('billing-details').innerHTML = `
+      <p><strong>Billing ID:</strong> ${billing.billingId}</p>
+      <p><strong>Service:</strong> ${billing.serviceName}</p>
+      <p><strong>Status:</strong> <span class="status-badge ${billing.status}">${billing.status.toUpperCase()}</span></p>
+      <p><strong>Agent:</strong> ${billing.assignedAgentName}</p>
+      <p><strong>Team Leader:</strong> ${billing.assignedTLName}</p>
+      <p><strong>Days in Process:</strong> ${billing.daysInProcess}</p>
+    `;
+
+    const steps = [
+      'Welcome to Wolf Technologies',
+      'Candidate Onboard',
+      'Get Documents',
+      'Agreement Sent',
+      'Agreement Signed'
+    ];
+
+    const stepsHtml = steps.map((step, idx) => {
+      const isCompleted = billing.completedSteps.includes(step);
+      const isCurrent = billing.currentStep === step;
+      return `
+        <div class="modal-step ${isCompleted ? 'completed' : ''} ${isCurrent ? 'current' : ''}">
+          <div class="step-number">${idx + 1}</div>
+          <div class="step-name">${step.substring(0, 15)}</div>
+        </div>
+      `;
+    }).join('');
+
+    document.getElementById('modal-workflow-steps').innerHTML = stepsHtml;
+
+    const docsHtml = Object.entries(billing.documents).map(([doc, status]) => `
+      <div class="doc-row">
+        <span>${doc.replace(/_/g, ' ').toUpperCase()}</span>
+        <span class="doc-status ${status}">${status.toUpperCase()}</span>
+      </div>
+    `).join('');
+
+    document.getElementById('modal-documents').innerHTML = docsHtml;
+
+    const agreementSent = billing.agreement.sent_at ? new Date(billing.agreement.sent_at).toLocaleDateString() : '-';
+    const agreementSigned = billing.agreement.signed_at ? new Date(billing.agreement.signed_at).toLocaleDateString() : '-';
+
+    document.getElementById('modal-agreement').innerHTML = `
+      <p><strong>Sent on:</strong> ${agreementSent}</p>
+      <p><strong>Signed on:</strong> ${agreementSigned}</p>
+    `;
+
+    modal.style.display = 'flex';
+  },
+
+  close: function() {
+    document.getElementById('workflow-modal').style.display = 'none';
+  }
+};
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') AccountUserViewModal.close();
+});
+</script>

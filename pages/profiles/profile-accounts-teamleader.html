@@ -3,18 +3,44 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Accounts Team Leader - Wolf Technologies</title>
+    <title>Account Team Leader Profile - Wolf Technologies</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="../../assets/css/profiles.css">
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <link rel="stylesheet" href="../../assets/css/profiles-accounts.css">
+    <style>
+      body { background: #F3F4F6; }
+      .container { max-width: 1400px; margin: 0 auto; padding: 24px; }
+      .page-title { font-size: 24px; font-weight: 600; margin-bottom: 24px; color: #1F2937; }
+      .section { background: #FFFFFF; border-radius: 8px; margin-bottom: 24px; border: 1px solid #E5E7EB; }
+    </style>
 </head>
-<body>
-    <div class="profile-container">
-        <aside class="profile-sidebar"></aside>
-        <main class="profile-main">
-            <div class="profile-header"></div>
-            <div class="profile-content"></div>
-        </main>
+<body data-page-type="team_leader">
+    <div id="sidebar-container"></div>
+
+    <div class="container">
+        <div class="page-title">Account Team Leader Profile</div>
+
+        <div id="profile-header"></div>
+
+        <div id="perf-cards"></div>
+
+        <div id="workflow-progress"></div>
+
+        <div id="team-performance"></div>
+
+        <div id="workflow-table"></div>
+
+        <div id="pending-tracker"></div>
+
+        <div id="recent-activity"></div>
+
+        <div id="targets-section"></div>
     </div>
-    <script src="../../assets/js/profiles.js"></script>
+
+    <div id="workflow-modal"></div>
+
+    <script src="../../assets/js/mockdata.js"></script>
+    <script src="../../assets/js/load-sidebar.js"></script>
+    <script src="../../assets/js/profiles-accounts.js"></script>
 </body>
 </html>
