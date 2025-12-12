@@ -4,11 +4,32 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Business Development Manager - Wolf Technologies</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="../../assets/css/style.css">
     <link rel="stylesheet" href="../../assets/css/profiles.css">
 </head>
-<body>
+<body class="dashboard-page">
+    <div id="sidebar-container"></div>
+
+    <div class="main-content">
+        <header class="dashboard-header">
+            <div class="header-left">
+                <button class="mobile-menu-toggle" id="mobileMenuToggle"><i class="fas fa-bars"></i></button>
+                <h1 class="page-title">BD Manager Profile</h1>
+            </div>
+            <div class="header-right">
+                <div class="header-item profile-dropdown" id="profileDropdown">
+                    <div class="profile-info">
+                        <img src="https://ui-avatars.com/api/?name=Admin&background=F4D03F&color=0F0F0F&bold=true" class="profile-avatar">
+                        <div class="profile-details"><span class="profile-name">Admin</span><span class="profile-role">Super Admin</span></div>
+                    </div>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+            </div>
+        </header>
+
+        <div class="dashboard-content">
     <div class="bd-profile">
         <!-- Header -->
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 32px;">
@@ -45,19 +66,17 @@
                 <div id="escalation-panel"></div>
             </div>
         </div>
+        </div>
+        </div>
     </div>
 
+    <script src="../../assets/js/load-sidebar.js"></script>
     <script src="../../assets/js/mockdata.js"></script>
     <script src="../../assets/js/profiles-bd.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            const profileName = document.getElementById('profile-name');
             const profileRole = document.getElementById('profile-role');
             if (profileRole) profileRole.textContent = 'BD Manager';
-
-            document.getElementById('profile-message')?.addEventListener('click', () => {
-                if (profileName) alert('Message sent to ' + profileName.textContent);
-            });
         });
     </script>
 </body>
