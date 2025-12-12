@@ -105,22 +105,11 @@ html, body {
     margin-bottom: var(--spacing-lg);
 }
 
-.logo-icon {
-    display: inline-flex;
-    align-items: center;
-    gap: 12px;
-    font-size: 28px;
-    font-weight: 800;
-    color: var(--brand-black);
-}
-
-.logo-icon i {
-    color: var(--brand-yellow);
-    font-size: 32px;
-}
-
-.logo-text {
-    letter-spacing: 2px;
+.logo-image {
+    max-width: 280px;
+    height: auto;
+    display: block;
+    margin: 0 auto;
 }
 
 .login-header {
@@ -322,15 +311,12 @@ html, body {
 .logo {
     display: flex;
     align-items: center;
-    gap: 12px;
-    font-size: 18px;
-    font-weight: 800;
-    letter-spacing: 1px;
+    justify-content: center;
 }
 
-.logo i {
-    color: var(--brand-yellow);
-    font-size: 24px;
+.sidebar-logo-img {
+    max-width: 180px;
+    height: auto;
 }
 
 .sidebar-toggle {
