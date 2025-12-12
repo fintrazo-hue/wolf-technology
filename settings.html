@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings - Wolf Technologies</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="dashboard-page">
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header"><div class="logo"><img src="public/logo.webp" alt="Wolf Technologies" class="sidebar-logo-img"></div></div>
+        <nav class="sidebar-nav">
+            <ul class="nav-list">
+                <li class="nav-item"><a href="dashboard.html" class="nav-link"><i class="fas fa-chart-line"></i><span>Dashboard</span></a></li>
+                <li class="nav-item"><a href="managers.html" class="nav-link"><i class="fas fa-user-tie"></i><span>Managers</span></a></li>
+                <li class="nav-item"><a href="team-leaders.html" class="nav-link"><i class="fas fa-users-cog"></i><span>Team Leaders</span></a></li>
+                <li class="nav-item"><a href="agents.html" class="nav-link"><i class="fas fa-user-friends"></i><span>Agents</span></a></li>
+                <li class="nav-item"><a href="crm-leads.html" class="nav-link"><i class="fas fa-address-book"></i><span>CRM Leads</span></a></li>
+                <li class="nav-item"><a href="departments.html" class="nav-link"><i class="fas fa-building"></i><span>Departments</span></a></li>
+                <li class="nav-item"><a href="purchase-users.html" class="nav-link"><i class="fas fa-shopping-cart"></i><span>Purchase Users</span></a></li>
+                <li class="nav-item"><a href="workflow.html" class="nav-link"><i class="fas fa-tasks"></i><span>Workflow Viewer</span></a></li>
+                <li class="nav-item"><a href="products.html" class="nav-link"><i class="fas fa-box"></i><span>Products</span></a></li>
+                <li class="nav-item"><a href="billing.html" class="nav-link"><i class="fas fa-file-invoice-dollar"></i><span>Billing & Payments</span></a></li>
+                <li class="nav-item"><a href="reports.html" class="nav-link"><i class="fas fa-chart-bar"></i><span>Reports</span></a></li>
+                <li class="nav-item"><a href="activity-logs.html" class="nav-link"><i class="fas fa-history"></i><span>Activity Logs</span></a></li>
+                <li class="nav-item"><a href="system-logs.html" class="nav-link"><i class="fas fa-server"></i><span>System Logs</span></a></li>
+                <li class="nav-item active"><a href="settings.html" class="nav-link"><i class="fas fa-cog"></i><span>Settings</span></a></li>
+                <li class="nav-item"><a href="profile.html" class="nav-link"><i class="fas fa-user"></i><span>Profile</span></a></li>
+            </ul>
+        </nav>
+        <div class="sidebar-footer"><button class="btn btn-logout" id="logoutBtn"><i class="fas fa-sign-out-alt"></i><span>Logout</span></button></div>
+    </aside>
+
+    <div class="main-content">
+        <header class="dashboard-header">
+            <div class="header-left">
+                <button class="mobile-menu-toggle" id="mobileMenuToggle"><i class="fas fa-bars"></i></button>
+                <h1 class="page-title">Settings</h1>
+            </div>
+            <div class="header-right">
+                <div class="header-search"><i class="fas fa-search"></i><input type="text" placeholder="Search..." class="search-input"></div>
+                <div class="header-item notification-icon" id="notificationIcon"><i class="fas fa-bell"></i><span class="badge" id="notificationBadge">3</span></div>
+                <div class="header-item profile-dropdown" id="profileDropdown">
+                    <div class="profile-info">
+                        <img src="https://ui-avatars.com/api/?name=Admin&background=F4D03F&color=0F0F0F&bold=true" class="profile-avatar">
+                        <div class="profile-details"><span class="profile-name">Admin</span><span class="profile-role">Super Admin</span></div>
+                    </div>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+            </div>
+        </header>
+
+        <div class="dashboard-content">
+            <div class="data-section">
+                <div class="section-header">
+                    <h2 class="section-title">Settings</h2>
+                    <button class="btn btn-primary" id="saveSettingsBtn"><i class="fas fa-plus"></i> Add New</button>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <script src="script.js"></script>
+    <script>toastr.options = { "closeButton": true, "progressBar": true, "positionClass": "toast-top-right", "timeOut": "3000" };</script>
+</body>
+</html>

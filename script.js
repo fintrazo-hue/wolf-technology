@@ -934,3 +934,233 @@ if (window.location.pathname.includes('team-leaders.html')) {
         $('#logoutBtn').on('click', handleLogout);
     });
 }
+
+// ============================================
+// Agents Page Functions
+// ============================================
+if (window.location.pathname.includes('agents.html')) {
+    $(document).ready(function() {
+        if (!localStorage.getItem('isLoggedIn')) {
+            window.location.href = 'index.html';
+            return;
+        }
+        
+        initSidebar();
+        
+        window.agentsTable = $('#agentsTable').DataTable({
+            data: mockData.agents,
+            columns: [
+                { data: 'id' },
+                { data: null, render: (data) => data.firstName + ' ' + data.lastName },
+                { data: 'email' },
+                { data: 'department' },
+                { data: 'employeeCode' },
+                { data: 'tlName' },
+                { data: 'managerName' },
+                { data: 'status', render: (data) => '<span class="badge badge-' + (data === 'Active' ? 'success' : 'secondary') + '">' + data + '</span>' },
+                { data: null, render: (data) => '<button class="action-btn action-btn-edit" onclick="editAgent(' + data.id + ')"><i class="fas fa-edit"></i></button><button class="action-btn action-btn-delete" onclick="deleteAgent(' + data.id + ')"><i class="fas fa-trash"></i></button>'}
+            ]
+        });
+        
+        const tlSelect = $('#agentTL');
+        const managerSelect = $('#agentManager');
+        mockData.teamLeaders.forEach(tl => tlSelect.append('<option value="' + tl.id + '">' + tl.name + '</option>'));
+        mockData.managers.forEach(m => managerSelect.append('<option value="' + m.id + '">' + m.firstName + ' ' + m.lastName + '</option>'));
+        
+        $('#addAgentBtn').on('click', function() {
+            $('#agentForm')[0].reset();
+            $('#agentId').val('');
+            $('#agentModalLabel').html('<i class="fas fa-user-plus"></i> Add Agent');
+            $('#agentModal').modal('show');
+        });
+        
+        $('#saveAgentBtn').on('click', function() {
+            const id = $('#agentId').val();
+            const tlId = parseInt($('#agentTL').val());
+            const managerId = parseInt($('#agentManager').val());
+            const tl = mockData.teamLeaders.find(t => t.id === tlId);
+            const manager = mockData.managers.find(m => m.id === managerId);
+            
+            const agent = {
+                id: id ? parseInt(id) : mockData.agents.length + 1,
+                firstName: $('#agentFirstName').val(),
+                lastName: $('#agentLastName').val(),
+                email: $('#agentEmail').val(),
+                phone: $('#agentPhone').val(),
+                employeeCode: $('#agentCode').val(),
+                department: $('#agentDepartment').val(),
+                tlId: tlId,
+                tlName: tl.name,
+                managerId: managerId,
+                managerName: manager.firstName + ' ' + manager.lastName,
+                status: $('#agentStatus').val()
+            };
+            
+            if (id) {
+                const index = mockData.agents.findIndex(a => a.id === parseInt(id));
+                mockData.agents[index] = agent;
+                toastr.success('Agent updated successfully!');
+            } else {
+                mockData.agents.push(agent);
+                toastr.success('Agent added successfully!');
+            }
+            
+            $('#agentModal').modal('hide');
+            window.agentsTable.clear().rows.add(mockData.agents).draw();
+        });
+        
+        window.editAgent = function(id) {
+            const agent = mockData.agents.find(a => a.id === id);
+            if (agent) {
+                $('#agentId').val(agent.id);
+                $('#agentFirstName').val(agent.firstName);
+                $('#agentLastName').val(agent.lastName);
+                $('#agentEmail').val(agent.email);
+                $('#agentPhone').val(agent.phone);
+                $('#agentCode').val(agent.employeeCode);
+                $('#agentDepartment').val(agent.department);
+                $('#agentTL').val(agent.tlId);
+                $('#agentManager').val(agent.managerId);
+                $('#agentStatus').val(agent.status);
+                $('#agentModalLabel').html('<i class="fas fa-edit"></i> Edit Agent');
+                $('#agentModal').modal('show');
+            }
+        };
+        
+        window.deleteAgent = function(id) {
+            if (confirm('Are you sure you want to delete this agent?')) {
+                const index = mockData.agents.findIndex(a => a.id === id);
+                mockData.agents.splice(index, 1);
+                window.agentsTable.clear().rows.add(mockData.agents).draw();
+                toastr.success('Agent deleted successfully!');
+            }
+        };
+        
+        $('#logoutBtn').on('click', handleLogout);
+    });
+}
+
+// ============================================
+// CRM Leads Page Functions
+// ============================================
+if (window.location.pathname.includes('crm-leads.html')) {
+    $(document).ready(function() {
+        if (!localStorage.getItem('isLoggedIn')) {
+            window.location.href = 'index.html';
+            return;
+        }
+        
+        initSidebar();
+        
+        window.crmLeadsTable = $('#crmLeadsTable').DataTable({
+            data: mockData.crmLeads,
+            columns: [
+                { data: 'id' },
+                { data: 'leadName' },
+                { data: 'clientName' },
+                { data: 'email' },
+                { data: 'phone' },
+                { data: 'linkedin' },
+                { data: 'visa' },
+                { data: 'source' },
+                { data: 'dealStage', render: (data) => '<span class="badge badge-info">' + data + '</span>' },
+                { data: 'assignedTo' },
+                { data: null, render: (data) => '<button class="action-btn action-btn-view" onclick="viewCRMLead(' + data.id + ')"><i class="fas fa-eye"></i></button><button class="action-btn action-btn-edit" onclick="editCRMLead(' + data.id + ')"><i class="fas fa-edit"></i></button><button class="action-btn action-btn-delete" onclick="deleteCRMLead(' + data.id + ')"><i class="fas fa-trash"></i></button>' }
+            ]
+        });
+        
+        window.viewCRMLead = function(id) {
+            const lead = mockData.crmLeads.find(l => l.id === id);
+            if (lead) {
+                toastr.info('Viewing lead: ' + lead.leadName + ' - ' + lead.clientName);
+            }
+        };
+        
+        window.editCRMLead = function(id) {
+            const lead = mockData.crmLeads.find(l => l.id === id);
+            if (lead) {
+                toastr.info('Edit functionality for ' + lead.leadName);
+            }
+        };
+        
+        window.deleteCRMLead = function(id) {
+            if (confirm('Are you sure you want to delete this lead?')) {
+                const index = mockData.crmLeads.findIndex(l => l.id === id);
+                mockData.crmLeads.splice(index, 1);
+                window.crmLeadsTable.clear().rows.add(mockData.crmLeads).draw();
+                toastr.success('Lead deleted successfully!');
+            }
+        };
+        
+        $('#logoutBtn').on('click', handleLogout);
+    });
+}
+
+// ============================================
+// Products Page Functions
+// ============================================
+if (window.location.pathname.includes('products.html')) {
+    $(document).ready(function() {
+        if (!localStorage.getItem('isLoggedIn')) {
+            window.location.href = 'index.html';
+            return;
+        }
+        
+        initSidebar();
+        
+        window.productsTable = $('#productsTable').DataTable({
+            data: mockData.products,
+            columns: [
+                { data: 'id' },
+                { data: 'name' },
+                { data: 'price', render: (data) => '$' + data.toLocaleString() },
+                { data: 'departments', render: (data) => data.join(', ') },
+                { data: 'status', render: (data) => '<span class="badge badge-' + (data === 'Active' ? 'success' : 'secondary') + '">' + data + '</span>' },
+                { data: null, render: (data) => '<button class="action-btn action-btn-edit" onclick="editProduct(' + data.id + ')"><i class="fas fa-edit"></i></button><button class="action-btn action-btn-delete" onclick="deleteProduct(' + data.id + ')"><i class="fas fa-trash"></i></button>' }
+            ]
+        });
+        
+        window.editProduct = function(id) {
+            const product = mockData.products.find(p => p.id === id);
+            if (product) {
+                toastr.info('Edit product: ' + product.name);
+            }
+        };
+        
+        window.deleteProduct = function(id) {
+            if (confirm('Are you sure you want to delete this product?')) {
+                const index = mockData.products.findIndex(p => p.id === id);
+                mockData.products.splice(index, 1);
+                window.productsTable.clear().rows.add(mockData.products).draw();
+                toastr.success('Product deleted successfully!');
+            }
+        };
+        
+        $('#logoutBtn').on('click', handleLogout);
+    });
+}
+
+// ============================================
+// Other Pages Basic Initialization
+// ============================================
+if (window.location.pathname.includes('departments.html') || 
+    window.location.pathname.includes('purchase-users.html') || 
+    window.location.pathname.includes('workflow.html') || 
+    window.location.pathname.includes('billing.html') || 
+    window.location.pathname.includes('reports.html') || 
+    window.location.pathname.includes('activity-logs.html') || 
+    window.location.pathname.includes('system-logs.html') || 
+    window.location.pathname.includes('settings.html') || 
+    window.location.pathname.includes('profile.html')) {
+    $(document).ready(function() {
+        if (!localStorage.getItem('isLoggedIn')) {
+            window.location.href = 'index.html';
+            return;
+        }
+        
+        initSidebar();
+        $('#logoutBtn').on('click', handleLogout);
+        
+        toastr.info('Page loaded successfully!');
+    });
+}
