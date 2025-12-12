@@ -4,17 +4,124 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sales Team Leader - Wolf Technologies</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../../assets/css/style.css">
     <link rel="stylesheet" href="../../assets/css/profiles.css">
+    <link rel="stylesheet" href="../../assets/css/profiles-sales.css">
 </head>
-<body>
-    <div class="profile-container">
-        <aside class="profile-sidebar"></aside>
-        <main class="profile-main">
-            <div class="profile-header"></div>
-            <div class="profile-content"></div>
-        </main>
+<body class="dashboard-page">
+    <div id="sidebar-container"></div>
+
+    <div class="main-content">
+        <header class="dashboard-header">
+            <div class="header-left">
+                <button class="mobile-menu-toggle" id="mobileMenuToggle"><i class="fas fa-bars"></i></button>
+                <h1 class="page-title">Sales Team Leader Profile</h1>
+            </div>
+            <div class="header-right">
+                <div class="header-item profile-dropdown" id="profileDropdown">
+                    <div class="profile-info">
+                        <img src="https://ui-avatars.com/api/?name=Admin&background=F4D03F&color=0F0F0F&bold=true" class="profile-avatar">
+                        <div class="profile-details"><span class="profile-name">Admin</span><span class="profile-role">Super Admin</span></div>
+                    </div>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+            </div>
+        </header>
+
+        <div class="dashboard-content">
+            <div class="sales-profile">
+                <!-- Header -->
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 32px;">
+                    <div>
+                        <h1 id="profile-name" style="font-size: 28px; font-weight: 700; margin-bottom: 4px;"></h1>
+                        <p id="profile-role" style="color: #6B6B6B; font-size: 14px;"></p>
+                    </div>
+                    <div style="display: flex; gap: 12px;">
+                        <button id="profile-message" class="sales-btn-primary" style="display: flex; align-items: center; gap: 8px;">
+                            <i class="fas fa-envelope"></i> Message
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Profile Info -->
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-bottom: 32px; background: white; padding: 20px; border-radius: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+                    <div>
+                        <p style="color: #6B6B6B; font-size: 12px; font-weight: 600; margin-bottom: 4px;">EMAIL</p>
+                        <p id="info-email" style="font-weight: 500;"></p>
+                    </div>
+                    <div>
+                        <p style="color: #6B6B6B; font-size: 12px; font-weight: 600; margin-bottom: 4px;">PHONE</p>
+                        <p id="info-phone" style="font-weight: 500;"></p>
+                    </div>
+                    <div>
+                        <p style="color: #6B6B6B; font-size: 12px; font-weight: 600; margin-bottom: 4px;">JOINED</p>
+                        <p id="info-joined" style="font-weight: 500;"></p>
+                    </div>
+                    <div>
+                        <p style="color: #6B6B6B; font-size: 12px; font-weight: 600; margin-bottom: 4px;">STATUS</p>
+                        <p id="info-status" style="font-weight: 500;"></p>
+                    </div>
+                </div>
+
+                <!-- Team Overview Table -->
+                <div style="margin-bottom: 32px;">
+                    <h2 class="sales-section-title" style="margin-bottom: 16px;">Team Agents</h2>
+                    <div style="background: white; border-radius: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); overflow: hidden;">
+                        <div class="sales-team-table"></div>
+                    </div>
+                </div>
+
+                <!-- Performance Cards -->
+                <div style="margin-bottom: 32px;">
+                    <h2 class="sales-section-title" style="margin-bottom: 16px;">My Performance</h2>
+                    <div class="sales-performance-cards"></div>
+                </div>
+
+                <!-- Pipeline Chart -->
+                <div style="margin-bottom: 32px;">
+                    <h2 class="sales-section-title" style="margin-bottom: 16px;">Sales Pipeline</h2>
+                    <div style="background: white; padding: 20px; border-radius: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+                        <div class="sales-pipeline-chart"></div>
+                    </div>
+                </div>
+
+                <!-- Inactivity + Activity -->
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-bottom: 32px;">
+                    <div style="background: white; padding: 20px; border-radius: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+                        <div class="sales-inactivity-tracker"></div>
+                    </div>
+                    <div style="background: white; padding: 20px; border-radius: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+                        <h3 class="sales-section-title">Recent Activity</h3>
+                        <div class="sales-activity-timeline"></div>
+                    </div>
+                </div>
+
+                <!-- Leads Table -->
+                <div style="margin-bottom: 32px;">
+                    <h2 class="sales-section-title" style="margin-bottom: 16px;">Team Leads</h2>
+                    <div style="background: white; border-radius: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); overflow: hidden;">
+                        <div class="sales-leads-table"></div>
+                    </div>
+                </div>
+
+                <!-- Targets -->
+                <div style="background: white; padding: 20px; border-radius: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+                    <div class="sales-targets-module"></div>
+                </div>
+            </div>
+        </div>
     </div>
-    <script src="../../assets/js/profiles.js"></script>
+
+    <script src="../../assets/js/load-sidebar.js"></script>
+    <script src="../../assets/js/script.js"></script>
+    <script src="../../assets/js/profiles-sales.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const profileRole = document.getElementById('profile-role');
+            if (profileRole) profileRole.textContent = 'Sales Team Leader';
+        });
+    </script>
 </body>
 </html>
