@@ -22,19 +22,26 @@ const mockData = {
     managers: [
         { id: 1, firstName: 'Michael', lastName: 'Roberts', email: 'michael.r@wolftech.com', phone: '555-0201', employeeCode: 'MGR001', department: 'Technical', status: 'Active', incentive: 5.5, discountAllowed: true },
         { id: 2, firstName: 'Jennifer', lastName: 'Martinez', email: 'jennifer.m@wolftech.com', phone: '555-0202', employeeCode: 'MGR002', department: 'Sales', status: 'Active', incentive: 6.0, discountAllowed: true },
-        { id: 3, firstName: 'David', lastName: 'Anderson', email: 'david.a@wolftech.com', phone: '555-0203', employeeCode: 'MGR003', department: 'Marketing', status: 'Active', incentive: 5.0, discountAllowed: false }
+        { id: 3, firstName: 'David', lastName: 'Anderson', email: 'david.a@wolftech.com', phone: '555-0203', employeeCode: 'MGR003', department: 'Marketing', status: 'Active', incentive: 5.0, discountAllowed: false },
+        { id: 22, firstName: 'Vivek', lastName: 'Saxena', email: 'vivek.saxena@wolftech.com', phone: '555-0222', employeeCode: 'MGR022', department: 'BD', status: 'Active', incentive: 7.0, discountAllowed: true }
     ],
 
     teamLeaders: [
         { id: 1, name: 'Sarah Thompson', email: 'sarah.t@wolftech.com', phone: '555-0301', employeeCode: 'TL001', department: 'Technical', managerId: 1, managerName: 'Michael Roberts', status: 'Active' },
         { id: 2, name: 'Robert Wilson', email: 'robert.w@wolftech.com', phone: '555-0302', employeeCode: 'TL002', department: 'Sales', managerId: 2, managerName: 'Jennifer Martinez', status: 'Active' },
-        { id: 3, name: 'Lisa Chen', email: 'lisa.c@wolftech.com', phone: '555-0303', employeeCode: 'TL003', department: 'Marketing', managerId: 3, managerName: 'David Anderson', status: 'Active' }
+        { id: 3, name: 'Lisa Chen', email: 'lisa.c@wolftech.com', phone: '555-0303', employeeCode: 'TL003', department: 'Marketing', managerId: 3, managerName: 'David Anderson', status: 'Active' },
+        { id: 23, name: 'Divya Pillai', email: 'divya.pillai@wolftech.com', phone: '555-0323', employeeCode: 'TL023', department: 'BD', managerId: 22, managerName: 'Vivek Saxena', status: 'Active' },
+        { id: 24, name: 'Harish Bhat', email: 'harish.bhat@wolftech.com', phone: '555-0324', employeeCode: 'TL024', department: 'BD', managerId: 22, managerName: 'Vivek Saxena', status: 'Active' }
     ],
 
     agents: [
         { id: 1, firstName: 'Alex', lastName: 'Johnson', email: 'alex.j@wolftech.com', phone: '555-0401', employeeCode: 'AGT001', department: 'Technical', tlId: 1, tlName: 'Sarah Thompson', managerId: 1, managerName: 'Michael Roberts', status: 'Active' },
         { id: 2, firstName: 'Emma', lastName: 'Davis', email: 'emma.d@wolftech.com', phone: '555-0402', employeeCode: 'AGT002', department: 'Sales', tlId: 2, tlName: 'Robert Wilson', managerId: 2, managerName: 'Jennifer Martinez', status: 'Active' },
-        { id: 3, firstName: 'James', lastName: 'Brown', email: 'james.b@wolftech.com', phone: '555-0403', employeeCode: 'AGT003', department: 'Marketing', tlId: 3, tlName: 'Lisa Chen', managerId: 3, managerName: 'David Anderson', status: 'Active' }
+        { id: 3, firstName: 'James', lastName: 'Brown', email: 'james.b@wolftech.com', phone: '555-0403', employeeCode: 'AGT003', department: 'Marketing', tlId: 3, tlName: 'Lisa Chen', managerId: 3, managerName: 'David Anderson', status: 'Active' },
+        { id: 25, firstName: 'Sneha', lastName: 'Kulkarni', email: 'sneha.kulkarni@wolftech.com', phone: '555-0425', employeeCode: 'AGT025', department: 'BD', tlId: 23, tlName: 'Divya Pillai', managerId: 22, managerName: 'Vivek Saxena', status: 'Active' },
+        { id: 26, firstName: 'Mohit', lastName: 'Jain', email: 'mohit.jain@wolftech.com', phone: '555-0426', employeeCode: 'AGT026', department: 'BD', tlId: 23, tlName: 'Divya Pillai', managerId: 22, managerName: 'Vivek Saxena', status: 'Active' },
+        { id: 27, firstName: 'Tanvi', lastName: 'Shah', email: 'tanvi.shah@wolftech.com', phone: '555-0427', employeeCode: 'AGT027', department: 'BD', tlId: 24, tlName: 'Harish Bhat', managerId: 22, managerName: 'Vivek Saxena', status: 'Active' },
+        { id: 28, firstName: 'Ashish', lastName: 'Dubey', email: 'ashish.dubey@wolftech.com', phone: '555-0428', employeeCode: 'AGT028', department: 'BD', tlId: 24, tlName: 'Harish Bhat', managerId: 22, managerName: 'Vivek Saxena', status: 'Active' }
     ],
 
     crmLeads: [
@@ -751,10 +758,6 @@ function getTimeAgo(date) {
 // ============================================
 if (window.location.pathname.includes('managers.html')) {
     $(document).ready(function() {
-        if (!localStorage.getItem('isLoggedIn')) {
-            window.location.href = 'index.html';
-            return;
-        }
         
         initSidebar();
         
@@ -769,6 +772,7 @@ if (window.location.pathname.includes('managers.html')) {
                 { data: 'phone' },
                 { data: 'status', render: (data) => `<span class="badge badge-${data === 'Active' ? 'success' : 'secondary'}">${data}</span>` },
                 { data: null, render: (data) => `
+                    <button class="action-btn action-btn-view" onclick="viewManager(${data.id})"><i class="fas fa-eye"></i></button>
                     <button class="action-btn action-btn-edit" onclick="editManager(${data.id})"><i class="fas fa-edit"></i></button>
                     <button class="action-btn action-btn-delete" onclick="deleteManager(${data.id})"><i class="fas fa-trash"></i></button>
                 `}
@@ -836,7 +840,14 @@ if (window.location.pathname.includes('managers.html')) {
                 toastr.success('Manager deleted successfully!');
             }
         };
-        
+
+        window.viewManager = function(id) {
+            const manager = mockData.managers.find(m => m.id === id);
+            if (manager && (manager.department === 'BD' || manager.department === 'business_development')) {
+                window.location.href = '../profiles/profile-bd-manager.html?userId=' + manager.id;
+            }
+        };
+
         $('#logoutBtn').on('click', handleLogout);
     });
 }
@@ -846,10 +857,6 @@ if (window.location.pathname.includes('managers.html')) {
 // ============================================
 if (window.location.pathname.includes('team-leaders.html')) {
     $(document).ready(function() {
-        if (!localStorage.getItem('isLoggedIn')) {
-            window.location.href = 'index.html';
-            return;
-        }
         
         initSidebar();
         
@@ -864,6 +871,7 @@ if (window.location.pathname.includes('team-leaders.html')) {
                 { data: 'managerName' },
                 { data: 'status', render: (data) => `<span class="badge badge-${data === 'Active' ? 'success' : 'secondary'}">${data}</span>` },
                 { data: null, render: (data) => `
+                    <button class="action-btn action-btn-view" onclick="viewTL(${data.id})"><i class="fas fa-eye"></i></button>
                     <button class="action-btn action-btn-edit" onclick="editTL(${data.id})"><i class="fas fa-edit"></i></button>
                     <button class="action-btn action-btn-delete" onclick="deleteTL(${data.id})"><i class="fas fa-trash"></i></button>
                 `}
@@ -937,7 +945,14 @@ if (window.location.pathname.includes('team-leaders.html')) {
                 toastr.success('Team Leader deleted successfully!');
             }
         };
-        
+
+        window.viewTL = function(id) {
+            const tl = mockData.teamLeaders.find(t => t.id === id);
+            if (tl && (tl.department === 'BD' || tl.department === 'business_development')) {
+                window.location.href = '../profiles/profile-bd-teamleader.html?userId=' + tl.id;
+            }
+        };
+
         $('#logoutBtn').on('click', handleLogout);
     });
 }
@@ -947,10 +962,6 @@ if (window.location.pathname.includes('team-leaders.html')) {
 // ============================================
 if (window.location.pathname.includes('agents.html')) {
     $(document).ready(function() {
-        if (!localStorage.getItem('isLoggedIn')) {
-            window.location.href = 'index.html';
-            return;
-        }
         
         initSidebar();
         
@@ -965,7 +976,7 @@ if (window.location.pathname.includes('agents.html')) {
                 { data: 'tlName' },
                 { data: 'managerName' },
                 { data: 'status', render: (data) => '<span class="badge badge-' + (data === 'Active' ? 'success' : 'secondary') + '">' + data + '</span>' },
-                { data: null, render: (data) => '<button class="action-btn action-btn-edit" onclick="editAgent(' + data.id + ')"><i class="fas fa-edit"></i></button><button class="action-btn action-btn-delete" onclick="deleteAgent(' + data.id + ')"><i class="fas fa-trash"></i></button>'}
+                { data: null, render: (data) => '<button class="action-btn action-btn-view" onclick="viewAgent(' + data.id + ')"><i class="fas fa-eye"></i></button><button class="action-btn action-btn-edit" onclick="editAgent(' + data.id + ')"><i class="fas fa-edit"></i></button><button class="action-btn action-btn-delete" onclick="deleteAgent(' + data.id + ')"><i class="fas fa-trash"></i></button>'}
             ]
         });
         
@@ -1042,7 +1053,14 @@ if (window.location.pathname.includes('agents.html')) {
                 toastr.success('Agent deleted successfully!');
             }
         };
-        
+
+        window.viewAgent = function(id) {
+            const agent = mockData.agents.find(a => a.id === id);
+            if (agent && (agent.department === 'BD' || agent.department === 'business_development')) {
+                window.location.href = '../profiles/profile-bd-agent.html?userId=' + agent.id;
+            }
+        };
+
         $('#logoutBtn').on('click', handleLogout);
     });
 }
