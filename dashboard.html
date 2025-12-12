@@ -3,644 +3,1073 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wolf Technologies - Super Admin Dashboard</title>
+    <title>Wolf Technologies - Employee Management Dashboard</title>
 
-    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
-    <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-    <!-- DataTables CSS -->
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
-
-    <!-- Toastr CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
-
-    <!-- Select2 CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.min.css" />
-
-    <!-- Date Picker CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
-
-    <!-- Custom Styles -->
     <link rel="stylesheet" href="style.css">
+
+    <style>
+        :root {
+            --primary-color: #6366f1;
+            --secondary-color: #8b5cf6;
+            --success-color: #10b981;
+            --danger-color: #ef4444;
+            --warning-color: #f59e0b;
+            --info-color: #3b82f6;
+            --dark-color: #1e293b;
+            --light-color: #f8fafc;
+            --border-color: #e2e8f0;
+            --text-primary: #0f172a;
+            --text-secondary: #64748b;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--light-color);
+            color: var(--text-primary);
+            overflow-x: hidden;
+        }
+
+        .dashboard-container {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        .sidebar {
+            width: 280px;
+            background: white;
+            border-right: 1px solid var(--border-color);
+            position: fixed;
+            height: 100vh;
+            overflow-y: auto;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .sidebar-header {
+            padding: 24px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .sidebar-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .sidebar-logo img {
+            width: 40px;
+            height: 40px;
+        }
+
+        .sidebar-logo-text {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            font-size: 18px;
+            color: var(--primary-color);
+        }
+
+        .sidebar-nav {
+            padding: 16px;
+        }
+
+        .nav-item {
+            margin-bottom: 8px;
+        }
+
+        .nav-link {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 16px;
+            color: var(--text-secondary);
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 0.2s ease;
+            font-weight: 500;
+        }
+
+        .nav-link:hover {
+            background: var(--light-color);
+            color: var(--primary-color);
+        }
+
+        .nav-link.active {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+        }
+
+        .main-content {
+            margin-left: 280px;
+            flex: 1;
+            padding: 24px;
+            width: calc(100% - 280px);
+        }
+
+        .top-header {
+            background: white;
+            border-radius: 12px;
+            padding: 20px 24px;
+            margin-bottom: 24px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .page-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin: 0;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+
+        .btn-add-employee {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-add-employee:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.4);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 24px;
+            border-radius: 12px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+        }
+
+        .stat-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 16px;
+            font-size: 24px;
+        }
+
+        .stat-value {
+            font-size: 32px;
+            font-weight: 800;
+            font-family: 'Poppins', sans-serif;
+            margin-bottom: 4px;
+        }
+
+        .stat-label {
+            color: var(--text-secondary);
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .department-tabs {
+            background: white;
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 24px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .tabs-header {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 24px;
+            border-bottom: 2px solid var(--border-color);
+            overflow-x: auto;
+            padding-bottom: 0;
+        }
+
+        .tab-button {
+            padding: 12px 24px;
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            font-weight: 600;
+            cursor: pointer;
+            position: relative;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .tab-button:hover {
+            color: var(--primary-color);
+        }
+
+        .tab-button.active {
+            color: var(--primary-color);
+        }
+
+        .tab-button.active::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            border-radius: 3px 3px 0 0;
+        }
+
+        .position-subtabs {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+
+        .subtab-button {
+            padding: 8px 20px;
+            background: var(--light-color);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            color: var(--text-secondary);
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .subtab-button:hover {
+            border-color: var(--primary-color);
+            color: var(--primary-color);
+        }
+
+        .subtab-button.active {
+            background: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+
+        .filters-section {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .filter-input {
+            padding: 10px 16px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            font-size: 14px;
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .filter-input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+
+        .employees-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 20px;
+            margin-top: 24px;
+        }
+
+        .employee-card {
+            background: white;
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 20px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .employee-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+            border-color: var(--primary-color);
+        }
+
+        .employee-header {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 16px;
+        }
+
+        .employee-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 12px;
+            object-fit: cover;
+        }
+
+        .employee-info h3 {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .employee-role {
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+
+        .employee-stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin-top: 16px;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 8px;
+            background: var(--light-color);
+            border-radius: 8px;
+        }
+
+        .stat-item-value {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        .stat-item-label {
+            font-size: 12px;
+            color: var(--text-secondary);
+            margin-top: 4px;
+        }
+
+        .performance-bar {
+            height: 8px;
+            background: var(--light-color);
+            border-radius: 4px;
+            overflow: hidden;
+            margin-top: 12px;
+        }
+
+        .performance-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--success-color), var(--info-color));
+            transition: width 0.3s ease;
+        }
+
+        .leads-section {
+            background: white;
+            border-radius: 12px;
+            padding: 24px;
+            margin-top: 24px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .section-title {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .leads-list {
+            display: grid;
+            gap: 16px;
+        }
+
+        .lead-card {
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 16px;
+            transition: all 0.2s ease;
+        }
+
+        .lead-card:hover {
+            border-color: var(--primary-color);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        .lead-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 12px;
+        }
+
+        .lead-title {
+            font-weight: 700;
+            font-size: 16px;
+        }
+
+        .lead-value {
+            font-weight: 600;
+            color: var(--success-color);
+        }
+
+        .lead-meta {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+            margin-top: 12px;
+        }
+
+        .lead-meta-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 13px;
+            color: var(--text-secondary);
+        }
+
+        .progress-section {
+            margin-top: 12px;
+        }
+
+        .progress-bar-container {
+            height: 6px;
+            background: var(--light-color);
+            border-radius: 3px;
+            overflow: hidden;
+            margin-top: 8px;
+        }
+
+        .progress-bar-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            transition: width 0.3s ease;
+        }
+
+        .badge {
+            padding: 4px 12px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .badge-high {
+            background: #fee2e2;
+            color: #dc2626;
+        }
+
+        .badge-medium {
+            background: #fef3c7;
+            color: #d97706;
+        }
+
+        .badge-low {
+            background: #dbeafe;
+            color: #2563eb;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 9999;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal.show {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 16px;
+            max-width: 800px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .modal-header {
+            padding: 24px;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-title {
+            font-size: 24px;
+            font-weight: 700;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--text-secondary);
+        }
+
+        .modal-body {
+            padding: 24px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            font-size: 14px;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.4);
+        }
+
+        .btn-secondary {
+            background: white;
+            color: var(--text-primary);
+            border: 1px solid var(--border-color);
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .btn-secondary:hover {
+            background: var(--light-color);
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                transform: translateX(-100%);
+            }
+
+            .sidebar.open {
+                transform: translateX(0);
+            }
+
+            .main-content {
+                margin-left: 0;
+                width: 100%;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .employees-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
-<body class="dashboard-page">
-
-    <!-- Sidebar -->
-    <aside class="sidebar" id="sidebar">
-        <div class="sidebar-header">
-            <div class="logo">
-                <img src="public/logo.webp" alt="Wolf Technologies" class="sidebar-logo-img">
-            </div>
-            <button class="sidebar-toggle" id="sidebarToggle">
-                <i class="fas fa-bars"></i>
-            </button>
-        </div>
-
-        <nav class="sidebar-nav">
-            <ul class="nav-list">
-                <li class="nav-item active">
-                    <a href="dashboard.html" class="nav-link">
-                        <i class="fas fa-chart-line"></i>
-                        <span>Dashboard</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="managers.html" class="nav-link">
-                        <i class="fas fa-user-tie"></i>
-                        <span>Managers</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="team-leaders.html" class="nav-link">
-                        <i class="fas fa-users-cog"></i>
-                        <span>Team Leaders</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="agents.html" class="nav-link">
-                        <i class="fas fa-user-friends"></i>
-                        <span>Agents</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="crm-leads.html" class="nav-link">
-                        <i class="fas fa-address-book"></i>
-                        <span>CRM Leads</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="departments.html" class="nav-link">
-                        <i class="fas fa-building"></i>
-                        <span>Departments</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="purchase-users.html" class="nav-link">
-                        <i class="fas fa-shopping-cart"></i>
-                        <span>Purchase Users</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="workflow.html" class="nav-link">
-                        <i class="fas fa-tasks"></i>
-                        <span>Workflow Viewer</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="products.html" class="nav-link">
-                        <i class="fas fa-box"></i>
-                        <span>Products</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="billing.html" class="nav-link">
-                        <i class="fas fa-file-invoice-dollar"></i>
-                        <span>Billing & Payments</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="reports.html" class="nav-link">
-                        <i class="fas fa-chart-bar"></i>
-                        <span>Reports</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="activity-logs.html" class="nav-link">
-                        <i class="fas fa-history"></i>
-                        <span>Activity Logs</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="system-logs.html" class="nav-link">
-                        <i class="fas fa-server"></i>
-                        <span>System Logs</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="settings.html" class="nav-link">
-                        <i class="fas fa-cog"></i>
-                        <span>Settings</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="profile.html" class="nav-link">
-                        <i class="fas fa-user"></i>
-                        <span>Profile</span>
-                    </a>
-                </li>
-            </ul>
-        </nav>
-
-        <div class="sidebar-footer">
-            <button class="btn btn-logout" id="logoutBtn">
-                <i class="fas fa-sign-out-alt"></i>
-                <span>Logout</span>
-            </button>
-        </div>
-    </aside>
-
-    <!-- Main Content -->
-    <div class="main-content">
-        <!-- Header -->
-        <header class="dashboard-header">
-            <div class="header-left">
-                <button class="mobile-menu-toggle" id="mobileMenuToggle">
-                    <i class="fas fa-bars"></i>
-                </button>
-                <h1 class="page-title">Super Admin Dashboard</h1>
-            </div>
-
-            <div class="header-right">
-                <!-- Search -->
-                <div class="header-search">
-                    <i class="fas fa-search"></i>
-                    <input type="text" placeholder="Search..." class="search-input">
-                </div>
-
-                <!-- Notifications -->
-                <div class="header-item notification-icon" id="notificationIcon">
-                    <i class="fas fa-bell"></i>
-                    <span class="badge" id="notificationBadge">5</span>
-                </div>
-
-                <!-- Profile -->
-                <div class="header-item profile-dropdown" id="profileDropdown">
-                    <div class="profile-info">
-                        <img src="https://ui-avatars.com/api/?name=Admin+User&background=F4D03F&color=0F0F0F&bold=true" alt="Admin" class="profile-avatar">
-                        <div class="profile-details">
-                            <span class="profile-name" id="userName">Admin User</span>
-                            <span class="profile-role">Super Admin</span>
-                        </div>
-                    </div>
-                    <i class="fas fa-chevron-down"></i>
+<body>
+    <div class="dashboard-container">
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="sidebar-logo">
+                    <img src="public/logo.webp" alt="Wolf Technologies">
+                    <span class="sidebar-logo-text">Wolf Tech</span>
                 </div>
             </div>
-        </header>
+            <nav class="sidebar-nav">
+                <ul class="nav-list">
+                    <li class="nav-item">
+                        <a href="dashboard.html" class="nav-link active">
+                            <i class="fas fa-chart-line"></i>
+                            <span>Dashboard</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="departments.html" class="nav-link">
+                            <i class="fas fa-building"></i>
+                            <span>Departments</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="crm-leads.html" class="nav-link">
+                            <i class="fas fa-address-book"></i>
+                            <span>CRM Leads</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="reports.html" class="nav-link">
+                            <i class="fas fa-chart-bar"></i>
+                            <span>Reports</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="settings.html" class="nav-link">
+                            <i class="fas fa-cog"></i>
+                            <span>Settings</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </aside>
 
-        <!-- Dashboard Content -->
-        <div class="dashboard-content">
-            <!-- KPI Cards -->
-            <div class="kpi-section">
-                <div class="row g-3">
-                    <div class="col-xl-3 col-lg-6 col-md-6">
-                        <div class="kpi-card">
-                            <div class="kpi-icon users-icon">
-                                <i class="fas fa-users"></i>
-                            </div>
-                            <div class="kpi-content">
-                                <h3 class="kpi-value" id="totalUsers">0</h3>
-                                <p class="kpi-label">Total Users</p>
-                                <span class="kpi-trend positive">
-                                    <i class="fas fa-arrow-up"></i> 12% this month
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-xl-3 col-lg-6 col-md-6">
-                        <div class="kpi-card">
-                            <div class="kpi-icon purchase-icon">
-                                <i class="fas fa-shopping-bag"></i>
-                            </div>
-                            <div class="kpi-content">
-                                <h3 class="kpi-value" id="newPurchase">0</h3>
-                                <p class="kpi-label">New Purchases</p>
-                                <span class="kpi-trend positive">
-                                    <i class="fas fa-arrow-up"></i> 8% this week
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-xl-3 col-lg-6 col-md-6">
-                        <div class="kpi-card">
-                            <div class="kpi-icon fail-icon">
-                                <i class="fas fa-times-circle"></i>
-                            </div>
-                            <div class="kpi-content">
-                                <h3 class="kpi-value" id="orderFail">0</h3>
-                                <p class="kpi-label">Failed Orders</p>
-                                <span class="kpi-trend negative">
-                                    <i class="fas fa-arrow-down"></i> 3% reduction
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-xl-3 col-lg-6 col-md-6">
-                        <div class="kpi-card">
-                            <div class="kpi-icon employees-icon">
-                                <i class="fas fa-user-tie"></i>
-                            </div>
-                            <div class="kpi-content">
-                                <h3 class="kpi-value" id="employeesCount">0</h3>
-                                <p class="kpi-label">Total Employees</p>
-                                <span class="kpi-trend neutral">
-                                    <i class="fas fa-minus"></i> No change
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Employee List Section -->
-            <div class="data-section">
-                <div class="section-header">
-                    <h2 class="section-title">Employee List</h2>
-                    <button class="btn btn-primary" id="addEmployeeBtn">
+        <main class="main-content">
+            <div class="top-header">
+                <h1 class="page-title">Employee Management</h1>
+                <div class="header-actions">
+                    <button class="btn-add-employee" id="addEmployeeBtn">
                         <i class="fas fa-plus"></i> Add Employee
                     </button>
                 </div>
-
-                <div class="data-table-container">
-                    <table id="employeeTable" class="table table-striped table-hover">
-                        <thead>
-                            <tr>
-                                <th>Employee Code</th>
-                                <th>Name</th>
-                                <th>Email</th>
-                                <th>Department</th>
-                                <th>Designation</th>
-                                <th>Joining Date</th>
-                                <th>Status</th>
-                                <th>Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                        </tbody>
-                    </table>
-                </div>
             </div>
 
-            <!-- Leads List Section -->
-            <div class="data-section">
-                <div class="section-header">
-                    <h2 class="section-title">Leads List</h2>
-                    <button class="btn btn-primary" id="addLeadBtn">
-                        <i class="fas fa-plus"></i> Add Lead
-                    </button>
+            <div class="stats-grid" id="statsGrid"></div>
+
+            <div class="department-tabs">
+                <div class="tabs-header" id="departmentTabs"></div>
+
+                <div class="position-subtabs" id="positionSubtabs"></div>
+
+                <div class="filters-section">
+                    <input type="text" class="filter-input" id="searchInput" placeholder="Search employees...">
+                    <select class="filter-input" id="performanceFilter">
+                        <option value="">All Performance</option>
+                        <option value="high">High (80%+)</option>
+                        <option value="medium">Medium (60-79%)</option>
+                        <option value="low">Low (<60%)</option>
+                    </select>
                 </div>
 
-                <div class="data-table-container">
-                    <table id="leadsTable" class="table table-striped table-hover">
-                        <thead>
-                            <tr>
-                                <th>Customer Name</th>
-                                <th>Email</th>
-                                <th>Phone</th>
-                                <th>Company</th>
-                                <th>Product</th>
-                                <th>Status</th>
-                                <th>Priority</th>
-                                <th>Assigned To</th>
-                                <th>Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                        </tbody>
-                    </table>
-                </div>
+                <div class="employees-grid" id="employeesGrid"></div>
             </div>
-        </div>
+
+            <div class="leads-section">
+                <h2 class="section-title">Department Leads</h2>
+                <div class="leads-list" id="leadsList"></div>
+            </div>
+        </main>
     </div>
 
-    <!-- Notification Drawer -->
-    <div class="notification-drawer" id="notificationDrawer">
-        <div class="drawer-header">
-            <h3 class="drawer-title">
-                <i class="fas fa-bell"></i> Notifications
-            </h3>
-            <button class="drawer-close" id="closeDrawer">
-                <i class="fas fa-times"></i>
-            </button>
-        </div>
-
-        <div class="drawer-tabs">
-            <button class="drawer-tab active" data-tab="all">All</button>
-            <button class="drawer-tab" data-tab="unread">Unread</button>
-        </div>
-
-        <div class="drawer-content" id="notificationList">
-        </div>
-    </div>
-
-    <!-- Profile Dropdown Menu -->
-    <div class="profile-menu" id="profileMenu">
-        <a href="#" class="profile-menu-item">
-            <i class="fas fa-user"></i> My Profile
-        </a>
-        <a href="#" class="profile-menu-item" id="settingsBtn">
-            <i class="fas fa-cog"></i> Settings
-        </a>
-        <a href="#" class="profile-menu-item" id="activityBtn">
-            <i class="fas fa-history"></i> Activity Log
-        </a>
-        <div class="profile-menu-divider"></div>
-        <a href="#" class="profile-menu-item" id="logoutBtnMenu">
-            <i class="fas fa-sign-out-alt"></i> Logout
-        </a>
-    </div>
-
-    <!-- Add/Edit Employee Modal -->
-    <div class="modal fade" id="employeeModal" tabindex="-1" aria-labelledby="employeeModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="employeeModalLabel">
-                        <i class="fas fa-user-plus"></i> Add New Employee
-                    </h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form id="employeeForm">
-                        <input type="hidden" id="employeeId">
-                        <div class="row g-3">
-                            <div class="col-md-6">
-                                <label for="employeeFullName" class="form-label">Full Name *</label>
-                                <input type="text" class="form-control" id="employeeFullName" required>
-                            </div>
-                            <div class="col-md-6">
-                                <label for="employeeEmail" class="form-label">Email *</label>
-                                <input type="email" class="form-control" id="employeeEmail" required>
-                            </div>
-                            <div class="col-md-6">
-                                <label for="employeePhone" class="form-label">Phone</label>
-                                <input type="tel" class="form-control" id="employeePhone">
-                            </div>
-                            <div class="col-md-6">
-                                <label for="employeeCode" class="form-label">Employee Code *</label>
-                                <input type="text" class="form-control" id="employeeCode" required>
-                            </div>
-                            <div class="col-md-6">
-                                <label for="employeeDepartment" class="form-label">Department *</label>
-                                <select class="form-select select2" id="employeeDepartment" required>
-                                    <option value="">Select Department</option>
-                                </select>
-                            </div>
-                            <div class="col-md-6">
-                                <label for="employeeDesignation" class="form-label">Designation *</label>
-                                <input type="text" class="form-control" id="employeeDesignation" required>
-                            </div>
-                            <div class="col-md-6">
-                                <label for="employeeJoiningDate" class="form-label">Joining Date *</label>
-                                <input type="text" class="form-control datepicker" id="employeeJoiningDate" required>
-                            </div>
-                            <div class="col-md-6">
-                                <label for="employeeSalary" class="form-label">Salary</label>
-                                <input type="number" class="form-control" id="employeeSalary" step="0.01">
-                            </div>
-                            <div class="col-md-12">
-                                <label for="employeeStatus" class="form-label">Status *</label>
-                                <select class="form-select" id="employeeStatus" required>
-                                    <option value="active">Active</option>
-                                    <option value="inactive">Inactive</option>
-                                    <option value="on_leave">On Leave</option>
-                                </select>
-                            </div>
+    <div class="modal" id="addEmployeeModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Add New Employee</h3>
+                <button class="modal-close" id="closeModal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="employeeForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">Full Name *</label>
+                            <input type="text" class="form-control" id="employeeName" required>
                         </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                    <button type="button" class="btn btn-primary" id="saveEmployeeBtn">
-                        <i class="fas fa-save"></i> Save Employee
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Add/Edit Lead Modal -->
-    <div class="modal fade" id="leadModal" tabindex="-1" aria-labelledby="leadModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="leadModalLabel">
-                        <i class="fas fa-user-plus"></i> Add New Lead
-                    </h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form id="leadForm">
-                        <input type="hidden" id="leadId">
-                        <div class="row g-3">
-                            <div class="col-md-6">
-                                <label for="leadCustomerName" class="form-label">Customer Name *</label>
-                                <input type="text" class="form-control" id="leadCustomerName" required>
-                            </div>
-                            <div class="col-md-6">
-                                <label for="leadEmail" class="form-label">Email *</label>
-                                <input type="email" class="form-control" id="leadEmail" required>
-                            </div>
-                            <div class="col-md-6">
-                                <label for="leadPhone" class="form-label">Phone *</label>
-                                <input type="tel" class="form-control" id="leadPhone" required>
-                            </div>
-                            <div class="col-md-6">
-                                <label for="leadCompany" class="form-label">Company</label>
-                                <input type="text" class="form-control" id="leadCompany">
-                            </div>
-                            <div class="col-md-6">
-                                <label for="leadProduct" class="form-label">Product</label>
-                                <input type="text" class="form-control" id="leadProduct">
-                            </div>
-                            <div class="col-md-6">
-                                <label for="leadSource" class="form-label">Source *</label>
-                                <select class="form-select" id="leadSource" required>
-                                    <option value="website">Website</option>
-                                    <option value="referral">Referral</option>
-                                    <option value="cold_call">Cold Call</option>
-                                    <option value="social_media">Social Media</option>
-                                    <option value="email">Email Campaign</option>
-                                </select>
-                            </div>
-                            <div class="col-md-6">
-                                <label for="leadStatus" class="form-label">Status *</label>
-                                <select class="form-select" id="leadStatus" required>
-                                    <option value="new">New</option>
-                                    <option value="contacted">Contacted</option>
-                                    <option value="qualified">Qualified</option>
-                                    <option value="converted">Converted</option>
-                                    <option value="lost">Lost</option>
-                                </select>
-                            </div>
-                            <div class="col-md-6">
-                                <label for="leadPriority" class="form-label">Priority *</label>
-                                <select class="form-select" id="leadPriority" required>
-                                    <option value="low">Low</option>
-                                    <option value="medium" selected>Medium</option>
-                                    <option value="high">High</option>
-                                </select>
-                            </div>
-                            <div class="col-md-6">
-                                <label for="leadAssignedTo" class="form-label">Assign To</label>
-                                <select class="form-select select2" id="leadAssignedTo">
-                                    <option value="">Select Agent</option>
-                                </select>
-                            </div>
-                            <div class="col-md-6">
-                                <label for="leadDepartment" class="form-label">Department</label>
-                                <select class="form-select select2" id="leadDepartment">
-                                    <option value="">Select Department</option>
-                                </select>
-                            </div>
-                            <div class="col-md-6">
-                                <label for="leadValue" class="form-label">Lead Value ($)</label>
-                                <input type="number" class="form-control" id="leadValue" step="0.01">
-                            </div>
-                            <div class="col-md-12">
-                                <label for="leadNotes" class="form-label">Notes</label>
-                                <textarea class="form-control" id="leadNotes" rows="3"></textarea>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                    <button type="button" class="btn btn-primary" id="saveLeadBtn">
-                        <i class="fas fa-save"></i> Save Lead
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Profile View Modal -->
-    <div class="modal fade" id="profileViewModal" tabindex="-1" aria-labelledby="profileViewModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-xl">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="profileViewModalLabel">
-                        <i class="fas fa-user"></i> Profile Details
-                    </h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="profile-view-content">
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="profile-sidebar">
-                                    <div class="profile-avatar-large">
-                                        <img src="" alt="Profile" id="profileViewAvatar">
-                                    </div>
-                                    <h3 id="profileViewName"></h3>
-                                    <p id="profileViewRole"></p>
-                                    <div class="profile-info-list" id="profileViewInfo"></div>
-                                </div>
-                            </div>
-                            <div class="col-md-8">
-                                <div class="profile-tabs">
-                                    <ul class="nav nav-tabs" role="tablist">
-                                        <li class="nav-item">
-                                            <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#workflowTab">Workflow Steps</button>
-                                        </li>
-                                        <li class="nav-item">
-                                            <button class="nav-link" data-bs-toggle="tab" data-bs-target="#activityTab">Activity Log</button>
-                                        </li>
-                                    </ul>
-                                    <div class="tab-content">
-                                        <div class="tab-pane fade show active" id="workflowTab">
-                                            <div class="workflow-steps" id="workflowSteps"></div>
-                                        </div>
-                                        <div class="tab-pane fade" id="activityTab">
-                                            <div class="activity-log" id="activityLog"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                        <div class="form-group">
+                            <label class="form-label">Email *</label>
+                            <input type="email" class="form-control" id="employeeEmail" required>
                         </div>
                     </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Settings Modal -->
-    <div class="modal fade" id="settingsModal" tabindex="-1" aria-labelledby="settingsModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="settingsModalLabel">
-                        <i class="fas fa-cog"></i> Settings
-                    </h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="settings-section">
-                        <h6 class="settings-subtitle">General Settings</h6>
-                        <div class="settings-item">
-                            <label class="form-label">Dashboard Theme</label>
-                            <select class="form-select" id="themeSelect">
-                                <option value="light">Light</option>
-                                <option value="dark">Dark</option>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">Phone</label>
+                            <input type="tel" class="form-control" id="employeePhone">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Department *</label>
+                            <select class="form-control" id="employeeDepartment" required>
+                                <option value="">Select Department</option>
                             </select>
                         </div>
-                        <div class="settings-item">
-                            <label class="form-label">Notifications</label>
-                            <div class="form-check form-switch">
-                                <input class="form-check-input" type="checkbox" id="emailNotifications" checked>
-                                <label class="form-check-label" for="emailNotifications">Email Notifications</label>
-                            </div>
-                            <div class="form-check form-switch">
-                                <input class="form-check-input" type="checkbox" id="pushNotifications" checked>
-                                <label class="form-check-label" for="pushNotifications">Push Notifications</label>
-                            </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">Position *</label>
+                            <select class="form-control" id="employeePosition" required>
+                                <option value="">Select Position</option>
+                            </select>
+                        </div>
+                        <div class="form-group" id="managerGroup" style="display: none;">
+                            <label class="form-label">Manager</label>
+                            <select class="form-control" id="employeeManager">
+                                <option value="">Select Manager</option>
+                            </select>
                         </div>
                     </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" id="saveSettingsBtn">
-                        <i class="fas fa-save"></i> Save Changes
-                    </button>
-                </div>
+                    <div class="form-row" id="teamLeaderGroup" style="display: none;">
+                        <div class="form-group">
+                            <label class="form-label">Team Leader</label>
+                            <select class="form-control" id="employeeTeamLeader">
+                                <option value="">Select Team Leader</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Join Date *</label>
+                        <input type="date" class="form-control" id="employeeJoinDate" required>
+                    </div>
+                    <div style="display: flex; gap: 12px; justify-content: flex-end; margin-top: 24px;">
+                        <button type="button" class="btn-secondary" id="cancelBtn">Cancel</button>
+                        <button type="submit" class="btn-primary">Save Employee</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
 
-    <!-- jQuery -->
-    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
-
-    <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-
-    <!-- DataTables JS -->
-    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
-
-    <!-- Toastr JS -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-
-    <!-- Select2 JS -->
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-
-    <!-- Flatpickr JS -->
-    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-
-    <!-- Supabase -->
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
-    <!-- Custom Scripts -->
-    <script src="script.js"></script>
-
+    <script src="mockdata.js"></script>
     <script>
-        // Initialize Toastr options
-        toastr.options = {
-            "closeButton": true,
-            "progressBar": true,
-            "positionClass": "toast-top-right",
-            "timeOut": "3000"
-        };
+        let currentDepartment = 'accounts';
+        let currentPosition = 'manager';
+
+        function initializeDashboard() {
+            renderStats();
+            renderDepartmentTabs();
+            renderPositionSubtabs();
+            renderEmployees();
+            renderLeads();
+            setupEventListeners();
+        }
+
+        function renderStats() {
+            const stats = MOCK_DATA.dashboardStats;
+            const statsHTML = `
+                <div class="stat-card">
+                    <div class="stat-icon" style="background: linear-gradient(135deg, #6366f1, #8b5cf6); color: white;">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div class="stat-value">${stats.totalEmployees}</div>
+                    <div class="stat-label">Total Employees</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon" style="background: linear-gradient(135deg, #10b981, #059669); color: white;">
+                        <i class="fas fa-address-book"></i>
+                    </div>
+                    <div class="stat-value">${stats.totalLeads}</div>
+                    <div class="stat-label">Active Leads</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon" style="background: linear-gradient(135deg, #f59e0b, #d97706); color: white;">
+                        <i class="fas fa-tasks"></i>
+                    </div>
+                    <div class="stat-value">${stats.activeProjects}</div>
+                    <div class="stat-label">Active Projects</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon" style="background: linear-gradient(135deg, #ef4444, #dc2626); color: white;">
+                        <i class="fas fa-rupee-sign"></i>
+                    </div>
+                    <div class="stat-value">₹${(stats.monthlyRevenue / 100000).toFixed(1)}L</div>
+                    <div class="stat-label">Monthly Revenue</div>
+                </div>
+            `;
+            document.getElementById('statsGrid').innerHTML = statsHTML;
+        }
+
+        function renderDepartmentTabs() {
+            const tabsHTML = MOCK_DATA.departments.map(dept => `
+                <button class="tab-button ${dept.id === currentDepartment ? 'active' : ''}"
+                        data-department="${dept.id}">
+                    ${dept.icon} ${dept.name}
+                </button>
+            `).join('');
+            document.getElementById('departmentTabs').innerHTML = tabsHTML;
+        }
+
+        function renderPositionSubtabs() {
+            const subtabsHTML = MOCK_DATA.positions.map(pos => `
+                <button class="subtab-button ${pos.id === currentPosition ? 'active' : ''}"
+                        data-position="${pos.id}">
+                    ${pos.name}
+                </button>
+            `).join('');
+            document.getElementById('positionSubtabs').innerHTML = subtabsHTML;
+        }
+
+        function renderEmployees() {
+            const employees = MOCK_DATA.employees.filter(emp =>
+                emp.department === currentDepartment && emp.position === currentPosition
+            );
+
+            if (employees.length === 0) {
+                document.getElementById('employeesGrid').innerHTML = '<p style="text-align: center; color: var(--text-secondary); padding: 40px;">No employees found</p>';
+                return;
+            }
+
+            const employeesHTML = employees.map(emp => {
+                const performanceData = MOCK_DATA.performanceData[emp.id];
+                const targets = MOCK_DATA.targets[emp.department][emp.position];
+
+                return `
+                    <div class="employee-card" onclick="viewEmployee('${emp.id}')">
+                        <div class="employee-header">
+                            <img src="${emp.avatar}" alt="${emp.name}" class="employee-avatar">
+                            <div class="employee-info">
+                                <h3>${emp.name}</h3>
+                                <div class="employee-role">${emp.email}</div>
+                                <div class="employee-role">${emp.phone}</div>
+                            </div>
+                        </div>
+                        <div class="employee-stats">
+                            <div class="stat-item">
+                                <div class="stat-item-value">${emp.performance}%</div>
+                                <div class="stat-item-label">Performance</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-item-value">${emp.tasksCompleted}</div>
+                                <div class="stat-item-label">Tasks Done</div>
+                            </div>
+                        </div>
+                        <div class="performance-bar">
+                            <div class="performance-fill" style="width: ${emp.performance}%"></div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+            document.getElementById('employeesGrid').innerHTML = employeesHTML;
+        }
+
+        function renderLeads() {
+            const leads = MOCK_DATA.leads.filter(lead => lead.department === currentDepartment);
+
+            if (leads.length === 0) {
+                document.getElementById('leadsList').innerHTML = '<p style="text-align: center; color: var(--text-secondary); padding: 20px;">No leads found for this department</p>';
+                return;
+            }
+
+            const leadsHTML = leads.slice(0, 5).map(lead => `
+                <div class="lead-card">
+                    <div class="lead-header">
+                        <div>
+                            <div class="lead-title">${lead.name}</div>
+                            <div style="color: var(--text-secondary); font-size: 14px;">${lead.company}</div>
+                        </div>
+                        <div>
+                            <div class="lead-value">₹${(lead.value / 1000).toFixed(0)}K</div>
+                            <span class="badge badge-${lead.priority}">${lead.priority}</span>
+                        </div>
+                    </div>
+                    <div class="lead-meta">
+                        <div class="lead-meta-item">
+                            <i class="fas fa-user"></i>
+                            ${lead.assignedToName}
+                        </div>
+                        <div class="lead-meta-item">
+                            <i class="fas fa-clock"></i>
+                            ${new Date(lead.lastActivity).toLocaleDateString()}
+                        </div>
+                        <div class="lead-meta-item">
+                            <i class="fas fa-tag"></i>
+                            ${lead.stage}
+                        </div>
+                    </div>
+                    <div class="progress-section">
+                        <div style="display: flex; justify-content: space-between; font-size: 12px; color: var(--text-secondary);">
+                            <span>Progress</span>
+                            <span>${lead.progress}%</span>
+                        </div>
+                        <div class="progress-bar-container">
+                            <div class="progress-bar-fill" style="width: ${lead.progress}%"></div>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+
+            document.getElementById('leadsList').innerHTML = leadsHTML;
+        }
+
+        function setupEventListeners() {
+            document.querySelectorAll('.tab-button').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    currentDepartment = e.currentTarget.dataset.department;
+                    renderDepartmentTabs();
+                    renderEmployees();
+                    renderLeads();
+                });
+            });
+
+            document.querySelectorAll('.subtab-button').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    currentPosition = e.currentTarget.dataset.position;
+                    renderPositionSubtabs();
+                    renderEmployees();
+                });
+            });
+
+            document.getElementById('addEmployeeBtn').addEventListener('click', () => {
+                document.getElementById('addEmployeeModal').classList.add('show');
+                populateDepartmentDropdown();
+                populatePositionDropdown();
+            });
+
+            document.getElementById('closeModal').addEventListener('click', () => {
+                document.getElementById('addEmployeeModal').classList.remove('show');
+            });
+
+            document.getElementById('cancelBtn').addEventListener('click', () => {
+                document.getElementById('addEmployeeModal').classList.remove('show');
+            });
+
+            document.getElementById('employeePosition').addEventListener('change', (e) => {
+                const position = e.target.value;
+                const managerGroup = document.getElementById('managerGroup');
+                const teamLeaderGroup = document.getElementById('teamLeaderGroup');
+
+                if (position === 'agent') {
+                    managerGroup.style.display = 'block';
+                    teamLeaderGroup.style.display = 'block';
+                } else if (position === 'team_leader') {
+                    managerGroup.style.display = 'block';
+                    teamLeaderGroup.style.display = 'none';
+                } else {
+                    managerGroup.style.display = 'none';
+                    teamLeaderGroup.style.display = 'none';
+                }
+            });
+
+            document.getElementById('searchInput').addEventListener('input', filterEmployees);
+            document.getElementById('performanceFilter').addEventListener('change', filterEmployees);
+        }
+
+        function populateDepartmentDropdown() {
+            const select = document.getElementById('employeeDepartment');
+            select.innerHTML = '<option value="">Select Department</option>' +
+                MOCK_DATA.departments.map(dept => `<option value="${dept.id}">${dept.name}</option>`).join('');
+        }
+
+        function populatePositionDropdown() {
+            const select = document.getElementById('employeePosition');
+            select.innerHTML = '<option value="">Select Position</option>' +
+                MOCK_DATA.positions.map(pos => `<option value="${pos.id}">${pos.name}</option>`).join('');
+        }
+
+        function filterEmployees() {
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+            const perfFilter = document.getElementById('performanceFilter').value;
+
+            let employees = MOCK_DATA.employees.filter(emp =>
+                emp.department === currentDepartment && emp.position === currentPosition
+            );
+
+            if (searchTerm) {
+                employees = employees.filter(emp =>
+                    emp.name.toLowerCase().includes(searchTerm) ||
+                    emp.email.toLowerCase().includes(searchTerm)
+                );
+            }
+
+            if (perfFilter === 'high') {
+                employees = employees.filter(emp => emp.performance >= 80);
+            } else if (perfFilter === 'medium') {
+                employees = employees.filter(emp => emp.performance >= 60 && emp.performance < 80);
+            } else if (perfFilter === 'low') {
+                employees = employees.filter(emp => emp.performance < 60);
+            }
+
+            renderFilteredEmployees(employees);
+        }
+
+        function renderFilteredEmployees(employees) {
+            if (employees.length === 0) {
+                document.getElementById('employeesGrid').innerHTML = '<p style="text-align: center; color: var(--text-secondary); padding: 40px;">No employees found</p>';
+                return;
+            }
+
+            const employeesHTML = employees.map(emp => `
+                <div class="employee-card" onclick="viewEmployee('${emp.id}')">
+                    <div class="employee-header">
+                        <img src="${emp.avatar}" alt="${emp.name}" class="employee-avatar">
+                        <div class="employee-info">
+                            <h3>${emp.name}</h3>
+                            <div class="employee-role">${emp.email}</div>
+                            <div class="employee-role">${emp.phone}</div>
+                        </div>
+                    </div>
+                    <div class="employee-stats">
+                        <div class="stat-item">
+                            <div class="stat-item-value">${emp.performance}%</div>
+                            <div class="stat-item-label">Performance</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-item-value">${emp.tasksCompleted}</div>
+                            <div class="stat-item-label">Tasks Done</div>
+                        </div>
+                    </div>
+                    <div class="performance-bar">
+                        <div class="performance-fill" style="width: ${emp.performance}%"></div>
+                    </div>
+                </div>
+            `).join('');
+
+            document.getElementById('employeesGrid').innerHTML = employeesHTML;
+        }
+
+        function viewEmployee(empId) {
+            console.log('Viewing employee:', empId);
+        }
+
+        document.addEventListener('DOMContentLoaded', initializeDashboard);
     </script>
 </body>
 </html>

@@ -1,214 +1,246 @@
-// Wolf Technologies - Comprehensive Mock Data System
+const MOCK_DATA = {
+  departments: [
+    { id: 'accounts', name: 'Accounts', color: '#10B981', icon: '💰' },
+    { id: 'technical', name: 'Technical', color: '#3B82F6', icon: '⚙️' },
+    { id: 'marketing', name: 'Marketing', color: '#F59E0B', icon: '📢' },
+    { id: 'business_development', name: 'Business Development', color: '#8B5CF6', icon: '🤝' },
+    { id: 'sales', name: 'Sales', color: '#EF4444', icon: '💼' }
+  ],
 
-const mockData = {
-    // DEPARTMENTS
-    departments: ['Accounts', 'Technical', 'Marketing', 'BD', 'Sales'],
+  positions: [
+    { id: 'manager', name: 'Manager', level: 3 },
+    { id: 'team_leader', name: 'Team Leader', level: 2 },
+    { id: 'agent', name: 'Agent', level: 1 }
+  ],
 
-    // TARGET DEFINITIONS BY DEPARTMENT & ROLE
-    targetDefinitions: {
-        'Accounts-Manager': { type: 'supervision', metrics: ['team_performance', 'billing_resolved', 'compliance_rate'] },
-        'Accounts-TL': { type: 'onboarding', metrics: ['inquiries_completed', 'steps_completed', 'avg_completion_time'] },
-        'Accounts-Agent': { type: 'tasks', metrics: ['documents_collected', 'agreements_sent', 'agreements_signed'] },
+  employees: [
+    { id: 'E001', name: 'Rajesh Kumar', email: 'rajesh.kumar@wolftech.com', department: 'accounts', position: 'manager', phone: '+91-9876543210', joinDate: '2022-01-15', avatar: 'https://i.pravatar.cc/150?img=12', status: 'active', performance: 92, tasksCompleted: 190, efficiency: 92 },
+    { id: 'E002', name: 'Priya Sharma', email: 'priya.sharma@wolftech.com', department: 'accounts', position: 'team_leader', managerId: 'E001', phone: '+91-9876543211', joinDate: '2022-03-20', avatar: 'https://i.pravatar.cc/150?img=45', status: 'active', performance: 88, tasksCompleted: 160, efficiency: 88 },
+    { id: 'E003', name: 'Amit Patel', email: 'amit.patel@wolftech.com', department: 'accounts', position: 'team_leader', managerId: 'E001', phone: '+91-9876543212', joinDate: '2022-04-10', avatar: 'https://i.pravatar.cc/150?img=13', status: 'active', performance: 85, tasksCompleted: 148, efficiency: 85 },
+    { id: 'E004', name: 'Neha Gupta', email: 'neha.gupta@wolftech.com', department: 'accounts', position: 'agent', teamLeaderId: 'E002', managerId: 'E001', phone: '+91-9876543213', joinDate: '2022-06-01', avatar: 'https://i.pravatar.cc/150?img=47', status: 'active', performance: 90, tasksCompleted: 135, efficiency: 90 },
+    { id: 'E005', name: 'Vikram Singh', email: 'vikram.singh@wolftech.com', department: 'accounts', position: 'agent', teamLeaderId: 'E002', managerId: 'E001', phone: '+91-9876543214', joinDate: '2022-07-15', avatar: 'https://i.pravatar.cc/150?img=14', status: 'active', performance: 82, tasksCompleted: 118, efficiency: 82 },
+    { id: 'E006', name: 'Anjali Mehta', email: 'anjali.mehta@wolftech.com', department: 'accounts', position: 'agent', teamLeaderId: 'E003', managerId: 'E001', phone: '+91-9876543215', joinDate: '2022-08-20', avatar: 'https://i.pravatar.cc/150?img=48', status: 'active', performance: 87, tasksCompleted: 127, efficiency: 87 },
+    { id: 'E007', name: 'Rohit Verma', email: 'rohit.verma@wolftech.com', department: 'accounts', position: 'agent', teamLeaderId: 'E003', managerId: 'E001', phone: '+91-9876543216', joinDate: '2022-09-10', avatar: 'https://i.pravatar.cc/150?img=15', status: 'active', performance: 79, tasksCompleted: 110, efficiency: 79 },
 
-        'Technical-Manager': { type: 'quality', metrics: ['training_quality', 'team_performance', 'resume_approval_rate'] },
-        'Technical-TL': { type: 'supervision', metrics: ['trainings_scheduled', 'inquiries_forwarded', 'steps_completed'] },
-        'Technical-Agent': { type: 'training', metrics: ['sessions_conducted', 'projects_completed', 'resumes_improved'] },
+    { id: 'E008', name: 'Suresh Reddy', email: 'suresh.reddy@wolftech.com', department: 'technical', position: 'manager', phone: '+91-9876543220', joinDate: '2021-11-10', avatar: 'https://i.pravatar.cc/150?img=33', status: 'active', performance: 94, tasksCompleted: 205, efficiency: 94 },
+    { id: 'E009', name: 'Kavita Iyer', email: 'kavita.iyer@wolftech.com', department: 'technical', position: 'team_leader', managerId: 'E008', phone: '+91-9876543221', joinDate: '2022-02-15', avatar: 'https://i.pravatar.cc/150?img=49', status: 'active', performance: 91, tasksCompleted: 172, efficiency: 91 },
+    { id: 'E010', name: 'Arjun Nair', email: 'arjun.nair@wolftech.com', department: 'technical', position: 'team_leader', managerId: 'E008', phone: '+91-9876543222', joinDate: '2022-03-25', avatar: 'https://i.pravatar.cc/150?img=34', status: 'active', performance: 89, tasksCompleted: 160, efficiency: 89 },
+    { id: 'E011', name: 'Deepika Joshi', email: 'deepika.joshi@wolftech.com', department: 'technical', position: 'agent', teamLeaderId: 'E009', managerId: 'E008', phone: '+91-9876543223', joinDate: '2022-05-10', avatar: 'https://i.pravatar.cc/150?img=44', status: 'active', performance: 93, tasksCompleted: 142, efficiency: 93 },
+    { id: 'E012', name: 'Karan Malhotra', email: 'karan.malhotra@wolftech.com', department: 'technical', position: 'agent', teamLeaderId: 'E009', managerId: 'E008', phone: '+91-9876543224', joinDate: '2022-06-20', avatar: 'https://i.pravatar.cc/150?img=51', status: 'active', performance: 86, tasksCompleted: 128, efficiency: 86 },
+    { id: 'E013', name: 'Simran Kaur', email: 'simran.kaur@wolftech.com', department: 'technical', position: 'agent', teamLeaderId: 'E010', managerId: 'E008', phone: '+91-9876543225', joinDate: '2022-08-05', avatar: 'https://i.pravatar.cc/150?img=43', status: 'active', performance: 88, tasksCompleted: 135, efficiency: 88 },
+    { id: 'E014', name: 'Rahul Desai', email: 'rahul.desai@wolftech.com', department: 'technical', position: 'agent', teamLeaderId: 'E010', managerId: 'E008', phone: '+91-9876543226', joinDate: '2022-09-15', avatar: 'https://i.pravatar.cc/150?img=52', status: 'active', performance: 84, tasksCompleted: 122, efficiency: 84 },
 
-        'Marketing-Manager': { type: 'performance', metrics: ['team_performance', 'applications_monitored', 'distribution_quality'] },
-        'Marketing-TL': { type: 'team', metrics: ['applications_tracked', 'interviews_scheduled', 'users_handled'] },
-        'Marketing-Agent': { type: 'leads', metrics: ['leads_handled', 'followups_completed', 'interviews_scheduled'] },
+    { id: 'E015', name: 'Manish Agarwal', email: 'manish.agarwal@wolftech.com', department: 'marketing', position: 'manager', phone: '+91-9876543230', joinDate: '2021-12-01', avatar: 'https://i.pravatar.cc/150?img=53', status: 'active', performance: 90, tasksCompleted: 188, efficiency: 90 },
+    { id: 'E016', name: 'Pooja Bansal', email: 'pooja.bansal@wolftech.com', department: 'marketing', position: 'team_leader', managerId: 'E015', phone: '+91-9876543231', joinDate: '2022-02-10', avatar: 'https://i.pravatar.cc/150?img=26', status: 'active', performance: 87, tasksCompleted: 165, efficiency: 87 },
+    { id: 'E017', name: 'Sanjay Rao', email: 'sanjay.rao@wolftech.com', department: 'marketing', position: 'team_leader', managerId: 'E015', phone: '+91-9876543232', joinDate: '2022-03-15', avatar: 'https://i.pravatar.cc/150?img=54', status: 'active', performance: 85, tasksCompleted: 152, efficiency: 85 },
+    { id: 'E018', name: 'Ritu Singh', email: 'ritu.singh@wolftech.com', department: 'marketing', position: 'agent', teamLeaderId: 'E016', managerId: 'E015', phone: '+91-9876543233', joinDate: '2022-05-20', avatar: 'https://i.pravatar.cc/150?img=32', status: 'active', performance: 91, tasksCompleted: 158, efficiency: 91 },
+    { id: 'E019', name: 'Gaurav Chopra', email: 'gaurav.chopra@wolftech.com', department: 'marketing', position: 'agent', teamLeaderId: 'E016', managerId: 'E015', phone: '+91-9876543234', joinDate: '2022-06-25', avatar: 'https://i.pravatar.cc/150?img=55', status: 'active', performance: 83, tasksCompleted: 138, efficiency: 83 },
+    { id: 'E020', name: 'Nisha Pandey', email: 'nisha.pandey@wolftech.com', department: 'marketing', position: 'agent', teamLeaderId: 'E017', managerId: 'E015', phone: '+91-9876543235', joinDate: '2022-07-30', avatar: 'https://i.pravatar.cc/150?img=31', status: 'active', performance: 86, tasksCompleted: 148, efficiency: 86 },
+    { id: 'E021', name: 'Aditya Khanna', email: 'aditya.khanna@wolftech.com', department: 'marketing', position: 'agent', teamLeaderId: 'E017', managerId: 'E015', phone: '+91-9876543236', joinDate: '2022-09-05', avatar: 'https://i.pravatar.cc/150?img=56', status: 'active', performance: 80, tasksCompleted: 132, efficiency: 80 },
 
-        'BD-Manager': { type: 'pipeline', metrics: ['lead_distribution', 'sales_pipeline', 'team_performance'] },
-        'BD-TL': { type: 'leads', metrics: ['leads_assigned', 'followup_cycles', 'deal_stages_updated'] },
-        'BD-Agent': { type: 'followups', metrics: ['leads_contacted', 'followups_completed', 'stages_progressed'] },
+    { id: 'E022', name: 'Vivek Saxena', email: 'vivek.saxena@wolftech.com', department: 'business_development', position: 'manager', phone: '+91-9876543240', joinDate: '2021-10-15', avatar: 'https://i.pravatar.cc/150?img=57', status: 'active', performance: 95, tasksCompleted: 215, efficiency: 95 },
+    { id: 'E023', name: 'Divya Pillai', email: 'divya.pillai@wolftech.com', department: 'business_development', position: 'team_leader', managerId: 'E022', phone: '+91-9876543241', joinDate: '2022-01-20', avatar: 'https://i.pravatar.cc/150?img=28', status: 'active', performance: 92, tasksCompleted: 185, efficiency: 92 },
+    { id: 'E024', name: 'Harish Bhat', email: 'harish.bhat@wolftech.com', department: 'business_development', position: 'team_leader', managerId: 'E022', phone: '+91-9876543242', joinDate: '2022-02-25', avatar: 'https://i.pravatar.cc/150?img=58', status: 'active', performance: 89, tasksCompleted: 172, efficiency: 89 },
+    { id: 'E025', name: 'Sneha Kulkarni', email: 'sneha.kulkarni@wolftech.com', department: 'business_development', position: 'agent', teamLeaderId: 'E023', managerId: 'E022', phone: '+91-9876543243', joinDate: '2022-04-15', avatar: 'https://i.pravatar.cc/150?img=38', status: 'active', performance: 94, tasksCompleted: 168, efficiency: 94 },
+    { id: 'E026', name: 'Mohit Jain', email: 'mohit.jain@wolftech.com', department: 'business_development', position: 'agent', teamLeaderId: 'E023', managerId: 'E022', phone: '+91-9876543244', joinDate: '2022-05-25', avatar: 'https://i.pravatar.cc/150?img=59', status: 'active', performance: 87, tasksCompleted: 152, efficiency: 87 },
+    { id: 'E027', name: 'Tanvi Shah', email: 'tanvi.shah@wolftech.com', department: 'business_development', position: 'agent', teamLeaderId: 'E024', managerId: 'E022', phone: '+91-9876543245', joinDate: '2022-07-10', avatar: 'https://i.pravatar.cc/150?img=24', status: 'active', performance: 90, tasksCompleted: 160, efficiency: 90 },
+    { id: 'E028', name: 'Ashish Dubey', email: 'ashish.dubey@wolftech.com', department: 'business_development', position: 'agent', teamLeaderId: 'E024', managerId: 'E022', phone: '+91-9876543246', joinDate: '2022-08-15', avatar: 'https://i.pravatar.cc/150?img=60', status: 'active', performance: 85, tasksCompleted: 145, efficiency: 85 },
 
-        'Sales-Manager': { type: 'revenue', metrics: ['revenue_pipeline', 'high_value_deals', 'team_performance'] },
-        'Sales-TL': { type: 'conversion', metrics: ['conversion_rate', 'followup_quality', 'pipeline_stages'] },
-        'Sales-Agent': { type: 'closing', metrics: ['deals_closed', 'meetings_scheduled', 'conversion_rate'] }
+    { id: 'E029', name: 'Sandeep Thakur', email: 'sandeep.thakur@wolftech.com', department: 'sales', position: 'manager', phone: '+91-9876543250', joinDate: '2021-09-10', avatar: 'https://i.pravatar.cc/150?img=61', status: 'active', performance: 93, tasksCompleted: 208, efficiency: 93 },
+    { id: 'E030', name: 'Meera Nambiar', email: 'meera.nambiar@wolftech.com', department: 'sales', position: 'team_leader', managerId: 'E029', phone: '+91-9876543251', joinDate: '2022-01-05', avatar: 'https://i.pravatar.cc/150?img=25', status: 'active', performance: 90, tasksCompleted: 182, efficiency: 90 },
+    { id: 'E031', name: 'Nikhil Bhatt', email: 'nikhil.bhatt@wolftech.com', department: 'sales', position: 'team_leader', managerId: 'E029', phone: '+91-9876543252', joinDate: '2022-02-15', avatar: 'https://i.pravatar.cc/150?img=62', status: 'active', performance: 88, tasksCompleted: 168, efficiency: 88 },
+    { id: 'E032', name: 'Priyanka Menon', email: 'priyanka.menon@wolftech.com', department: 'sales', position: 'agent', teamLeaderId: 'E030', managerId: 'E029', phone: '+91-9876543253', joinDate: '2022-04-20', avatar: 'https://i.pravatar.cc/150?img=22', status: 'active', performance: 92, tasksCompleted: 165, efficiency: 92 },
+    { id: 'E033', name: 'Vishal Tiwari', email: 'vishal.tiwari@wolftech.com', department: 'sales', position: 'agent', teamLeaderId: 'E030', managerId: 'E029', phone: '+91-9876543254', joinDate: '2022-05-30', avatar: 'https://i.pravatar.cc/150?img=63', status: 'active', performance: 86, tasksCompleted: 148, efficiency: 86 },
+    { id: 'E034', name: 'Swati Mishra', email: 'swati.mishra@wolftech.com', department: 'sales', position: 'agent', teamLeaderId: 'E031', managerId: 'E029', phone: '+91-9876543255', joinDate: '2022-07-05', avatar: 'https://i.pravatar.cc/150?img=23', status: 'active', performance: 89, tasksCompleted: 158, efficiency: 89 },
+    { id: 'E035', name: 'Akash Sinha', email: 'akash.sinha@wolftech.com', department: 'sales', position: 'agent', teamLeaderId: 'E031', managerId: 'E029', phone: '+91-9876543256', joinDate: '2022-08-20', avatar: 'https://i.pravatar.cc/150?img=64', status: 'active', performance: 84, tasksCompleted: 142, efficiency: 84 }
+  ],
+
+  targets: {
+    accounts: {
+      manager: {
+        invoicesProcessed: { value: 150, unit: 'invoices' },
+        billingIssuesResolved: { value: 50, unit: 'issues' },
+        revenueManaged: { value: 5000000, unit: '₹' }
+      },
+      team_leader: {
+        onboardingsCompleted: { value: 80, unit: 'onboardings' },
+        workflowStepsManaged: { value: 200, unit: 'steps' },
+        documentationAccuracy: { value: 95, unit: '%' }
+      },
+      agent: {
+        customersOnboarded: { value: 60, unit: 'customers' },
+        documentsCollected: { value: 180, unit: 'documents' },
+        agreementsSigned: { value: 55, unit: 'agreements' }
+      }
     },
-
-    // EMPLOYEES - MANAGERS (4 per department = 20 total)
-    managers: [
-        { id: 1, firstName: 'Michael', lastName: 'Roberts', email: 'michael.r@wolftech.com', phone: '555-0101', employeeCode: 'MGR-ACC-001', department: 'Accounts', role: 'Manager', status: 'Active', joinDate: '2023-01-15', target: { billing_resolved: 50, compliance_rate: 95, team_performance: 85 }, achievement: { billing_resolved: 45, compliance_rate: 92, team_performance: 88 } },
-        { id: 2, firstName: 'Sarah', lastName: 'Anderson', email: 'sarah.a@wolftech.com', phone: '555-0102', employeeCode: 'MGR-ACC-002', department: 'Accounts', role: 'Manager', status: 'Active', joinDate: '2023-02-20', target: { billing_resolved: 45, compliance_rate: 93, team_performance: 82 }, achievement: { billing_resolved: 48, compliance_rate: 95, team_performance: 85 } },
-        { id: 3, firstName: 'James', lastName: 'Wilson', email: 'james.w@wolftech.com', phone: '555-0103', employeeCode: 'MGR-ACC-003', department: 'Accounts', role: 'Manager', status: 'Active', joinDate: '2023-03-10', target: { billing_resolved: 40, compliance_rate: 90, team_performance: 80 }, achievement: { billing_resolved: 42, compliance_rate: 91, team_performance: 83 } },
-
-        { id: 4, firstName: 'Jennifer', lastName: 'Martinez', email: 'jennifer.m@wolftech.com', phone: '555-0104', employeeCode: 'MGR-TECH-001', department: 'Technical', role: 'Manager', status: 'Active', joinDate: '2023-01-10', target: { training_quality: 90, team_performance: 85, resume_approval_rate: 92 }, achievement: { training_quality: 88, team_performance: 87, resume_approval_rate: 94 } },
-        { id: 5, firstName: 'David', lastName: 'Taylor', email: 'david.t@wolftech.com', phone: '555-0105', employeeCode: 'MGR-TECH-002', department: 'Technical', role: 'Manager', status: 'Active', joinDate: '2023-02-15', target: { training_quality: 88, team_performance: 83, resume_approval_rate: 90 }, achievement: { training_quality: 90, team_performance: 85, resume_approval_rate: 93 } },
-        { id: 6, firstName: 'Lisa', lastName: 'Brown', email: 'lisa.b@wolftech.com', phone: '555-0106', employeeCode: 'MGR-TECH-003', department: 'Technical', role: 'Manager', status: 'Active', joinDate: '2023-03-20', target: { training_quality: 85, team_performance: 80, resume_approval_rate: 88 }, achievement: { training_quality: 86, team_performance: 82, resume_approval_rate: 90 } },
-
-        { id: 7, firstName: 'Robert', lastName: 'Johnson', email: 'robert.j@wolftech.com', phone: '555-0107', employeeCode: 'MGR-MRKT-001', department: 'Marketing', role: 'Manager', status: 'Active', joinDate: '2023-01-25', target: { team_performance: 85, applications_monitored: 100, distribution_quality: 90 }, achievement: { team_performance: 87, applications_monitored: 105, distribution_quality: 92 } },
-        { id: 8, firstName: 'Emily', lastName: 'Davis', email: 'emily.d@wolftech.com', phone: '555-0108', employeeCode: 'MGR-MRKT-002', department: 'Marketing', role: 'Manager', status: 'Active', joinDate: '2023-02-28', target: { team_performance: 82, applications_monitored: 95, distribution_quality: 88 }, achievement: { team_performance: 84, applications_monitored: 98, distribution_quality: 90 } },
-        { id: 9, firstName: 'Daniel', lastName: 'White', email: 'daniel.w@wolftech.com', phone: '555-0109', employeeCode: 'MGR-MRKT-003', department: 'Marketing', role: 'Manager', status: 'Active', joinDate: '2023-03-15', target: { team_performance: 80, applications_monitored: 90, distribution_quality: 85 }, achievement: { team_performance: 82, applications_monitored: 92, distribution_quality: 87 } },
-
-        { id: 10, firstName: 'Christopher', lastName: 'Miller', email: 'chris.m@wolftech.com', phone: '555-0110', employeeCode: 'MGR-BD-001', department: 'BD', role: 'Manager', status: 'Active', joinDate: '2023-01-05', target: { lead_distribution: 80, sales_pipeline: 100, team_performance: 85 }, achievement: { lead_distribution: 85, sales_pipeline: 105, team_performance: 88 } },
-        { id: 11, firstName: 'Amanda', lastName: 'Garcia', email: 'amanda.g@wolftech.com', phone: '555-0111', employeeCode: 'MGR-BD-002', department: 'BD', role: 'Manager', status: 'Active', joinDate: '2023-02-10', target: { lead_distribution: 75, sales_pipeline: 95, team_performance: 82 }, achievement: { lead_distribution: 78, sales_pipeline: 98, team_performance: 85 } },
-        { id: 12, firstName: 'Matthew', lastName: 'Rodriguez', email: 'matthew.r@wolftech.com', phone: '555-0112', employeeCode: 'MGR-BD-003', department: 'BD', role: 'Manager', status: 'Active', joinDate: '2023-03-05', target: { lead_distribution: 70, sales_pipeline: 90, team_performance: 80 }, achievement: { lead_distribution: 73, sales_pipeline: 92, team_performance: 82 } },
-
-        { id: 13, firstName: 'Jessica', lastName: 'Martinez', email: 'jessica.m@wolftech.com', phone: '555-0113', employeeCode: 'MGR-SALES-001', department: 'Sales', role: 'Manager', status: 'Active', joinDate: '2023-01-20', target: { revenue_pipeline: 500000, high_value_deals: 15, team_performance: 88 }, achievement: { revenue_pipeline: 520000, high_value_deals: 16, team_performance: 90 } },
-        { id: 14, firstName: 'Andrew', lastName: 'Hernandez', email: 'andrew.h@wolftech.com', phone: '555-0114', employeeCode: 'MGR-SALES-002', department: 'Sales', role: 'Manager', status: 'Active', joinDate: '2023-02-25', target: { revenue_pipeline: 450000, high_value_deals: 12, team_performance: 85 }, achievement: { revenue_pipeline: 470000, high_value_deals: 13, team_performance: 87 } },
-        { id: 15, firstName: 'Ashley', lastName: 'Lopez', email: 'ashley.l@wolftech.com', phone: '555-0115', employeeCode: 'MGR-SALES-003', department: 'Sales', role: 'Manager', status: 'Active', joinDate: '2023-03-30', target: { revenue_pipeline: 400000, high_value_deals: 10, team_performance: 82 }, achievement: { revenue_pipeline: 420000, high_value_deals: 11, team_performance: 84 } }
-    ],
-
-    // TEAM LEADERS (4 per department = 20 total)
-    teamLeaders: [
-        { id: 1, firstName: 'Kevin', lastName: 'Thompson', email: 'kevin.t@wolftech.com', phone: '555-0201', employeeCode: 'TL-ACC-001', department: 'Accounts', role: 'TL', managerId: 1, managerName: 'Michael Roberts', status: 'Active', joinDate: '2023-04-10', target: { inquiries_completed: 30, steps_completed: 120, avg_completion_time: 48 }, achievement: { inquiries_completed: 32, steps_completed: 125, avg_completion_time: 45 } },
-        { id: 2, firstName: 'Rachel', lastName: 'Moore', email: 'rachel.m@wolftech.com', phone: '555-0202', employeeCode: 'TL-ACC-002', department: 'Accounts', role: 'TL', managerId: 1, managerName: 'Michael Roberts', status: 'Active', joinDate: '2023-05-15', target: { inquiries_completed: 28, steps_completed: 110, avg_completion_time: 50 }, achievement: { inquiries_completed: 30, steps_completed: 115, avg_completion_time: 48 } },
-        { id: 3, firstName: 'Brandon', lastName: 'Jackson', email: 'brandon.j@wolftech.com', phone: '555-0203', employeeCode: 'TL-ACC-003', department: 'Accounts', role: 'TL', managerId: 2, managerName: 'Sarah Anderson', status: 'Active', joinDate: '2023-06-20', target: { inquiries_completed: 25, steps_completed: 100, avg_completion_time: 52 }, achievement: { inquiries_completed: 27, steps_completed: 105, avg_completion_time: 50 } },
-
-        { id: 4, firstName: 'Nicole', lastName: 'Lee', email: 'nicole.l@wolftech.com', phone: '555-0204', employeeCode: 'TL-TECH-001', department: 'Technical', role: 'TL', managerId: 4, managerName: 'Jennifer Martinez', status: 'Active', joinDate: '2023-04-15', target: { trainings_scheduled: 25, inquiries_forwarded: 20, steps_completed: 80 }, achievement: { trainings_scheduled: 27, inquiries_forwarded: 22, steps_completed: 85 } },
-        { id: 5, firstName: 'Steven', lastName: 'Harris', email: 'steven.h@wolftech.com', phone: '555-0205', employeeCode: 'TL-TECH-002', department: 'Technical', role: 'TL', managerId: 4, managerName: 'Jennifer Martinez', status: 'Active', joinDate: '2023-05-20', target: { trainings_scheduled: 22, inquiries_forwarded: 18, steps_completed: 75 }, achievement: { trainings_scheduled: 24, inquiries_forwarded: 20, steps_completed: 78 } },
-        { id: 6, firstName: 'Michelle', lastName: 'Clark', email: 'michelle.c@wolftech.com', phone: '555-0206', employeeCode: 'TL-TECH-003', department: 'Technical', role: 'TL', managerId: 5, managerName: 'David Taylor', status: 'Active', joinDate: '2023-06-25', target: { trainings_scheduled: 20, inquiries_forwarded: 16, steps_completed: 70 }, achievement: { trainings_scheduled: 21, inquiries_forwarded: 17, steps_completed: 72 } },
-
-        { id: 7, firstName: 'Ryan', lastName: 'Lewis', email: 'ryan.l@wolftech.com', phone: '555-0207', employeeCode: 'TL-MRKT-001', department: 'Marketing', role: 'TL', managerId: 7, managerName: 'Robert Johnson', status: 'Active', joinDate: '2023-04-20', target: { applications_tracked: 50, interviews_scheduled: 30, users_handled: 25 }, achievement: { applications_tracked: 52, interviews_scheduled: 32, users_handled: 27 } },
-        { id: 8, firstName: 'Melissa', lastName: 'Walker', email: 'melissa.w@wolftech.com', phone: '555-0208', employeeCode: 'TL-MRKT-002', department: 'Marketing', role: 'TL', managerId: 7, managerName: 'Robert Johnson', status: 'Active', joinDate: '2023-05-25', target: { applications_tracked: 45, interviews_scheduled: 28, users_handled: 22 }, achievement: { applications_tracked: 47, interviews_scheduled: 30, users_handled: 24 } },
-        { id: 9, firstName: 'Jason', lastName: 'Hall', email: 'jason.h@wolftech.com', phone: '555-0209', employeeCode: 'TL-MRKT-003', department: 'Marketing', role: 'TL', managerId: 8, managerName: 'Emily Davis', status: 'Active', joinDate: '2023-06-30', target: { applications_tracked: 40, interviews_scheduled: 25, users_handled: 20 }, achievement: { applications_tracked: 42, interviews_scheduled: 27, users_handled: 22 } },
-
-        { id: 10, firstName: 'Laura', lastName: 'Allen', email: 'laura.a@wolftech.com', phone: '555-0210', employeeCode: 'TL-BD-001', department: 'BD', role: 'TL', managerId: 10, managerName: 'Christopher Miller', status: 'Active', joinDate: '2023-04-25', target: { leads_assigned: 60, followup_cycles: 180, deal_stages_updated: 50 }, achievement: { leads_assigned: 65, followup_cycles: 190, deal_stages_updated: 55 } },
-        { id: 11, firstName: 'Eric', lastName: 'Young', email: 'eric.y@wolftech.com', phone: '555-0211', employeeCode: 'TL-BD-002', department: 'BD', role: 'TL', managerId: 10, managerName: 'Christopher Miller', status: 'Active', joinDate: '2023-05-30', target: { leads_assigned: 55, followup_cycles: 165, deal_stages_updated: 45 }, achievement: { leads_assigned: 58, followup_cycles: 170, deal_stages_updated: 48 } },
-        { id: 12, firstName: 'Stephanie', lastName: 'King', email: 'stephanie.k@wolftech.com', phone: '555-0212', employeeCode: 'TL-BD-003', department: 'BD', role: 'TL', managerId: 11, managerName: 'Amanda Garcia', status: 'Active', joinDate: '2023-06-15', target: { leads_assigned: 50, followup_cycles: 150, deal_stages_updated: 40 }, achievement: { leads_assigned: 52, followup_cycles: 155, deal_stages_updated: 42 } },
-
-        { id: 13, firstName: 'Brian', lastName: 'Wright', email: 'brian.w@wolftech.com', phone: '555-0213', employeeCode: 'TL-SALES-001', department: 'Sales', role: 'TL', managerId: 13, managerName: 'Jessica Martinez', status: 'Active', joinDate: '2023-04-30', target: { conversion_rate: 25, followup_quality: 90, pipeline_stages: 45 }, achievement: { conversion_rate: 27, followup_quality: 92, pipeline_stages: 48 } },
-        { id: 14, firstName: 'Angela', lastName: 'Scott', email: 'angela.s@wolftech.com', phone: '555-0214', employeeCode: 'TL-SALES-002', department: 'Sales', role: 'TL', managerId: 13, managerName: 'Jessica Martinez', status: 'Active', joinDate: '2023-05-15', target: { conversion_rate: 22, followup_quality: 88, pipeline_stages: 40 }, achievement: { conversion_rate: 24, followup_quality: 90, pipeline_stages: 43 } },
-        { id: 15, firstName: 'Timothy', lastName: 'Green', email: 'timothy.g@wolftech.com', phone: '555-0215', employeeCode: 'TL-SALES-003', department: 'Sales', role: 'TL', managerId: 14, managerName: 'Andrew Hernandez', status: 'Active', joinDate: '2023-06-10', target: { conversion_rate: 20, followup_quality: 85, pipeline_stages: 35 }, achievement: { conversion_rate: 21, followup_quality: 87, pipeline_stages: 37 } }
-    ],
-
-    // AGENTS (4 per department = 20 total)
-    agents: [
-        { id: 1, firstName: 'Alex', lastName: 'Cooper', email: 'alex.c@wolftech.com', phone: '555-0301', employeeCode: 'AGT-ACC-001', department: 'Accounts', role: 'Agent', tlId: 1, tlName: 'Kevin Thompson', managerId: 1, managerName: 'Michael Roberts', status: 'Active', joinDate: '2023-07-10', target: { documents_collected: 25, agreements_sent: 20, agreements_signed: 18 }, achievement: { documents_collected: 27, agreements_sent: 22, agreements_signed: 20 } },
-        { id: 2, firstName: 'Samantha', lastName: 'Baker', email: 'samantha.b@wolftech.com', phone: '555-0302', employeeCode: 'AGT-ACC-002', department: 'Accounts', role: 'Agent', tlId: 1, tlName: 'Kevin Thompson', managerId: 1, managerName: 'Michael Roberts', status: 'Active', joinDate: '2023-08-15', target: { documents_collected: 22, agreements_sent: 18, agreements_signed: 16 }, achievement: { documents_collected: 24, agreements_sent: 20, agreements_signed: 18 } },
-        { id: 3, firstName: 'Nathan', lastName: 'Adams', email: 'nathan.a@wolftech.com', phone: '555-0303', employeeCode: 'AGT-ACC-003', department: 'Accounts', role: 'Agent', tlId: 2, tlName: 'Rachel Moore', managerId: 1, managerName: 'Michael Roberts', status: 'Active', joinDate: '2023-09-20', target: { documents_collected: 20, agreements_sent: 16, agreements_signed: 14 }, achievement: { documents_collected: 21, agreements_sent: 17, agreements_signed: 15 } },
-        { id: 4, firstName: 'Victoria', lastName: 'Nelson', email: 'victoria.n@wolftech.com', phone: '555-0304', employeeCode: 'AGT-ACC-004', department: 'Accounts', role: 'Agent', tlId: 3, tlName: 'Brandon Jackson', managerId: 2, managerName: 'Sarah Anderson', status: 'Active', joinDate: '2023-10-25', target: { documents_collected: 18, agreements_sent: 15, agreements_signed: 13 }, achievement: { documents_collected: 19, agreements_sent: 16, agreements_signed: 14 } },
-
-        { id: 5, firstName: 'Joshua', lastName: 'Carter', email: 'joshua.c@wolftech.com', phone: '555-0305', employeeCode: 'AGT-TECH-001', department: 'Technical', role: 'Agent', tlId: 4, tlName: 'Nicole Lee', managerId: 4, managerName: 'Jennifer Martinez', status: 'Active', joinDate: '2023-07-15', target: { sessions_conducted: 30, projects_completed: 15, resumes_improved: 20 }, achievement: { sessions_conducted: 32, projects_completed: 17, resumes_improved: 22 } },
-        { id: 6, firstName: 'Brittany', lastName: 'Mitchell', email: 'brittany.m@wolftech.com', phone: '555-0306', employeeCode: 'AGT-TECH-002', department: 'Technical', role: 'Agent', tlId: 4, tlName: 'Nicole Lee', managerId: 4, managerName: 'Jennifer Martinez', status: 'Active', joinDate: '2023-08-20', target: { sessions_conducted: 28, projects_completed: 14, resumes_improved: 18 }, achievement: { sessions_conducted: 30, projects_completed: 16, resumes_improved: 20 } },
-        { id: 7, firstName: 'Justin', lastName: 'Perez', email: 'justin.p@wolftech.com', phone: '555-0307', employeeCode: 'AGT-TECH-003', department: 'Technical', role: 'Agent', tlId: 5, tlName: 'Steven Harris', managerId: 4, managerName: 'Jennifer Martinez', status: 'Active', joinDate: '2023-09-25', target: { sessions_conducted: 25, projects_completed: 12, resumes_improved: 16 }, achievement: { sessions_conducted: 27, projects_completed: 13, resumes_improved: 18 } },
-        { id: 8, firstName: 'Danielle', lastName: 'Roberts', email: 'danielle.r@wolftech.com', phone: '555-0308', employeeCode: 'AGT-TECH-004', department: 'Technical', role: 'Agent', tlId: 6, tlName: 'Michelle Clark', managerId: 5, managerName: 'David Taylor', status: 'Active', joinDate: '2023-10-30', target: { sessions_conducted: 22, projects_completed: 10, resumes_improved: 14 }, achievement: { sessions_conducted: 23, projects_completed: 11, resumes_improved: 15 } },
-
-        { id: 9, firstName: 'Kyle', lastName: 'Turner', email: 'kyle.t@wolftech.com', phone: '555-0309', employeeCode: 'AGT-MRKT-001', department: 'Marketing', role: 'Agent', tlId: 7, tlName: 'Ryan Lewis', managerId: 7, managerName: 'Robert Johnson', status: 'Active', joinDate: '2023-07-20', target: { leads_handled: 35, followups_completed: 80, interviews_scheduled: 20 }, achievement: { leads_handled: 38, followups_completed: 85, interviews_scheduled: 22 } },
-        { id: 10, firstName: 'Crystal', lastName: 'Phillips', email: 'crystal.p@wolftech.com', phone: '555-0310', employeeCode: 'AGT-MRKT-002', department: 'Marketing', role: 'Agent', tlId: 7, tlName: 'Ryan Lewis', managerId: 7, managerName: 'Robert Johnson', status: 'Active', joinDate: '2023-08-25', target: { leads_handled: 32, followups_completed: 75, interviews_scheduled: 18 }, achievement: { leads_handled: 34, followups_completed: 78, interviews_scheduled: 20 } },
-        { id: 11, firstName: 'Jeremy', lastName: 'Campbell', email: 'jeremy.c@wolftech.com', phone: '555-0311', employeeCode: 'AGT-MRKT-003', department: 'Marketing', role: 'Agent', tlId: 8, tlName: 'Melissa Walker', managerId: 7, managerName: 'Robert Johnson', status: 'Active', joinDate: '2023-09-15', target: { leads_handled: 30, followups_completed: 70, interviews_scheduled: 16 }, achievement: { leads_handled: 32, followups_completed: 73, interviews_scheduled: 18 } },
-        { id: 12, firstName: 'Tiffany', lastName: 'Parker', email: 'tiffany.p@wolftech.com', phone: '555-0312', employeeCode: 'AGT-MRKT-004', department: 'Marketing', role: 'Agent', tlId: 9, tlName: 'Jason Hall', managerId: 8, managerName: 'Emily Davis', status: 'Active', joinDate: '2023-10-20', target: { leads_handled: 28, followups_completed: 65, interviews_scheduled: 14 }, achievement: { leads_handled: 30, followups_completed: 68, interviews_scheduled: 16 } },
-
-        { id: 13, firstName: 'Patrick', lastName: 'Evans', email: 'patrick.e@wolftech.com', phone: '555-0313', employeeCode: 'AGT-BD-001', department: 'BD', role: 'Agent', tlId: 10, tlName: 'Laura Allen', managerId: 10, managerName: 'Christopher Miller', status: 'Active', joinDate: '2023-07-25', target: { leads_contacted: 40, followups_completed: 100, stages_progressed: 30 }, achievement: { leads_contacted: 43, followups_completed: 105, stages_progressed: 33 } },
-        { id: 14, firstName: 'Kimberly', lastName: 'Edwards', email: 'kimberly.e@wolftech.com', phone: '555-0314', employeeCode: 'AGT-BD-002', department: 'BD', role: 'Agent', tlId: 10, tlName: 'Laura Allen', managerId: 10, managerName: 'Christopher Miller', status: 'Active', joinDate: '2023-08-30', target: { leads_contacted: 38, followups_completed: 95, stages_progressed: 28 }, achievement: { leads_contacted: 40, followups_completed: 98, stages_progressed: 30 } },
-        { id: 15, firstName: 'Aaron', lastName: 'Collins', email: 'aaron.c@wolftech.com', phone: '555-0315', employeeCode: 'AGT-BD-003', department: 'BD', role: 'Agent', tlId: 11, tlName: 'Eric Young', managerId: 10, managerName: 'Christopher Miller', status: 'Active', joinDate: '2023-09-20', target: { leads_contacted: 35, followups_completed: 90, stages_progressed: 25 }, achievement: { leads_contacted: 37, followups_completed: 92, stages_progressed: 27 } },
-        { id: 16, firstName: 'Heather', lastName: 'Stewart', email: 'heather.s@wolftech.com', phone: '555-0316', employeeCode: 'AGT-BD-004', department: 'BD', role: 'Agent', tlId: 12, tlName: 'Stephanie King', managerId: 11, managerName: 'Amanda Garcia', status: 'Active', joinDate: '2023-10-15', target: { leads_contacted: 32, followups_completed: 85, stages_progressed: 22 }, achievement: { leads_contacted: 34, followups_completed: 87, stages_progressed: 24 } },
-
-        { id: 17, firstName: 'Gregory', lastName: 'Sanchez', email: 'gregory.s@wolftech.com', phone: '555-0317', employeeCode: 'AGT-SALES-001', department: 'Sales', role: 'Agent', tlId: 13, tlName: 'Brian Wright', managerId: 13, managerName: 'Jessica Martinez', status: 'Active', joinDate: '2023-07-30', target: { deals_closed: 12, meetings_scheduled: 25, conversion_rate: 18 }, achievement: { deals_closed: 14, meetings_scheduled: 27, conversion_rate: 20 } },
-        { id: 18, firstName: 'Amber', lastName: 'Morris', email: 'amber.m@wolftech.com', phone: '555-0318', employeeCode: 'AGT-SALES-002', department: 'Sales', role: 'Agent', tlId: 13, tlName: 'Brian Wright', managerId: 13, managerName: 'Jessica Martinez', status: 'Active', joinDate: '2023-08-15', target: { deals_closed: 10, meetings_scheduled: 22, conversion_rate: 16 }, achievement: { deals_closed: 12, meetings_scheduled: 24, conversion_rate: 18 } },
-        { id: 19, firstName: 'Zachary', lastName: 'Rogers', email: 'zachary.r@wolftech.com', phone: '555-0319', employeeCode: 'AGT-SALES-003', department: 'Sales', role: 'Agent', tlId: 14, tlName: 'Angela Scott', managerId: 13, managerName: 'Jessica Martinez', status: 'Active', joinDate: '2023-09-10', target: { deals_closed: 9, meetings_scheduled: 20, conversion_rate: 14 }, achievement: { deals_closed: 10, meetings_scheduled: 22, conversion_rate: 16 } },
-        { id: 20, firstName: 'Rebecca', lastName: 'Reed', email: 'rebecca.r@wolftech.com', phone: '555-0320', employeeCode: 'AGT-SALES-004', department: 'Sales', role: 'Agent', tlId: 15, tlName: 'Timothy Green', managerId: 14, managerName: 'Andrew Hernandez', status: 'Active', joinDate: '2023-10-05', target: { deals_closed: 8, meetings_scheduled: 18, conversion_rate: 12 }, achievement: { deals_closed: 9, meetings_scheduled: 20, conversion_rate: 14 } }
-    ],
-
-    // COMPREHENSIVE CRM LEADS (35 leads with detailed activity)
-    leads: [
-        { id: 1, leadName: 'LEAD-2024-001', clientName: 'Rajesh Kumar', email: 'rajesh.k@techcorp.com', phone: '+91-98765-43210', linkedin: 'linkedin.com/in/rajesh-kumar', visa: 'H1B', source: 'Website', department: 'BD', dealStage: 'Connected', priority: 'High', assignedTo: 'Patrick Evans', assignedToId: 13, lastActivity: '2024-01-15 10:30 AM', lastActivityBy: 'Patrick Evans', createdDate: '2024-01-10', activities: [{ date: '2024-01-15 10:30 AM', user: 'Patrick Evans', action: 'Called', note: 'Initial discussion about training needs' }, { date: '2024-01-12 03:15 PM', user: 'Patrick Evans', action: 'Email Sent', note: 'Sent company brochure' }] },
-
-        { id: 2, leadName: 'LEAD-2024-002', clientName: 'Priya Sharma', email: 'priya.s@innovtech.com', phone: '+91-98765-43211', linkedin: 'linkedin.com/in/priya-sharma', visa: 'L1', source: 'Referral', department: 'BD', dealStage: 'Qualified', priority: 'High', assignedTo: 'Kimberly Edwards', assignedToId: 14, lastActivity: '2024-01-14 02:45 PM', lastActivityBy: 'Kimberly Edwards', createdDate: '2024-01-08', activities: [{ date: '2024-01-14 02:45 PM', user: 'Kimberly Edwards', action: 'Meeting', note: 'Discussed training timeline' }, { date: '2024-01-11 11:20 AM', user: 'Kimberly Edwards', action: 'Follow-up Call', note: 'Clarified pricing' }] },
-
-        { id: 3, leadName: 'LEAD-2024-003', clientName: 'Amit Patel', email: 'amit.p@globalsoft.com', phone: '+91-98765-43212', linkedin: 'linkedin.com/in/amit-patel', visa: 'OPT', source: 'LinkedIn', department: 'Sales', dealStage: 'Proposal Sent', priority: 'High', assignedTo: 'Gregory Sanchez', assignedToId: 17, lastActivity: '2024-01-15 09:15 AM', lastActivityBy: 'Gregory Sanchez', createdDate: '2024-01-05', activities: [{ date: '2024-01-15 09:15 AM', user: 'Gregory Sanchez', action: 'Proposal Sent', note: 'Sent detailed training proposal' }, { date: '2024-01-13 04:30 PM', user: 'Gregory Sanchez', action: 'Demo', note: 'Product demonstration completed' }] },
-
-        { id: 4, leadName: 'LEAD-2024-004', clientName: 'Sneha Reddy', email: 'sneha.r@datatech.com', phone: '+91-98765-43213', linkedin: 'linkedin.com/in/sneha-reddy', visa: 'H1B', source: 'Cold Call', department: 'Sales', dealStage: 'Negotiation', priority: 'Medium', assignedTo: 'Amber Morris', assignedToId: 18, lastActivity: '2024-01-14 01:00 PM', lastActivityBy: 'Amber Morris', createdDate: '2024-01-03', activities: [{ date: '2024-01-14 01:00 PM', user: 'Amber Morris', action: 'Negotiation', note: 'Discussing payment terms' }, { date: '2024-01-12 10:45 AM', user: 'Amber Morris', action: 'Call', note: 'Follow-up on proposal' }] },
-
-        { id: 5, leadName: 'LEAD-2024-005', clientName: 'Vikram Singh', email: 'vikram.s@cloudnine.com', phone: '+91-98765-43214', linkedin: 'linkedin.com/in/vikram-singh', visa: 'L1', source: 'Website', department: 'BD', dealStage: 'Connected', priority: 'Medium', assignedTo: 'Aaron Collins', assignedToId: 15, lastActivity: '2024-01-15 11:20 AM', lastActivityBy: 'Aaron Collins', createdDate: '2024-01-11', activities: [{ date: '2024-01-15 11:20 AM', user: 'Aaron Collins', action: 'Email', note: 'Sent initial introduction' }] },
-
-        { id: 6, leadName: 'LEAD-2024-006', clientName: 'Ananya Iyer', email: 'ananya.i@techsolutions.com', phone: '+91-98765-43215', linkedin: 'linkedin.com/in/ananya-iyer', visa: 'OPT', source: 'Referral', department: 'Sales', dealStage: 'Won', priority: 'High', assignedTo: 'Gregory Sanchez', assignedToId: 17, lastActivity: '2024-01-14 05:30 PM', lastActivityBy: 'Gregory Sanchez', createdDate: '2024-01-02', activities: [{ date: '2024-01-14 05:30 PM', user: 'Gregory Sanchez', action: 'Deal Closed', note: 'Agreement signed' }, { date: '2024-01-13 02:00 PM', user: 'Gregory Sanchez', action: 'Final Discussion', note: 'Finalized all terms' }] },
-
-        { id: 7, leadName: 'LEAD-2024-007', clientName: 'Rohit Verma', email: 'rohit.v@infotech.com', phone: '+91-98765-43216', linkedin: 'linkedin.com/in/rohit-verma', visa: 'H1B', source: 'LinkedIn', department: 'BD', dealStage: 'Qualified', priority: 'Low', assignedTo: 'Heather Stewart', assignedToId: 16, lastActivity: '2024-01-13 03:45 PM', lastActivityBy: 'Heather Stewart', createdDate: '2024-01-09', activities: [{ date: '2024-01-13 03:45 PM', user: 'Heather Stewart', action: 'Qualification Call', note: 'Confirmed budget and timeline' }] },
-
-        { id: 8, leadName: 'LEAD-2024-008', clientName: 'Meera Nair', email: 'meera.n@digitech.com', phone: '+91-98765-43217', linkedin: 'linkedin.com/in/meera-nair', visa: 'L1', source: 'Website', department: 'Marketing', dealStage: 'Connected', priority: 'Medium', assignedTo: 'Kyle Turner', assignedToId: 9, lastActivity: '2024-01-15 08:00 AM', lastActivityBy: 'Kyle Turner', createdDate: '2024-01-12', activities: [{ date: '2024-01-15 08:00 AM', user: 'Kyle Turner', action: 'Initial Contact', note: 'First touchpoint established' }] },
-
-        { id: 9, leadName: 'LEAD-2024-009', clientName: 'Arjun Kapoor', email: 'arjun.k@webtech.com', phone: '+91-98765-43218', linkedin: 'linkedin.com/in/arjun-kapoor', visa: 'OPT', source: 'Cold Call', department: 'Sales', dealStage: 'Proposal Sent', priority: 'High', assignedTo: 'Zachary Rogers', assignedToId: 19, lastActivity: '2024-01-14 04:15 PM', lastActivityBy: 'Zachary Rogers', createdDate: '2024-01-06', activities: [{ date: '2024-01-14 04:15 PM', user: 'Zachary Rogers', action: 'Proposal', note: 'Customized proposal sent' }] },
-
-        { id: 10, leadName: 'LEAD-2024-010', clientName: 'Divya Menon', email: 'divya.m@smarttech.com', phone: '+91-98765-43219', linkedin: 'linkedin.com/in/divya-menon', visa: 'H1B', source: 'Referral', department: 'BD', dealStage: 'Connected', priority: 'Medium', assignedTo: 'Patrick Evans', assignedToId: 13, lastActivity: '2024-01-15 12:30 PM', lastActivityBy: 'Patrick Evans', createdDate: '2024-01-13', activities: [{ date: '2024-01-15 12:30 PM', user: 'Patrick Evans', action: 'WhatsApp', note: 'Sent service details' }] },
-
-        { id: 11, leadName: 'LEAD-2024-011', clientName: 'Karthik Rao', email: 'karthik.r@nettech.com', phone: '+91-98765-43220', linkedin: 'linkedin.com/in/karthik-rao', visa: 'L1', source: 'LinkedIn', department: 'Sales', dealStage: 'Negotiation', priority: 'High', assignedTo: 'Rebecca Reed', assignedToId: 20, lastActivity: '2024-01-14 11:00 AM', lastActivityBy: 'Rebecca Reed', createdDate: '2024-01-04', activities: [{ date: '2024-01-14 11:00 AM', user: 'Rebecca Reed', action: 'Negotiation', note: 'Price negotiation in progress' }] },
-
-        { id: 12, leadName: 'LEAD-2024-012', clientName: 'Pooja Desai', email: 'pooja.d@cybertech.com', phone: '+91-98765-43221', linkedin: 'linkedin.com/in/pooja-desai', visa: 'OPT', source: 'Website', department: 'Marketing', dealStage: 'Qualified', priority: 'Low', assignedTo: 'Crystal Phillips', assignedToId: 10, lastActivity: '2024-01-13 02:30 PM', lastActivityBy: 'Crystal Phillips', createdDate: '2024-01-10', activities: [{ date: '2024-01-13 02:30 PM', user: 'Crystal Phillips', action: 'Qualification', note: 'Needs assessment completed' }] },
-
-        { id: 13, leadName: 'LEAD-2024-013', clientName: 'Sanjay Gupta', email: 'sanjay.g@apptech.com', phone: '+91-98765-43222', linkedin: 'linkedin.com/in/sanjay-gupta', visa: 'H1B', source: 'Referral', department: 'BD', dealStage: 'Qualified', priority: 'Medium', assignedTo: 'Kimberly Edwards', assignedToId: 14, lastActivity: '2024-01-15 10:00 AM', lastActivityBy: 'Kimberly Edwards', createdDate: '2024-01-07', activities: [{ date: '2024-01-15 10:00 AM', user: 'Kimberly Edwards', action: 'Follow-up', note: 'Discussed next steps' }] },
-
-        { id: 14, leadName: 'LEAD-2024-014', clientName: 'Nisha Agarwal', email: 'nisha.a@devtech.com', phone: '+91-98765-43223', linkedin: 'linkedin.com/in/nisha-agarwal', visa: 'L1', source: 'Cold Call', department: 'Sales', dealStage: 'Won', priority: 'High', assignedTo: 'Amber Morris', assignedToId: 18, lastActivity: '2024-01-13 05:45 PM', lastActivityBy: 'Amber Morris', createdDate: '2024-01-01', activities: [{ date: '2024-01-13 05:45 PM', user: 'Amber Morris', action: 'Closed', note: 'Successfully closed deal' }] },
-
-        { id: 15, leadName: 'LEAD-2024-015', clientName: 'Rahul Mehta', email: 'rahul.m@cloudtech.com', phone: '+91-98765-43224', linkedin: 'linkedin.com/in/rahul-mehta', visa: 'OPT', source: 'LinkedIn', department: 'BD', dealStage: 'Connected', priority: 'Low', assignedTo: 'Aaron Collins', assignedToId: 15, lastActivity: '2024-01-14 09:30 AM', lastActivityBy: 'Aaron Collins', createdDate: '2024-01-11', activities: [{ date: '2024-01-14 09:30 AM', user: 'Aaron Collins', action: 'LinkedIn Message', note: 'Initial outreach' }] },
-
-        { id: 16, leadName: 'LEAD-2024-016', clientName: 'Kavita Joshi', email: 'kavita.j@webdev.com', phone: '+91-98765-43225', linkedin: 'linkedin.com/in/kavita-joshi', visa: 'H1B', source: 'Website', department: 'Marketing', dealStage: 'Connected', priority: 'Medium', assignedTo: 'Jeremy Campbell', assignedToId: 11, lastActivity: '2024-01-15 01:15 PM', lastActivityBy: 'Jeremy Campbell', createdDate: '2024-01-12', activities: [{ date: '2024-01-15 01:15 PM', user: 'Jeremy Campbell', action: 'Email', note: 'Sent welcome email' }] },
-
-        { id: 17, leadName: 'LEAD-2024-017', clientName: 'Manish Khanna', email: 'manish.k@softtech.com', phone: '+91-98765-43226', linkedin: 'linkedin.com/in/manish-khanna', visa: 'L1', source: 'Referral', department: 'Sales', dealStage: 'Proposal Sent', priority: 'High', assignedTo: 'Gregory Sanchez', assignedToId: 17, lastActivity: '2024-01-14 03:00 PM', lastActivityBy: 'Gregory Sanchez', createdDate: '2024-01-05', activities: [{ date: '2024-01-14 03:00 PM', user: 'Gregory Sanchez', action: 'Proposal', note: 'Detailed proposal delivered' }] },
-
-        { id: 18, leadName: 'LEAD-2024-018', clientName: 'Shreya Pandey', email: 'shreya.p@datasoft.com', phone: '+91-98765-43227', linkedin: 'linkedin.com/in/shreya-pandey', visa: 'OPT', source: 'LinkedIn', department: 'BD', dealStage: 'Qualified', priority: 'Medium', assignedTo: 'Heather Stewart', assignedToId: 16, lastActivity: '2024-01-13 11:45 AM', lastActivityBy: 'Heather Stewart', createdDate: '2024-01-08', activities: [{ date: '2024-01-13 11:45 AM', user: 'Heather Stewart', action: 'Qualification Call', note: 'Budget confirmed' }] },
-
-        { id: 19, leadName: 'LEAD-2024-019', clientName: 'Vishal Saxena', email: 'vishal.s@techworld.com', phone: '+91-98765-43228', linkedin: 'linkedin.com/in/vishal-saxena', visa: 'H1B', source: 'Cold Call', department: 'Marketing', dealStage: 'Connected', priority: 'Low', assignedTo: 'Tiffany Parker', assignedToId: 12, lastActivity: '2024-01-14 10:20 AM', lastActivityBy: 'Tiffany Parker', createdDate: '2024-01-10', activities: [{ date: '2024-01-14 10:20 AM', user: 'Tiffany Parker', action: 'Call', note: 'First contact made' }] },
-
-        { id: 20, leadName: 'LEAD-2024-020', clientName: 'Ritu Malhotra', email: 'ritu.m@innovate.com', phone: '+91-98765-43229', linkedin: 'linkedin.com/in/ritu-malhotra', visa: 'L1', source: 'Website', department: 'Sales', dealStage: 'Negotiation', priority: 'High', assignedTo: 'Zachary Rogers', assignedToId: 19, lastActivity: '2024-01-15 02:30 PM', lastActivityBy: 'Zachary Rogers', createdDate: '2024-01-03', activities: [{ date: '2024-01-15 02:30 PM', user: 'Zachary Rogers', action: 'Negotiation', note: 'Terms being finalized' }] },
-
-        { id: 21, leadName: 'LEAD-2024-021', clientName: 'Aditya Bhatt', email: 'aditya.b@techno.com', phone: '+91-98765-43230', linkedin: 'linkedin.com/in/aditya-bhatt', visa: 'OPT', source: 'Referral', department: 'BD', dealStage: 'Connected', priority: 'Medium', assignedTo: 'Patrick Evans', assignedToId: 13, lastActivity: '2024-01-15 04:00 PM', lastActivityBy: 'Patrick Evans', createdDate: '2024-01-14', activities: [{ date: '2024-01-15 04:00 PM', user: 'Patrick Evans', action: 'Call', note: 'Introduction call completed' }] },
-
-        { id: 22, leadName: 'LEAD-2024-022', clientName: 'Neha Chopra', email: 'neha.c@digitalsol.com', phone: '+91-98765-43231', linkedin: 'linkedin.com/in/neha-chopra', visa: 'H1B', source: 'LinkedIn', department: 'Sales', dealStage: 'Won', priority: 'High', assignedTo: 'Rebecca Reed', assignedToId: 20, lastActivity: '2024-01-13 04:30 PM', lastActivityBy: 'Rebecca Reed', createdDate: '2024-01-02', activities: [{ date: '2024-01-13 04:30 PM', user: 'Rebecca Reed', action: 'Deal Won', note: 'Contract finalized' }] },
-
-        { id: 23, leadName: 'LEAD-2024-023', clientName: 'Suresh Pillai', email: 'suresh.p@appdev.com', phone: '+91-98765-43232', linkedin: 'linkedin.com/in/suresh-pillai', visa: 'L1', source: 'Website', department: 'Marketing', dealStage: 'Qualified', priority: 'Medium', assignedTo: 'Kyle Turner', assignedToId: 9, lastActivity: '2024-01-14 12:00 PM', lastActivityBy: 'Kyle Turner', createdDate: '2024-01-09', activities: [{ date: '2024-01-14 12:00 PM', user: 'Kyle Turner', action: 'Qualification', note: 'Requirements gathered' }] },
-
-        { id: 24, leadName: 'LEAD-2024-024', clientName: 'Preeti Sinha', email: 'preeti.s@netsoft.com', phone: '+91-98765-43233', linkedin: 'linkedin.com/in/preeti-sinha', visa: 'OPT', source: 'Cold Call', department: 'BD', dealStage: 'Qualified', priority: 'Low', assignedTo: 'Kimberly Edwards', assignedToId: 14, lastActivity: '2024-01-13 10:15 AM', lastActivityBy: 'Kimberly Edwards', createdDate: '2024-01-07', activities: [{ date: '2024-01-13 10:15 AM', user: 'Kimberly Edwards', action: 'Discovery Call', note: 'Pain points identified' }] },
-
-        { id: 25, leadName: 'LEAD-2024-025', clientName: 'Alok Tripathi', email: 'alok.t@cybersoft.com', phone: '+91-98765-43234', linkedin: 'linkedin.com/in/alok-tripathi', visa: 'H1B', source: 'Referral', department: 'Sales', dealStage: 'Proposal Sent', priority: 'High', assignedTo: 'Amber Morris', assignedToId: 18, lastActivity: '2024-01-15 11:45 AM', lastActivityBy: 'Amber Morris', createdDate: '2024-01-04', activities: [{ date: '2024-01-15 11:45 AM', user: 'Amber Morris', action: 'Proposal', note: 'Comprehensive proposal shared' }] },
-
-        { id: 26, leadName: 'LEAD-2024-026', clientName: 'Geeta Varma', email: 'geeta.v@webworld.com', phone: '+91-98765-43235', linkedin: 'linkedin.com/in/geeta-varma', visa: 'L1', source: 'LinkedIn', department: 'Marketing', dealStage: 'Connected', priority: 'Medium', assignedTo: 'Crystal Phillips', assignedToId: 10, lastActivity: '2024-01-14 02:00 PM', lastActivityBy: 'Crystal Phillips', createdDate: '2024-01-11', activities: [{ date: '2024-01-14 02:00 PM', user: 'Crystal Phillips', action: 'LinkedIn Connect', note: 'Connection accepted' }] },
-
-        { id: 27, leadName: 'LEAD-2024-027', clientName: 'Harish Nambiar', email: 'harish.n@techies.com', phone: '+91-98765-43236', linkedin: 'linkedin.com/in/harish-nambiar', visa: 'OPT', source: 'Website', department: 'BD', dealStage: 'Connected', priority: 'Low', assignedTo: 'Aaron Collins', assignedToId: 15, lastActivity: '2024-01-15 09:30 AM', lastActivityBy: 'Aaron Collins', createdDate: '2024-01-13', activities: [{ date: '2024-01-15 09:30 AM', user: 'Aaron Collins', action: 'Email', note: 'Introduction sent' }] },
-
-        { id: 28, leadName: 'LEAD-2024-028', clientName: 'Deepa Krishnan', email: 'deepa.k@softsol.com', phone: '+91-98765-43237', linkedin: 'linkedin.com/in/deepa-krishnan', visa: 'H1B', source: 'Referral', department: 'Sales', dealStage: 'Negotiation', priority: 'High', assignedTo: 'Gregory Sanchez', assignedToId: 17, lastActivity: '2024-01-14 05:00 PM', lastActivityBy: 'Gregory Sanchez', createdDate: '2024-01-03', activities: [{ date: '2024-01-14 05:00 PM', user: 'Gregory Sanchez', action: 'Negotiation Call', note: 'Pricing discussion' }] },
-
-        { id: 29, leadName: 'LEAD-2024-029', clientName: 'Manoj Kulkarni', email: 'manoj.k@datasys.com', phone: '+91-98765-43238', linkedin: 'linkedin.com/in/manoj-kulkarni', visa: 'L1', source: 'Cold Call', department: 'Marketing', dealStage: 'Qualified', priority: 'Medium', assignedTo: 'Jeremy Campbell', assignedToId: 11, lastActivity: '2024-01-13 03:00 PM', lastActivityBy: 'Jeremy Campbell', createdDate: '2024-01-08', activities: [{ date: '2024-01-13 03:00 PM', user: 'Jeremy Campbell', action: 'Qualification', note: 'Decision maker identified' }] },
-
-        { id: 30, leadName: 'LEAD-2024-030', clientName: 'Sunita Raghavan', email: 'sunita.r@appworld.com', phone: '+91-98765-43239', linkedin: 'linkedin.com/in/sunita-raghavan', visa: 'OPT', source: 'LinkedIn', department: 'BD', dealStage: 'Qualified', priority: 'Low', assignedTo: 'Heather Stewart', assignedToId: 16, lastActivity: '2024-01-14 11:30 AM', lastActivityBy: 'Heather Stewart', createdDate: '2024-01-06', activities: [{ date: '2024-01-14 11:30 AM', user: 'Heather Stewart', action: 'Follow-up', note: 'Requirements review' }] }
-    ],
-
-    // PURCHASE USERS & BILLING DATA
-    purchaseUsers: [
-        { id: 1, billingId: 'BILL-2024-001', customerName: 'Rajesh Kumar', serviceName: 'Full Stack Training', paymentStatus: 'Paid', billingDate: '2024-01-10', referBy: 'Gregory Sanchez', amount: 5000, department: 'Technical' },
-        { id: 2, billingId: 'BILL-2024-002', customerName: 'Ananya Iyer', serviceName: 'Advanced Java Training', paymentStatus: 'Paid', billingDate: '2024-01-12', referBy: 'Gregory Sanchez', amount: 4500, department: 'Technical' },
-        { id: 3, billingId: 'BILL-2024-003', customerName: 'Neha Chopra', serviceName: 'Marketing Package', paymentStatus: 'Paid', billingDate: '2024-01-11', referBy: 'Rebecca Reed', amount: 3500, department: 'Marketing' },
-        { id: 4, billingId: 'BILL-2024-004', customerName: 'Shreya Pandey', serviceName: 'Business Development Package', paymentStatus: 'Pending', billingDate: '2024-01-13', referBy: 'Patrick Evans', amount: 4000, department: 'BD' },
-        { id: 5, billingId: 'BILL-2024-005', customerName: 'Deepa Krishnan', serviceName: 'Sales Training', paymentStatus: 'Paid', billingDate: '2024-01-14', referBy: 'Amber Morris', amount: 3200, department: 'Sales' },
-        { id: 6, billingId: 'BILL-2024-006', customerName: 'Vikram Singh', serviceName: 'Python Full Stack', paymentStatus: 'Pending', billingDate: '2024-01-15', referBy: 'Gregory Sanchez', amount: 5500, department: 'Technical' }
-    ],
-
-    // DASHBOARD STATS
-    stats: {
-        totalUsers: 55,
-        newPurchases: 6,
-        ordersFailed: 1,
-        totalEmployees: 55,
-        activeLeads: 30,
-        convertedLeads: 3,
-        pendingPayments: 2,
-        revenue: 25700
+    technical: {
+      manager: {
+        trainingSessionsSupervised: { value: 100, unit: 'sessions' },
+        qualityScore: { value: 90, unit: '%' },
+        teamProductivity: { value: 85, unit: '%' }
+      },
+      team_leader: {
+        onboardingsManaged: { value: 50, unit: 'onboardings' },
+        resumesCreated: { value: 45, unit: 'resumes' },
+        trainingsScheduled: { value: 60, unit: 'trainings' }
+      },
+      agent: {
+        candidatesTrained: { value: 40, unit: 'candidates' },
+        projectsMonitored: { value: 30, unit: 'projects' },
+        technicalSessions: { value: 50, unit: 'sessions' }
+      }
     },
+    marketing: {
+      manager: {
+        campaignsSupervised: { value: 30, unit: 'campaigns' },
+        teamPerformance: { value: 85, unit: '%' },
+        budgetUtilization: { value: 90, unit: '%' }
+      },
+      team_leader: {
+        applicationsTracked: { value: 100, unit: 'applications' },
+        interviewsScheduled: { value: 80, unit: 'interviews' },
+        conversionRate: { value: 40, unit: '%' }
+      },
+      agent: {
+        leadsGenerated: { value: 120, unit: 'leads' },
+        followUpsCompleted: { value: 150, unit: 'follow-ups' },
+        interviewsUpdated: { value: 75, unit: 'interviews' }
+      }
+    },
+    business_development: {
+      manager: {
+        dealsSupervised: { value: 40, unit: 'deals' },
+        revenueTarget: { value: 8000000, unit: '₹' },
+        teamEfficiency: { value: 88, unit: '%' }
+      },
+      team_leader: {
+        leadsAssigned: { value: 100, unit: 'leads' },
+        followUpCycles: { value: 200, unit: 'cycles' },
+        conversionRate: { value: 35, unit: '%' }
+      },
+      agent: {
+        leadsHandled: { value: 80, unit: 'leads' },
+        dealsClosed: { value: 25, unit: 'deals' },
+        activityUpdates: { value: 250, unit: 'updates' }
+      }
+    },
+    sales: {
+      manager: {
+        revenuePipeline: { value: 10000000, unit: '₹' },
+        dealsSupervised: { value: 60, unit: 'deals' },
+        conversionRate: { value: 45, unit: '%' }
+      },
+      team_leader: {
+        agentPerformance: { value: 88, unit: '%' },
+        pipelineManaged: { value: 5000000, unit: '₹' },
+        dealsMonitored: { value: 50, unit: 'deals' }
+      },
+      agent: {
+        leadsQualified: { value: 70, unit: 'leads' },
+        dealsClosed: { value: 30, unit: 'deals' },
+        revenueGenerated: { value: 2000000, unit: '₹' }
+      }
+    }
+  },
 
-    // PRODUCTS
-    products: [
-        { id: 1, name: 'Full Stack Development Training', price: 5000, departments: ['Technical'], status: 'Active' },
-        { id: 2, name: 'Advanced Java Training', price: 4500, departments: ['Technical'], status: 'Active' },
-        { id: 3, name: 'Python Full Stack', price: 5500, departments: ['Technical'], status: 'Active' },
-        { id: 4, name: 'Marketing Package - Premium', price: 3500, departments: ['Marketing'], status: 'Active' },
-        { id: 5, name: 'Business Development Package', price: 4000, departments: ['BD'], status: 'Active' },
-        { id: 6, name: 'Sales Training Program', price: 3200, departments: ['Sales'], status: 'Active' }
-    ],
+  performanceData: {
+    E001: { invoicesProcessed: 142, billingIssuesResolved: 48, revenueManaged: 4850000 },
+    E002: { onboardingsCompleted: 75, workflowStepsManaged: 185, documentationAccuracy: 94 },
+    E003: { onboardingsCompleted: 68, workflowStepsManaged: 172, documentationAccuracy: 92 },
+    E004: { customersOnboarded: 58, documentsCollected: 174, agreementsSigned: 52 },
+    E005: { customersOnboarded: 51, documentsCollected: 153, agreementsSigned: 46 },
+    E006: { customersOnboarded: 54, documentsCollected: 162, agreementsSigned: 49 },
+    E007: { customersOnboarded: 48, documentsCollected: 144, agreementsSigned: 43 },
 
-    // NOTIFICATIONS
-    notifications: [
-        { id: 1, title: 'New Lead Assigned', message: 'LEAD-2024-021 assigned to Patrick Evans', time: '5 mins ago', read: false, type: 'lead' },
-        { id: 2, title: 'Deal Won', message: 'Neha Chopra deal successfully closed', time: '2 hours ago', read: false, type: 'success' },
-        { id: 3, title: 'Payment Received', message: 'Payment received for BILL-2024-005', time: '3 hours ago', read: true, type: 'payment' },
-        { id: 4, title: 'Target Achieved', message: 'Gregory Sanchez achieved monthly target', time: '1 day ago', read: true, type: 'achievement' },
-        { id: 5, title: 'New Employee Joined', message: 'Rebecca Reed joined Sales team', time: '2 days ago', read: true, type: 'employee' }
-    ]
+    E008: { trainingSessionsSupervised: 96, qualityScore: 92, teamProductivity: 87 },
+    E009: { onboardingsManaged: 48, resumesCreated: 43, trainingsScheduled: 58 },
+    E010: { onboardingsManaged: 46, resumesCreated: 41, trainingsScheduled: 54 },
+    E011: { candidatesTrained: 39, projectsMonitored: 28, technicalSessions: 48 },
+    E012: { candidatesTrained: 35, projectsMonitored: 26, technicalSessions: 44 },
+    E013: { candidatesTrained: 37, projectsMonitored: 27, technicalSessions: 46 },
+    E014: { candidatesTrained: 34, projectsMonitored: 25, technicalSessions: 42 },
+
+    E015: { campaignsSupervised: 28, teamPerformance: 87, budgetUtilization: 92 },
+    E016: { applicationsTracked: 95, interviewsScheduled: 78, conversionRate: 42 },
+    E017: { applicationsTracked: 88, interviewsScheduled: 72, conversionRate: 38 },
+    E018: { leadsGenerated: 115, followUpsCompleted: 145, interviewsUpdated: 72 },
+    E019: { leadsGenerated: 102, followUpsCompleted: 128, interviewsUpdated: 65 },
+    E020: { leadsGenerated: 108, followUpsCompleted: 136, interviewsUpdated: 68 },
+    E021: { leadsGenerated: 98, followUpsCompleted: 122, interviewsUpdated: 62 },
+
+    E022: { dealsSupervised: 39, revenueManaged: 7850000, teamEfficiency: 90 },
+    E023: { leadsAssigned: 98, followUpCycles: 195, conversionRate: 38 },
+    E024: { leadsAssigned: 92, followUpCycles: 182, conversionRate: 34 },
+    E025: { leadsHandled: 78, dealsClosed: 26, activityUpdates: 245 },
+    E026: { leadsHandled: 72, dealsClosed: 23, activityUpdates: 228 },
+    E027: { leadsHandled: 75, dealsClosed: 24, activityUpdates: 235 },
+    E028: { leadsHandled: 68, dealsClosed: 21, activityUpdates: 218 },
+
+    E029: { revenuePipeline: 9850000, dealsSupervised: 58, conversionRate: 48 },
+    E030: { agentPerformance: 90, pipelineManaged: 4950000, dealsMonitored: 49 },
+    E031: { agentPerformance: 86, pipelineManaged: 4650000, dealsMonitored: 46 },
+    E032: { leadsQualified: 68, dealsClosed: 29, revenueGenerated: 2050000 },
+    E033: { leadsQualified: 62, dealsClosed: 26, revenueGenerated: 1850000 },
+    E034: { leadsQualified: 65, dealsClosed: 28, revenueGenerated: 1950000 },
+    E035: { leadsQualified: 58, dealsClosed: 24, revenueGenerated: 1750000 }
+  },
+
+  leads: [
+    { id: 'L001', name: 'TechCorp India', company: 'TechCorp India Pvt Ltd', email: 'contact@techcorp.in', phone: '+91-9988776655', status: 'qualified', department: 'business_development', assignedTo: 'E025', assignedToName: 'Sneha Kulkarni', lastActivity: '2024-12-11T14:30:00', lastWorkedBy: 'E025', lastWorkedByName: 'Sneha Kulkarni', value: 450000, stage: 'proposal', source: 'website', priority: 'high', progress: 65, notes: 'Interested in enterprise solution' },
+    { id: 'L002', name: 'Digital Solutions', company: 'Digital Solutions Ltd', email: 'info@digitalsol.com', phone: '+91-9988776656', status: 'contacted', department: 'business_development', assignedTo: 'E026', assignedToName: 'Mohit Jain', lastActivity: '2024-12-10T16:45:00', lastWorkedBy: 'E023', lastWorkedByName: 'Divya Pillai', value: 320000, stage: 'discovery', source: 'referral', priority: 'medium', progress: 40, notes: 'Requires technical demo' },
+    { id: 'L003', name: 'SmartBiz Corp', company: 'SmartBiz Corporation', email: 'hello@smartbiz.co', phone: '+91-9988776657', status: 'qualified', department: 'sales', assignedTo: 'E032', assignedToName: 'Priyanka Menon', lastActivity: '2024-12-11T10:20:00', lastWorkedBy: 'E032', lastWorkedByName: 'Priyanka Menon', value: 580000, stage: 'negotiation', source: 'cold_call', priority: 'high', progress: 75, notes: 'Pricing negotiation ongoing' },
+    { id: 'L004', name: 'Global Tech', company: 'Global Tech Services', email: 'sales@globaltech.in', phone: '+91-9988776658', status: 'new', department: 'business_development', assignedTo: 'E027', assignedToName: 'Tanvi Shah', lastActivity: '2024-12-09T09:15:00', lastWorkedBy: 'E027', lastWorkedByName: 'Tanvi Shah', value: 280000, stage: 'initial_contact', source: 'linkedin', priority: 'low', progress: 20, notes: 'First contact made via LinkedIn' },
+    { id: 'L005', name: 'Innovation Labs', company: 'Innovation Labs Pvt Ltd', email: 'contact@innovlabs.com', phone: '+91-9988776659', status: 'qualified', department: 'sales', assignedTo: 'E033', assignedToName: 'Vishal Tiwari', lastActivity: '2024-12-11T15:00:00', lastWorkedBy: 'E030', lastWorkedByName: 'Meera Nambiar', value: 720000, stage: 'closing', source: 'website', priority: 'high', progress: 85, notes: 'Contract review in progress' },
+    { id: 'L006', name: 'NextGen Systems', company: 'NextGen Systems Inc', email: 'info@nextgen.co.in', phone: '+91-9988776660', status: 'contacted', department: 'business_development', assignedTo: 'E028', assignedToName: 'Ashish Dubey', lastActivity: '2024-12-08T11:30:00', lastWorkedBy: 'E028', lastWorkedByName: 'Ashish Dubey', value: 390000, stage: 'qualification', source: 'email_campaign', priority: 'medium', progress: 35, notes: 'Budget confirmation pending' },
+    { id: 'L007', name: 'CloudFirst Solutions', company: 'CloudFirst Solutions', email: 'sales@cloudfirst.in', phone: '+91-9988776661', status: 'qualified', department: 'sales', assignedTo: 'E034', assignedToName: 'Swati Mishra', lastActivity: '2024-12-10T13:45:00', lastWorkedBy: 'E034', lastWorkedByName: 'Swati Mishra', value: 510000, stage: 'proposal', source: 'partner', priority: 'high', progress: 60, notes: 'Proposal submitted, awaiting feedback' },
+    { id: 'L008', name: 'DataDrive Inc', company: 'DataDrive Inc', email: 'contact@datadrive.com', phone: '+91-9988776662', status: 'new', department: 'marketing', assignedTo: 'E018', assignedToName: 'Ritu Singh', lastActivity: '2024-12-11T08:00:00', lastWorkedBy: 'E018', lastWorkedByName: 'Ritu Singh', value: 150000, stage: 'lead_generation', source: 'social_media', priority: 'low', progress: 15, notes: 'Found through social media campaign' },
+    { id: 'L009', name: 'Enterprise Hub', company: 'Enterprise Hub Ltd', email: 'hello@enterhub.in', phone: '+91-9988776663', status: 'contacted', department: 'marketing', assignedTo: 'E019', assignedToName: 'Gaurav Chopra', lastActivity: '2024-12-09T14:20:00', lastWorkedBy: 'E016', lastWorkedByName: 'Pooja Bansal', value: 210000, stage: 'nurturing', source: 'webinar', priority: 'medium', progress: 30, notes: 'Attended recent webinar' },
+    { id: 'L010', name: 'FutureTech Group', company: 'FutureTech Group', email: 'info@futuretech.co', phone: '+91-9988776664', status: 'qualified', department: 'business_development', assignedTo: 'E025', assignedToName: 'Sneha Kulkarni', lastActivity: '2024-12-11T12:00:00', lastWorkedBy: 'E025', lastWorkedByName: 'Sneha Kulkarni', value: 640000, stage: 'proposal', source: 'trade_show', priority: 'high', progress: 70, notes: 'Met at industry trade show' },
+    { id: 'L011', name: 'Synergy Solutions', company: 'Synergy Solutions Pvt Ltd', email: 'contact@synergy.in', phone: '+91-9988776665', status: 'qualified', department: 'sales', assignedTo: 'E035', assignedToName: 'Akash Sinha', lastActivity: '2024-12-11T16:30:00', lastWorkedBy: 'E031', lastWorkedByName: 'Nikhil Bhatt', value: 480000, stage: 'negotiation', source: 'referral', priority: 'high', progress: 78, notes: 'Referred by existing client' },
+    { id: 'L012', name: 'Apex Technologies', company: 'Apex Technologies Ltd', email: 'sales@apextech.com', phone: '+91-9988776666', status: 'contacted', department: 'business_development', assignedTo: 'E026', assignedToName: 'Mohit Jain', lastActivity: '2024-12-10T10:15:00', lastWorkedBy: 'E026', lastWorkedByName: 'Mohit Jain', value: 350000, stage: 'discovery', source: 'cold_call', priority: 'medium', progress: 45, notes: 'Initial discovery call completed' },
+    { id: 'L013', name: 'Velocity Systems', company: 'Velocity Systems Inc', email: 'info@velocity.co.in', phone: '+91-9988776667', status: 'new', department: 'marketing', assignedTo: 'E020', assignedToName: 'Nisha Pandey', lastActivity: '2024-12-08T15:45:00', lastWorkedBy: 'E020', lastWorkedByName: 'Nisha Pandey', value: 180000, stage: 'lead_generation', source: 'google_ads', priority: 'low', progress: 12, notes: 'Generated through Google Ads campaign' },
+    { id: 'L014', name: 'ProBiz Enterprises', company: 'ProBiz Enterprises', email: 'hello@probiz.in', phone: '+91-9988776668', status: 'qualified', department: 'sales', assignedTo: 'E032', assignedToName: 'Priyanka Menon', lastActivity: '2024-12-11T11:00:00', lastWorkedBy: 'E032', lastWorkedByName: 'Priyanka Menon', value: 590000, stage: 'closing', source: 'website', priority: 'high', progress: 82, notes: 'Ready to sign, final review pending' },
+    { id: 'L015', name: 'InnoWave Tech', company: 'InnoWave Technologies', email: 'contact@innowave.com', phone: '+91-9988776669', status: 'contacted', department: 'business_development', assignedTo: 'E027', assignedToName: 'Tanvi Shah', lastActivity: '2024-12-09T12:30:00', lastWorkedBy: 'E024', lastWorkedByName: 'Harish Bhat', value: 420000, stage: 'qualification', source: 'linkedin', priority: 'medium', progress: 38, notes: 'LinkedIn connection established' },
+    { id: 'L016', name: 'AlphaTech Solutions', company: 'AlphaTech Solutions Ltd', email: 'info@alphatech.in', phone: '+91-9988776670', status: 'qualified', department: 'sales', assignedTo: 'E033', assignedToName: 'Vishal Tiwari', lastActivity: '2024-12-10T14:00:00', lastWorkedBy: 'E033', lastWorkedByName: 'Vishal Tiwari', value: 530000, stage: 'proposal', source: 'partner', priority: 'high', progress: 68, notes: 'Partner introduction, proposal sent' },
+    { id: 'L017', name: 'MegaSoft Corporation', company: 'MegaSoft Corp', email: 'sales@megasoft.co', phone: '+91-9988776671', status: 'new', department: 'marketing', assignedTo: 'E021', assignedToName: 'Aditya Khanna', lastActivity: '2024-12-11T09:00:00', lastWorkedBy: 'E021', lastWorkedByName: 'Aditya Khanna', value: 195000, stage: 'nurturing', source: 'email_campaign', priority: 'low', progress: 18, notes: 'Responded to email campaign' },
+    { id: 'L018', name: 'Quantum Systems', company: 'Quantum Systems Pvt Ltd', email: 'contact@quantum.in', phone: '+91-9988776672', status: 'qualified', department: 'business_development', assignedTo: 'E028', assignedToName: 'Ashish Dubey', lastActivity: '2024-12-11T13:15:00', lastWorkedBy: 'E028', lastWorkedByName: 'Ashish Dubey', value: 670000, stage: 'negotiation', source: 'referral', priority: 'high', progress: 72, notes: 'Price and timeline negotiation' },
+    { id: 'L019', name: 'Zenith Innovations', company: 'Zenith Innovations Ltd', email: 'hello@zenith.com', phone: '+91-9988776673', status: 'contacted', department: 'marketing', assignedTo: 'E018', assignedToName: 'Ritu Singh', lastActivity: '2024-12-10T11:45:00', lastWorkedBy: 'E018', lastWorkedByName: 'Ritu Singh', value: 240000, stage: 'lead_generation', source: 'social_media', priority: 'medium', progress: 25, notes: 'Active on social media' },
+    { id: 'L020', name: 'Pinnacle Group', company: 'Pinnacle Business Group', email: 'info@pinnacle.in', phone: '+91-9988776674', status: 'qualified', department: 'sales', assignedTo: 'E034', assignedToName: 'Swati Mishra', lastActivity: '2024-12-11T15:45:00', lastWorkedBy: 'E034', lastWorkedByName: 'Swati Mishra', value: 610000, stage: 'closing', source: 'website', priority: 'high', progress: 88, notes: 'Final approval stage' },
+    { id: 'L021', name: 'CoreTech Services', company: 'CoreTech Services Ltd', email: 'contact@coretech.co', phone: '+91-9988776675', status: 'new', department: 'business_development', assignedTo: 'E025', assignedToName: 'Sneha Kulkarni', lastActivity: '2024-12-08T10:00:00', lastWorkedBy: 'E025', lastWorkedByName: 'Sneha Kulkarni', value: 310000, stage: 'initial_contact', source: 'cold_call', priority: 'low', progress: 22, notes: 'Cold call outreach made' },
+    { id: 'L022', name: 'BrightPath Solutions', company: 'BrightPath Solutions', email: 'sales@brightpath.in', phone: '+91-9988776676', status: 'contacted', department: 'marketing', assignedTo: 'E019', assignedToName: 'Gaurav Chopra', lastActivity: '2024-12-09T15:30:00', lastWorkedBy: 'E019', lastWorkedByName: 'Gaurav Chopra', value: 265000, stage: 'nurturing', source: 'webinar', priority: 'medium', progress: 32, notes: 'Webinar participant, follow-up sent' },
+    { id: 'L023', name: 'EliteWare Systems', company: 'EliteWare Systems Inc', email: 'info@eliteware.com', phone: '+91-9988776677', status: 'qualified', department: 'sales', assignedTo: 'E035', assignedToName: 'Akash Sinha', lastActivity: '2024-12-11T10:45:00', lastWorkedBy: 'E035', lastWorkedByName: 'Akash Sinha', value: 555000, stage: 'proposal', source: 'partner', priority: 'high', progress: 64, notes: 'Partner-sourced opportunity' },
+    { id: 'L024', name: 'NexusPoint Tech', company: 'NexusPoint Technologies', email: 'hello@nexuspoint.in', phone: '+91-9988776678', status: 'qualified', department: 'business_development', assignedTo: 'E026', assignedToName: 'Mohit Jain', lastActivity: '2024-12-10T12:20:00', lastWorkedBy: 'E023', lastWorkedByName: 'Divya Pillai', value: 495000, stage: 'discovery', source: 'linkedin', priority: 'high', progress: 52, notes: 'Discovery phase active' },
+    { id: 'L025', name: 'Momentum Solutions', company: 'Momentum Solutions Ltd', email: 'contact@momentum.co', phone: '+91-9988776679', status: 'contacted', department: 'marketing', assignedTo: 'E020', assignedToName: 'Nisha Pandey', lastActivity: '2024-12-11T14:10:00', lastWorkedBy: 'E020', lastWorkedByName: 'Nisha Pandey', value: 220000, stage: 'lead_generation', source: 'google_ads', priority: 'medium', progress: 28, notes: 'PPC campaign lead' },
+    { id: 'L026', name: 'Summit Enterprises', company: 'Summit Enterprises Pvt Ltd', email: 'info@summit.in', phone: '+91-9988776680', status: 'qualified', department: 'sales', assignedTo: 'E032', assignedToName: 'Priyanka Menon', lastActivity: '2024-12-11T16:00:00', lastWorkedBy: 'E032', lastWorkedByName: 'Priyanka Menon', value: 690000, stage: 'negotiation', source: 'referral', priority: 'high', progress: 80, notes: 'High-value opportunity, negotiations underway' },
+    { id: 'L027', name: 'Catalyst Systems', company: 'Catalyst Systems Inc', email: 'sales@catalyst.com', phone: '+91-9988776681', status: 'new', department: 'business_development', assignedTo: 'E027', assignedToName: 'Tanvi Shah', lastActivity: '2024-12-08T13:00:00', lastWorkedBy: 'E027', lastWorkedByName: 'Tanvi Shah', value: 340000, stage: 'initial_contact', source: 'trade_show', priority: 'low', progress: 16, notes: 'Trade show contact' },
+    { id: 'L028', name: 'Vertex Technologies', company: 'Vertex Technologies Ltd', email: 'contact@vertex.in', phone: '+91-9988776682', status: 'qualified', department: 'sales', assignedTo: 'E033', assignedToName: 'Vishal Tiwari', lastActivity: '2024-12-11T12:30:00', lastWorkedBy: 'E030', lastWorkedByName: 'Meera Nambiar', value: 575000, stage: 'closing', source: 'website', priority: 'high', progress: 86, notes: 'Close to deal closure' },
+    { id: 'L029', name: 'PrimeTech Group', company: 'PrimeTech Business Group', email: 'hello@primetech.co', phone: '+91-9988776683', status: 'contacted', department: 'marketing', assignedTo: 'E021', assignedToName: 'Aditya Khanna', lastActivity: '2024-12-10T09:45:00', lastWorkedBy: 'E021', lastWorkedByName: 'Aditya Khanna', value: 285000, stage: 'nurturing', source: 'email_campaign', priority: 'medium', progress: 36, notes: 'Email campaign engagement' },
+    { id: 'L030', name: 'Horizon Systems', company: 'Horizon Systems Pvt Ltd', email: 'info@horizon.in', phone: '+91-9988776684', status: 'qualified', department: 'business_development', assignedTo: 'E028', assignedToName: 'Ashish Dubey', lastActivity: '2024-12-11T11:30:00', lastWorkedBy: 'E028', lastWorkedByName: 'Ashish Dubey', value: 625000, stage: 'proposal', source: 'partner', priority: 'high', progress: 66, notes: 'Proposal under review' }
+  ],
+
+  dashboardStats: {
+    totalEmployees: 35,
+    totalLeads: 30,
+    activeProjects: 87,
+    monthlyRevenue: 12500000,
+    departments: {
+      accounts: { employees: 7, activeLeads: 0, revenue: 4850000, performance: 86 },
+      technical: { employees: 7, activeLeads: 0, revenue: 0, performance: 89 },
+      marketing: { employees: 7, activeLeads: 8, revenue: 1850000, performance: 84 },
+      business_development: { employees: 7, activeLeads: 12, revenue: 3500000, performance: 91 },
+      sales: { employees: 7, activeLeads: 10, revenue: 2300000, performance: 88 }
+    }
+  },
+
+  activityLogs: [
+    { id: 'A001', employeeId: 'E025', employeeName: 'Sneha Kulkarni', leadId: 'L001', leadName: 'TechCorp India', action: 'Updated proposal', timestamp: '2024-12-11T14:30:00', department: 'business_development' },
+    { id: 'A002', employeeId: 'E032', employeeName: 'Priyanka Menon', leadId: 'L003', leadName: 'SmartBiz Corp', action: 'Sent contract for negotiation', timestamp: '2024-12-11T10:20:00', department: 'sales' },
+    { id: 'A003', employeeId: 'E033', employeeName: 'Vishal Tiwari', leadId: 'L005', leadName: 'Innovation Labs', action: 'Moved to closing stage', timestamp: '2024-12-11T15:00:00', department: 'sales' },
+    { id: 'A004', employeeId: 'E025', employeeName: 'Sneha Kulkarni', leadId: 'L010', leadName: 'FutureTech Group', action: 'Submitted proposal document', timestamp: '2024-12-11T12:00:00', department: 'business_development' },
+    { id: 'A005', employeeId: 'E032', employeeName: 'Priyanka Menon', leadId: 'L014', leadName: 'ProBiz Enterprises', action: 'Scheduled closing meeting', timestamp: '2024-12-11T11:00:00', department: 'sales' }
+  ]
 };
 
-// Legacy mock data for compatibility
-const MOCK_DATA = mockData;
-
 if (typeof module !== 'undefined' && module.exports) {
-    module.exports = mockData;
+  module.exports = MOCK_DATA;
 }
