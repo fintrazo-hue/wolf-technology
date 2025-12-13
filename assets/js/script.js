@@ -791,13 +791,17 @@ if (window.location.pathname.includes('crm-leads.html')) {
             ]
         });
         
-        window.viewCRMLead = function(id) {
-            const lead = mockData.crmLeads.find(l => l.id === id);
-            if (lead) {
-                toastr.info('Viewing lead: ' + lead.leadName + ' - ' + lead.clientName);
-            }
-        };
+        // window.viewCRMLead = function(id) {
+        //     const lead = mockData.crmLeads.find(l => l.id === id);
+        //     if (lead) {
+        //         toastr.info('Viewing lead: ' + lead.leadName + ' - ' + lead.clientName);
+        //     }
+        // };
         
+        window.viewCRMLead = function(id) {
+            window.location.href = '/pages/candidates/candidate-profile.html';
+        };
+
         window.editCRMLead = function(id) {
             const lead = mockData.crmLeads.find(l => l.id === id);
             if (lead) {

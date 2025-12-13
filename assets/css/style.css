@@ -261,12 +261,12 @@ html, body {
 
 .login-card-modern {
     width: 100%;
-    max-width: 420px;
+    /* max-width: 420px; */
     padding: var(--spacing-xl);
     background: rgba(255, 255, 255, 0.95);
     backdrop-filter: blur(10px);
     border-radius: 20px;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+    /* box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15); */
     animation: slide-up 0.8s ease-out;
 }
 

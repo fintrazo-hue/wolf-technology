@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', function() {
   const employees = window.MOCK_DATA?.employees || [];
 
   const addLeadButtonHandler = () => {
-    const btn = document.querySelector('#addLeadBtn');
+    const btn = document.querySelector('#addCRMLeadBtn');
     if (btn) {
       btn.addEventListener('click', showAddLeadForm);
     }
@@ -132,7 +132,7 @@ document.addEventListener('DOMContentLoaded', function() {
           </td>
           <td>
             <button class="btn btn-sm btn-primary view-lead" data-id="${lead.id}">
-              <i class="fas fa-eye"></i>
+              <i class="fas fa-eye">test</i>
             </button>
             <button class="btn btn-sm btn-warning edit-lead" data-id="${lead.id}">
               <i class="fas fa-edit"></i>
