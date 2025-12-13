@@ -9,13 +9,10 @@ const SalesProfileModule = (() => {
 
   const loadMockData = async () => {
     try {
-      if (typeof mockData !== 'undefined') {
+      if (typeof mockData !== 'undefined' && mockData.employees) {
+        const salesEmployees = mockData.employees.filter(e => e.department === 'sales');
         return {
-          employees: [
-            ...mockData.agents.map(a => ({ ...a, id: a.id, position: 'agent', name: a.firstName + ' ' + a.lastName })),
-            ...mockData.teamLeaders.map(tl => ({ ...tl, position: 'team_leader' })),
-            ...mockData.managers.map(m => ({ ...m, id: m.id, position: 'manager', name: m.firstName + ' ' + m.lastName }))
-          ],
+          employees: salesEmployees,
           leads: mockData.leads || [],
           activityLogs: mockData.activityLogs || []
         };
@@ -689,8 +686,15 @@ const SalesProfileModule = (() => {
   };
 
   const initializeSalesManager = async () => {
+    const userId = getUserFromUrl();
     const data = await loadMockData();
-    const manager = data.employees.find(e => e.department === 'Sales' && e.position === 'manager');
+    let manager;
+
+    if (userId) {
+      manager = data.employees.find(e => e.id === userId || String(e.id) === String(userId));
+    } else {
+      manager = data.employees.find(e => e.position === 'manager');
+    }
 
     if (!manager) {
       console.error('Sales Manager not found');
@@ -699,7 +703,7 @@ const SalesProfileModule = (() => {
 
     renderProfileHeader(manager);
 
-    const teamLeaders = data.employees.filter(e => e.department === 'Sales' && e.position === 'team_leader');
+    const teamLeaders = data.employees.filter(e => e.department === 'sales' && e.position === 'team_leader');
     renderTeamTable(document.querySelector('.sales-manager-tl-table'), teamLeaders, data.leads);
     renderDepartmentStats(document.getElementById('dept-stats'), data);
     renderPipelineChart(document.querySelector('.sales-department-pipeline'), computeMetrics(manager, data.leads));

@@ -9,13 +9,10 @@ const BDProfileModule = (() => {
 
   const loadMockData = async () => {
     try {
-      if (typeof mockData !== 'undefined') {
+      if (typeof mockData !== 'undefined' && mockData.employees) {
+        const bdEmployees = mockData.employees.filter(e => e.department === 'business_development');
         return {
-          employees: [
-            ...mockData.agents.map(a => ({ ...a, id: a.id, position: 'agent', name: a.firstName + ' ' + a.lastName })),
-            ...mockData.teamLeaders.map(tl => ({ ...tl, position: 'team_leader' })),
-            ...mockData.managers.map(m => ({ ...m, id: m.id, position: 'manager', name: m.firstName + ' ' + m.lastName }))
-          ],
+          employees: bdEmployees,
           leads: mockData.leads || [],
           activityLogs: mockData.activityLogs || []
         };
@@ -846,7 +843,7 @@ const BDProfileModule = (() => {
   const renderDepartmentStats = (container, data) => {
     if (!container) return;
 
-    const bdLeads = data.leads.filter(l => l.department === 'business_development' || l.department === 'BD');
+    const bdLeads = data.leads || [];
     const openLeads = bdLeads.filter(l => l.stage !== 'closing').length;
     const closedLeads = bdLeads.filter(l => l.stage === 'closing').length;
     const avgResTime = bdLeads.length > 0
@@ -890,7 +887,7 @@ const BDProfileModule = (() => {
   const renderDepartmentHealth = (container, data) => {
     if (!container) return;
 
-    const bdLeads = data.leads.filter(l => l.department === 'business_development' || l.department === 'BD');
+    const bdLeads = data.leads || [];
     const totalValue = bdLeads.reduce((sum, l) => sum + (l.value || 0), 0);
     const inactiveCount = bdLeads.filter(l => computeInactivity(l) > 48).length;
 
@@ -950,8 +947,15 @@ const BDProfileModule = (() => {
   };
 
   const initializeBDManager = async () => {
+    const userId = getUserFromUrl();
     const data = await loadMockData();
-    const manager = data.employees.find(e => (e.department === 'business_development' || e.department === 'BD') && e.position === 'manager');
+    let manager;
+
+    if (userId) {
+      manager = data.employees.find(e => e.id === userId || String(e.id) === String(userId));
+    } else {
+      manager = data.employees.find(e => e.position === 'manager');
+    }
 
     if (!manager) {
       console.error('BD Manager not found');
@@ -960,7 +964,7 @@ const BDProfileModule = (() => {
 
     renderProfileHeader(manager);
 
-    const teamLeaders = data.employees.filter(e => (e.department === 'business_development' || e.department === 'BD') && e.position === 'team_leader');
+    const teamLeaders = data.employees.filter(e => e.department === 'business_development' && e.position === 'team_leader');
 
     renderDepartmentStats(document.getElementById('dept-stats'), data);
     renderTeamTable(document.querySelector('.bd-manager-tl-table'), teamLeaders, data.leads);
