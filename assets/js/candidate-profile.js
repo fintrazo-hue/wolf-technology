@@ -229,32 +229,148 @@ document.addEventListener('DOMContentLoaded', function() {
   };
 
   const generateMockCommunications = () => {
-    return [
-      {
-        channel: 'whatsapp',
-        message: 'Hi Rajesh, your interview with TechCorp is scheduled for March 5th at 2 PM. Please confirm.',
-        sender: 'Neha Gupta',
-        timestamp: new Date(Date.now() - 2 * 60 * 60 * 1000).toISOString()
+    return {
+      'Amit Sharma': {
+        role: 'BD Agent',
+        department: 'BD/Sales',
+        messages: [
+          {
+            channel: 'whatsapp',
+            message: 'Hi Rajesh, welcome to Wolf Technologies! I am Amit, your BD representative. I will help you throughout the onboarding process.',
+            timestamp: new Date('2024-01-15T10:30:00Z').toISOString()
+          },
+          {
+            channel: 'call',
+            message: 'Initial consultation call - Discussed service requirements and expectations. Duration: 45 minutes.',
+            timestamp: new Date('2024-01-15T15:00:00Z').toISOString()
+          },
+          {
+            channel: 'whatsapp',
+            message: 'Thank you for the call. Please find the payment link: [Payment Link]. Once payment is completed, we will start the process.',
+            timestamp: new Date('2024-01-16T09:00:00Z').toISOString()
+          },
+          {
+            channel: 'email',
+            message: 'Payment Confirmation - Your payment of ₹50,000 has been received. Moving you to Accounts department for onboarding.',
+            timestamp: new Date('2024-01-20T16:00:00Z').toISOString()
+          }
+        ]
       },
-      {
-        channel: 'email',
-        message: 'Interview Invitation - TechCorp Software Solutions',
-        sender: 'Neha Gupta',
-        timestamp: new Date(Date.now() - 1 * 24 * 60 * 60 * 1000).toISOString()
+      'Priya Singh': {
+        role: 'Accounts Agent',
+        department: 'Accounts',
+        messages: [
+          {
+            channel: 'email',
+            message: 'Welcome to Wolf Technologies Accounts Department! Please check the attached documents that need to be filled and submitted.',
+            timestamp: new Date('2024-01-21T09:30:00Z').toISOString()
+          },
+          {
+            channel: 'whatsapp',
+            message: 'Hi Rajesh, have you checked the email? Please let me know if you have any questions regarding the documents.',
+            timestamp: new Date('2024-01-22T11:00:00Z').toISOString()
+          },
+          {
+            channel: 'whatsapp',
+            message: 'Documents received! Everything looks good. I am now preparing your service agreement.',
+            timestamp: new Date('2024-01-23T17:00:00Z').toISOString()
+          },
+          {
+            channel: 'email',
+            message: 'Service Agreement - Please review and digitally sign the attached agreement document.',
+            timestamp: new Date('2024-01-24T10:00:00Z').toISOString()
+          },
+          {
+            channel: 'whatsapp',
+            message: 'Agreement signed successfully! Your accounts onboarding is complete. You will now be moved to Technical department.',
+            timestamp: new Date('2024-01-26T10:30:00Z').toISOString()
+          }
+        ]
       },
-      {
-        channel: 'meeting',
-        message: 'Monthly progress review meeting',
-        sender: 'Anjali Mehta',
-        timestamp: new Date(Date.now() - 5 * 24 * 60 * 60 * 1000).toISOString()
+      'Vikram Patel': {
+        role: 'Technical Team Leader',
+        department: 'Technical',
+        messages: [
+          {
+            channel: 'whatsapp',
+            message: 'Hello Rajesh! I am Vikram from Technical department. We will be working on your resume and technical training.',
+            timestamp: new Date('2024-01-29T09:30:00Z').toISOString()
+          },
+          {
+            channel: 'meeting',
+            message: 'Resume review and planning session - Discussed background, skills, and project ideas. Duration: 60 minutes.',
+            timestamp: new Date('2024-01-29T14:00:00Z').toISOString()
+          },
+          {
+            channel: 'email',
+            message: 'Updated Resume Draft - Please review your new resume and provide feedback.',
+            timestamp: new Date('2024-02-01T11:00:00Z').toISOString()
+          },
+          {
+            channel: 'whatsapp',
+            message: 'Great! Your project is coming along well. E-commerce application is 70% complete. Keep up the good work!',
+            timestamp: new Date('2024-02-15T16:00:00Z').toISOString()
+          },
+          {
+            channel: 'whatsapp',
+            message: 'Congratulations! Your resume has been approved and your project is complete. Moving you to Marketing for interview process.',
+            timestamp: new Date('2024-02-21T10:00:00Z').toISOString()
+          }
+        ]
       },
-      {
-        channel: 'whatsapp',
-        message: 'Congratulations! Your resume has been approved. Moving to marketing phase.',
-        sender: 'Vikram Patel',
-        timestamp: new Date(Date.now() - 10 * 24 * 60 * 60 * 1000).toISOString()
+      'Neha Gupta': {
+        role: 'Marketing Agent',
+        department: 'Marketing',
+        messages: [
+          {
+            channel: 'whatsapp',
+            message: 'Hi Rajesh! I am Neha from Marketing. I will help you with interview scheduling and preparation.',
+            timestamp: new Date('2024-02-22T09:00:00Z').toISOString()
+          },
+          {
+            channel: 'call',
+            message: 'Interview preparation call - Discussed common interview questions and best practices. Duration: 30 minutes.',
+            timestamp: new Date('2024-02-23T15:00:00Z').toISOString()
+          },
+          {
+            channel: 'whatsapp',
+            message: 'Great news! I have scheduled your first interview with TechCorp Solutions on March 1st at 11 AM. Details sent via email.',
+            timestamp: new Date('2024-02-27T10:30:00Z').toISOString()
+          },
+          {
+            channel: 'email',
+            message: 'Interview Details - TechCorp Solutions | Position: Java Full Stack Developer | Date: March 1, 2024 | Time: 11:00 AM | Mode: Video Call',
+            timestamp: new Date('2024-02-27T10:35:00Z').toISOString()
+          },
+          {
+            channel: 'whatsapp',
+            message: 'How did your interview go with TechCorp? Please share your feedback.',
+            timestamp: new Date('2024-03-01T14:00:00Z').toISOString()
+          },
+          {
+            channel: 'whatsapp',
+            message: 'Your next interview is scheduled with GlobalTech Inc on March 5th at 2 PM. Please confirm your availability.',
+            timestamp: new Date(Date.now() - 2 * 60 * 60 * 1000).toISOString()
+          }
+        ]
+      },
+      'Anjali Mehta': {
+        role: 'Marketing Manager',
+        department: 'Marketing',
+        messages: [
+          {
+            channel: 'meeting',
+            message: 'Monthly progress review meeting - Discussed interview performance and areas of improvement.',
+            timestamp: new Date(Date.now() - 5 * 24 * 60 * 60 * 1000).toISOString()
+          },
+          {
+            channel: 'email',
+            message: 'Progress Report - You have attended 3 interviews so far. Keep up the positive attitude!',
+            timestamp: new Date(Date.now() - 4 * 24 * 60 * 60 * 1000).toISOString()
+          }
+        ]
       }
-    ];
+    };
   };
 
   const formatDate = (dateString) => {
@@ -522,28 +638,83 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   };
 
+  const getChannelIcon = (channel) => {
+    const icons = {
+      whatsapp: 'fa-whatsapp',
+      email: 'fa-envelope',
+      call: 'fa-phone-alt',
+      meeting: 'fa-video'
+    };
+    return icons[channel] || 'fa-comment';
+  };
+
+  const getInitials = (name) => {
+    return name.split(' ').map(n => n[0]).join('').toUpperCase();
+  };
+
   const renderCommunications = (communications) => {
-    const container = document.getElementById('communication-list');
+    const container = document.getElementById('communication-container');
+    if (!container) return;
+
     container.innerHTML = '';
 
-    communications.forEach(comm => {
-      const item = document.createElement('div');
-      item.className = 'communication-item';
-      item.innerHTML = `
-        <div class="comm-icon ${comm.channel}">
-          <i class="fab fa-${comm.channel === 'whatsapp' ? 'whatsapp' : comm.channel === 'email' ? 'envelope' : 'video'}"></i>
-        </div>
-        <div class="comm-content">
-          <div class="comm-header">
-            <span class="comm-channel">${comm.channel.charAt(0).toUpperCase() + comm.channel.slice(1)}</span>
-            <span class="comm-time">${calculateInactivity(comm.timestamp)}</span>
-          </div>
-          <div class="comm-message">${comm.message}</div>
-          <div class="comm-sender">Sent by ${comm.sender}</div>
+    const employees = Object.keys(communications);
+    if (employees.length === 0) {
+      container.innerHTML = `
+        <div class="no-communications">
+          <i class="fas fa-comments"></i>
+          <p>No communications found</p>
         </div>
       `;
-      container.appendChild(item);
+      return;
+    }
+
+    employees.forEach(employeeName => {
+      const employee = communications[employeeName];
+      const messageCount = employee.messages.length;
+
+      const employeeGroup = document.createElement('div');
+      employeeGroup.className = 'employee-chat-group';
+
+      const messagesHtml = employee.messages.map(msg => {
+        return `
+          <div class="chat-message" data-channel="${msg.channel}">
+            <div class="chat-message-icon ${msg.channel}">
+              <i class="fas ${getChannelIcon(msg.channel)}"></i>
+            </div>
+            <div class="chat-message-content">
+              <div class="chat-message-header">
+                <span class="chat-channel">
+                  <i class="fas ${getChannelIcon(msg.channel)} chat-channel-icon"></i>
+                  ${msg.channel}
+                </span>
+                <span class="chat-time">${calculateInactivity(msg.timestamp)}</span>
+              </div>
+              <div class="chat-text">${msg.message}</div>
+              <div class="chat-sender">By ${employeeName}</div>
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      employeeGroup.innerHTML = `
+        <div class="employee-chat-header" onclick="toggleEmployeeChat(this)">
+          <div class="employee-avatar">${getInitials(employeeName)}</div>
+          <div class="employee-info">
+            <div class="employee-name">${employeeName}</div>
+            <div class="employee-role">${employee.role} • ${employee.department}</div>
+          </div>
+          <div class="chat-count">${messageCount}</div>
+        </div>
+        <div class="employee-chat-messages">
+          ${messagesHtml}
+        </div>
+      `;
+
+      container.appendChild(employeeGroup);
     });
+
+    setupCommunicationFilters();
   };
 
   const renderRoleBasedActions = (userRole) => {
@@ -604,6 +775,34 @@ document.addEventListener('DOMContentLoaded', function() {
 
         btn.classList.add('active');
         document.getElementById(`${targetSubtab}-subtab`).classList.add('active');
+      });
+    });
+  };
+
+  window.toggleEmployeeChat = (headerElement) => {
+    const messagesContainer = headerElement.nextElementSibling;
+    messagesContainer.classList.toggle('collapsed');
+  };
+
+  const setupCommunicationFilters = () => {
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const chatMessages = document.querySelectorAll('.chat-message');
+
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const filter = btn.getAttribute('data-filter');
+
+        filterBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        chatMessages.forEach(msg => {
+          if (filter === 'all') {
+            msg.style.display = 'flex';
+          } else {
+            const channel = msg.getAttribute('data-channel');
+            msg.style.display = channel === filter ? 'flex' : 'none';
+          }
+        });
       });
     });
   };

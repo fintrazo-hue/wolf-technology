@@ -436,6 +436,23 @@
       <div class="tab-content" id="activity-tab">
         <div class="content-card">
           <div class="card-header">
+            <h3>Communication History</h3>
+            <div class="communication-filters">
+              <button class="filter-btn active" data-filter="all">All</button>
+              <button class="filter-btn" data-filter="whatsapp">WhatsApp</button>
+              <button class="filter-btn" data-filter="email">Email</button>
+              <button class="filter-btn" data-filter="call">Calls</button>
+              <button class="filter-btn" data-filter="meeting">Meetings</button>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="communication-container" id="communication-container">
+              <!-- Employee-wise chat history will be inserted here -->
+            </div>
+          </div>
+        </div>
+        <div class="content-card">
+          <div class="card-header">
             <h3>Activity Log</h3>
             <button class="btn btn-primary" id="add-activity-btn">
               <i class="fas fa-plus"></i> Add Activity
@@ -444,16 +461,6 @@
           <div class="card-body">
             <div class="activity-list" id="activity-list">
               <!-- Activities will be inserted here -->
-            </div>
-          </div>
-        </div>
-        <div class="content-card">
-          <div class="card-header">
-            <h3>Communication Log</h3>
-          </div>
-          <div class="card-body">
-            <div class="communication-list" id="communication-list">
-              <!-- Communications will be inserted here -->
             </div>
           </div>
         </div>
