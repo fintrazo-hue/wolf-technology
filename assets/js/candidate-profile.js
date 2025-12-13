@@ -652,84 +652,139 @@ document.addEventListener('DOMContentLoaded', function() {
     return name.split(' ').map(n => n[0]).join('').toUpperCase();
   };
 
+  let allCommunications = {};
+  let currentFilter = 'all';
+
   const renderCommunications = (communications) => {
-    const container = document.getElementById('communication-container');
-
-    if (!container) {
-      console.error('Communication container not found!');
-      return;
-    }
-
-    container.innerHTML = '';
+    allCommunications = communications;
 
     if (!communications || typeof communications !== 'object') {
-      container.innerHTML = '<p style="padding: 20px; color: red;">Communications data is invalid</p>';
       return;
     }
 
     const employees = Object.keys(communications);
-
     if (employees.length === 0) {
-      container.innerHTML = `
-        <div class="no-communications">
-          <i class="fas fa-comments"></i>
-          <p>No communications found</p>
-        </div>
-      `;
       return;
     }
 
+    renderEmployeeList(currentFilter);
+    setupCommunicationFilters();
+  };
+
+  const renderEmployeeList = (filter = 'all') => {
+    const listContainer = document.getElementById('employee-list-container');
+    const countElement = document.getElementById('employee-count');
+
+    if (!listContainer) return;
+
+    listContainer.innerHTML = '';
+
+    const employees = Object.keys(allCommunications);
+    let filteredCount = 0;
+
     employees.forEach(employeeName => {
-      const employee = communications[employeeName];
+      const employee = allCommunications[employeeName];
       if (!employee || !employee.messages) return;
 
-      const messageCount = employee.messages.length;
+      const filteredMessages = filter === 'all'
+        ? employee.messages
+        : employee.messages.filter(msg => msg.channel === filter);
 
-      const employeeGroup = document.createElement('div');
-      employeeGroup.className = 'employee-chat-group';
+      if (filteredMessages.length === 0) return;
 
-      let messagesHtml = '';
-      employee.messages.forEach(msg => {
-        messagesHtml += `
-          <div class="chat-message" data-channel="${msg.channel}">
-            <div class="chat-message-icon ${msg.channel}">
-              <i class="fas ${getChannelIcon(msg.channel)}"></i>
-            </div>
-            <div class="chat-message-content">
-              <div class="chat-message-header">
-                <span class="chat-channel">
-                  <i class="fas ${getChannelIcon(msg.channel)} chat-channel-icon"></i>
-                  ${msg.channel.toUpperCase()}
-                </span>
-                <span class="chat-time">${calculateInactivity(msg.timestamp)}</span>
-              </div>
-              <div class="chat-text">${msg.message}</div>
-              <div class="chat-sender">By ${employeeName}</div>
-            </div>
-          </div>
-        `;
-      });
+      filteredCount++;
+      const lastMessage = filteredMessages[filteredMessages.length - 1];
 
-      const headerHTML = `
-        <div class="employee-chat-header" onclick="toggleEmployeeChat(this)">
-          <div class="employee-avatar">${getInitials(employeeName)}</div>
-          <div class="employee-info">
-            <div class="employee-name">${employeeName}</div>
-            <div class="employee-role">${employee.role} • ${employee.department}</div>
-          </div>
-          <div class="chat-count">${messageCount}</div>
-          <i class="fas fa-chevron-down toggle-icon"></i>
+      const employeeItem = document.createElement('div');
+      employeeItem.className = 'employee-list-item';
+      employeeItem.setAttribute('data-employee', employeeName);
+      employeeItem.onclick = () => selectEmployee(employeeName, filter);
+
+      employeeItem.innerHTML = `
+        <div class="employee-avatar">${getInitials(employeeName)}</div>
+        <div class="employee-info">
+          <div class="employee-name">${employeeName}</div>
+          <div class="employee-last-message">${lastMessage.message.substring(0, 40)}...</div>
         </div>
-        <div class="employee-chat-messages collapsed">
-          ${messagesHtml}
+        <div class="employee-list-meta">
+          <div class="employee-time">${calculateInactivity(lastMessage.timestamp)}</div>
+          ${filteredMessages.length > 1 ? `<span class="chat-count">${filteredMessages.length}</span>` : ''}
         </div>
       `;
 
-      employeeGroup.innerHTML = headerHTML;
-      container.appendChild(employeeGroup);
+      listContainer.appendChild(employeeItem);
     });
 
-    setupCommunicationFilters();
+    if (countElement) {
+      countElement.textContent = filteredCount;
+    }
+  };
+
+  const selectEmployee = (employeeName, filter = 'all') => {
+    document.querySelectorAll('.employee-list-item').forEach(item => {
+      item.classList.remove('active');
+    });
+
+    const selectedItem = document.querySelector(`[data-employee="${employeeName}"]`);
+    if (selectedItem) {
+      selectedItem.classList.add('active');
+    }
+
+    renderChatPanel(employeeName, filter);
+  };
+
+  const renderChatPanel = (employeeName, filter = 'all') => {
+    const chatPanel = document.getElementById('chat-panel');
+    if (!chatPanel) return;
+
+    const employee = allCommunications[employeeName];
+    if (!employee) return;
+
+    const filteredMessages = filter === 'all'
+      ? employee.messages
+      : employee.messages.filter(msg => msg.channel === filter);
+
+    let messagesHTML = '';
+    filteredMessages.forEach((msg, index) => {
+      const isReceived = index % 2 === 0;
+      messagesHTML += `
+        <div class="chat-message ${isReceived ? 'received' : 'sent'}">
+          <div class="chat-bubble">
+            <div class="chat-bubble-text">${msg.message}</div>
+            <div class="chat-bubble-footer">
+              <span class="chat-channel-badge ${msg.channel}">
+                <i class="fas ${getChannelIcon(msg.channel)}"></i>
+                ${msg.channel.toUpperCase()}
+              </span>
+              <span class="chat-bubble-time">${formatTime(msg.timestamp)}</span>
+            </div>
+          </div>
+        </div>
+      `;
+    });
+
+    chatPanel.innerHTML = `
+      <div class="chat-header">
+        <div class="employee-avatar">${getInitials(employeeName)}</div>
+        <div class="employee-info">
+          <div class="employee-name">${employeeName}</div>
+          <div class="employee-role">${employee.role} • ${employee.department}</div>
+        </div>
+      </div>
+      <div class="chat-messages-container">
+        ${messagesHTML}
+      </div>
+    `;
+
+    const messagesContainer = chatPanel.querySelector('.chat-messages-container');
+    if (messagesContainer) {
+      messagesContainer.scrollTop = messagesContainer.scrollHeight;
+    }
+  };
+
+  const formatTime = (timestamp) => {
+    const date = new Date(timestamp);
+    return date.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
   };
 
   const renderRoleBasedActions = (userRole) => {
@@ -794,31 +849,28 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   };
 
-  window.toggleEmployeeChat = (headerElement) => {
-    const messagesContainer = headerElement.nextElementSibling;
-    messagesContainer.classList.toggle('collapsed');
-    headerElement.classList.toggle('expanded');
-  };
-
   const setupCommunicationFilters = () => {
     const filterBtns = document.querySelectorAll('.filter-btn');
-    const chatMessages = document.querySelectorAll('.chat-message');
 
     filterBtns.forEach(btn => {
       btn.addEventListener('click', () => {
         const filter = btn.getAttribute('data-filter');
+        currentFilter = filter;
 
         filterBtns.forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
 
-        chatMessages.forEach(msg => {
-          if (filter === 'all') {
-            msg.style.display = 'flex';
-          } else {
-            const channel = msg.getAttribute('data-channel');
-            msg.style.display = channel === filter ? 'flex' : 'none';
-          }
-        });
+        renderEmployeeList(filter);
+
+        const chatPanel = document.getElementById('chat-panel');
+        if (chatPanel) {
+          chatPanel.innerHTML = `
+            <div class="chat-panel-placeholder">
+              <i class="fas fa-comments"></i>
+              <p>Select a contact to view conversation</p>
+            </div>
+          `;
+        }
       });
     });
   };

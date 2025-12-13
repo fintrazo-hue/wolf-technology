@@ -446,8 +446,22 @@
             </div>
           </div>
           <div class="card-body">
-            <div class="communication-container" id="communication-container">
-              <!-- Employee-wise chat history will be inserted here -->
+            <div class="communication-split-view" id="communication-split-view">
+              <div class="employee-list-panel" id="employee-list-panel">
+                <div class="employee-list-header">
+                  <h4>Contacts</h4>
+                  <span class="employee-count" id="employee-count">0</span>
+                </div>
+                <div class="employee-list-container" id="employee-list-container">
+                  <!-- Employee list will be inserted here -->
+                </div>
+              </div>
+              <div class="chat-panel" id="chat-panel">
+                <div class="chat-panel-placeholder">
+                  <i class="fas fa-comments"></i>
+                  <p>Select a contact to view conversation</p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
