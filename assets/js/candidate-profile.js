@@ -654,11 +654,21 @@ document.addEventListener('DOMContentLoaded', function() {
 
   const renderCommunications = (communications) => {
     const container = document.getElementById('communication-container');
-    if (!container) return;
+
+    if (!container) {
+      console.error('Communication container not found!');
+      return;
+    }
 
     container.innerHTML = '';
 
+    if (!communications || typeof communications !== 'object') {
+      container.innerHTML = '<p style="padding: 20px; color: red;">Communications data is invalid</p>';
+      return;
+    }
+
     const employees = Object.keys(communications);
+
     if (employees.length === 0) {
       container.innerHTML = `
         <div class="no-communications">
@@ -671,13 +681,16 @@ document.addEventListener('DOMContentLoaded', function() {
 
     employees.forEach(employeeName => {
       const employee = communications[employeeName];
+      if (!employee || !employee.messages) return;
+
       const messageCount = employee.messages.length;
 
       const employeeGroup = document.createElement('div');
       employeeGroup.className = 'employee-chat-group';
 
-      const messagesHtml = employee.messages.map(msg => {
-        return `
+      let messagesHtml = '';
+      employee.messages.forEach(msg => {
+        messagesHtml += `
           <div class="chat-message" data-channel="${msg.channel}">
             <div class="chat-message-icon ${msg.channel}">
               <i class="fas ${getChannelIcon(msg.channel)}"></i>
@@ -686,7 +699,7 @@ document.addEventListener('DOMContentLoaded', function() {
               <div class="chat-message-header">
                 <span class="chat-channel">
                   <i class="fas ${getChannelIcon(msg.channel)} chat-channel-icon"></i>
-                  ${msg.channel}
+                  ${msg.channel.toUpperCase()}
                 </span>
                 <span class="chat-time">${calculateInactivity(msg.timestamp)}</span>
               </div>
@@ -695,9 +708,9 @@ document.addEventListener('DOMContentLoaded', function() {
             </div>
           </div>
         `;
-      }).join('');
+      });
 
-      employeeGroup.innerHTML = `
+      const headerHTML = `
         <div class="employee-chat-header" onclick="toggleEmployeeChat(this)">
           <div class="employee-avatar">${getInitials(employeeName)}</div>
           <div class="employee-info">
@@ -711,6 +724,7 @@ document.addEventListener('DOMContentLoaded', function() {
         </div>
       `;
 
+      employeeGroup.innerHTML = headerHTML;
       container.appendChild(employeeGroup);
     });
 
