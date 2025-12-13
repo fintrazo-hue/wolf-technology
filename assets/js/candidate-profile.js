@@ -718,8 +718,9 @@ document.addEventListener('DOMContentLoaded', function() {
             <div class="employee-role">${employee.role} • ${employee.department}</div>
           </div>
           <div class="chat-count">${messageCount}</div>
+          <i class="fas fa-chevron-down toggle-icon"></i>
         </div>
-        <div class="employee-chat-messages">
+        <div class="employee-chat-messages collapsed">
           ${messagesHtml}
         </div>
       `;
@@ -796,6 +797,7 @@ document.addEventListener('DOMContentLoaded', function() {
   window.toggleEmployeeChat = (headerElement) => {
     const messagesContainer = headerElement.nextElementSibling;
     messagesContainer.classList.toggle('collapsed');
+    headerElement.classList.toggle('expanded');
   };
 
   const setupCommunicationFilters = () => {

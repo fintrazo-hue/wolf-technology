@@ -876,10 +876,22 @@
   border-bottom: 1px solid var(--grey-200);
   cursor: pointer;
   transition: all 0.2s ease;
+  position: relative;
 }
 
 .employee-chat-header:hover {
   background: var(--grey-100);
+}
+
+.employee-chat-header .toggle-icon {
+  margin-left: auto;
+  font-size: 14px;
+  color: var(--grey-400);
+  transition: transform 0.3s ease;
+}
+
+.employee-chat-header.expanded .toggle-icon {
+  transform: rotate(180deg);
 }
 
 .employee-avatar {
