@@ -254,6 +254,9 @@ const MOCK_DATA = {
   ]
 };
 
+window.mockData = MOCK_DATA;
+window.MOCK_DATA = MOCK_DATA;
+
 if (typeof module !== 'undefined' && module.exports) {
   module.exports = MOCK_DATA;
 }
