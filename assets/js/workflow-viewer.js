@@ -111,6 +111,57 @@ document.addEventListener('DOMContentLoaded', function() {
     tbody.innerHTML = rows;
   };
 
+  const addWorkflowButtonHandler = () => {
+    const btn = document.querySelector('#addWorkflowBtn');
+    if (btn) {
+      btn.addEventListener('click', () => {
+        const formHTML = `
+          <form id="addWorkflowForm">
+            <div class="mb-3">
+              <label class="form-label">Record ID *</label>
+              <input type="text" class="form-control" name="recordId" required>
+            </div>
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label class="form-label">Billing ID *</label>
+                <input type="text" class="form-control" name="billingId" required>
+              </div>
+              <div class="col-md-6 mb-3">
+                <label class="form-label">Customer Name *</label>
+                <input type="text" class="form-control" name="customerName" required>
+              </div>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Current Step *</label>
+              <input type="text" class="form-control" name="currentStep" placeholder="e.g., KYC Verification" required>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Workflow Status *</label>
+              <select class="form-select" name="status" required>
+                <option value="in_progress">In Progress</option>
+                <option value="completed">Completed</option>
+                <option value="pending">Pending</option>
+              </select>
+            </div>
+            <button type="submit" class="btn btn-success">Add Workflow Record</button>
+          </form>
+        `;
+        FormHandler.createModal('Add Workflow Record', formHTML, (modal, form) => {
+          const errors = [];
+          const fd = new FormData(form);
+          if (!fd.get('recordId')) errors.push('Record ID is required');
+          if (!fd.get('billingId')) errors.push('Billing ID is required');
+          if (!fd.get('customerName')) errors.push('Customer name is required');
+          if (errors.length > 0) { FormHandler.showErrors(errors); return; }
+          FormHandler.closeModal(modal);
+          FormHandler.showSuccess('Workflow record added successfully!');
+          renderWorkflowTable();
+        });
+      });
+    }
+  };
+
   renderWorkflowTabs();
   renderWorkflowTable();
+  addWorkflowButtonHandler();
 });

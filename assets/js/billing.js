@@ -83,5 +83,63 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   };
 
+  const addBillingButtonHandler = () => {
+    const btn = document.querySelector('#addBillingBtn');
+    if (btn) {
+      btn.addEventListener('click', () => {
+        const formHTML = `
+          <form id="addBillingForm">
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label class="form-label">Invoice Number *</label>
+                <input type="text" class="form-control" name="invoiceNumber" required>
+              </div>
+              <div class="col-md-6 mb-3">
+                <label class="form-label">Billing ID *</label>
+                <input type="text" class="form-control" name="billingId" required>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label class="form-label">Candidate Name *</label>
+                <input type="text" class="form-control" name="candidateName" required>
+              </div>
+              <div class="col-md-6 mb-3">
+                <label class="form-label">Product/Service *</label>
+                <input type="text" class="form-control" name="productName" required>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label class="form-label">Amount (₹) *</label>
+                <input type="number" class="form-control" name="amount" min="0" required>
+              </div>
+              <div class="col-md-6 mb-3">
+                <label class="form-label">Payment Status *</label>
+                <select class="form-select" name="paymentStatus" required>
+                  <option value="paid">Paid</option>
+                  <option value="pending">Pending</option>
+                </select>
+              </div>
+            </div>
+            <button type="submit" class="btn btn-success">Add Billing Record</button>
+          </form>
+        `;
+        FormHandler.createModal('Add Billing Record', formHTML, (modal, form) => {
+          const errors = [];
+          const fd = new FormData(form);
+          if (!fd.get('invoiceNumber')) errors.push('Invoice number is required');
+          if (!fd.get('candidateName')) errors.push('Candidate name is required');
+          if (!fd.get('amount')) errors.push('Amount is required');
+          if (errors.length > 0) { FormHandler.showErrors(errors); return; }
+          FormHandler.closeModal(modal);
+          FormHandler.showSuccess('Billing record added successfully!');
+          renderBillingTable();
+        });
+      });
+    }
+  };
+
   renderBillingTable();
+  addBillingButtonHandler();
 });

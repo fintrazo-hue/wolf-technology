@@ -78,5 +78,74 @@ document.addEventListener('DOMContentLoaded', function() {
     document.body.appendChild(modal);
   };
 
+  const addPurchaseButtonHandler = () => {
+    const btn = document.querySelector('#addPurchaseBtn');
+    if (btn) {
+      btn.addEventListener('click', () => {
+        const formHTML = `
+          <form id="addPurchaseForm">
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label class="form-label">Billing ID *</label>
+                <input type="text" class="form-control" name="billingId" required>
+              </div>
+              <div class="col-md-6 mb-3">
+                <label class="form-label">Candidate Name *</label>
+                <input type="text" class="form-control" name="candidateName" required>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label class="form-label">Service *</label>
+                <input type="text" class="form-control" name="service" placeholder="e.g., Java Training" required>
+              </div>
+              <div class="col-md-6 mb-3">
+                <label class="form-label">Amount (₹) *</label>
+                <input type="number" class="form-control" name="amount" min="0" required>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-4 mb-3">
+                <label class="form-label">Payment Status *</label>
+                <select class="form-select" name="paymentStatus" required>
+                  <option value="paid">Paid</option>
+                  <option value="pending">Pending</option>
+                </select>
+              </div>
+              <div class="col-md-4 mb-3">
+                <label class="form-label">Department *</label>
+                <select class="form-select" name="department" required>
+                  <option value="">Select Department</option>
+                  <option value="accounts">Accounts</option>
+                  <option value="technical">Technical</option>
+                  <option value="marketing">Marketing</option>
+                  <option value="business_development">Business Development</option>
+                  <option value="sales">Sales</option>
+                </select>
+              </div>
+              <div class="col-md-4 mb-3">
+                <label class="form-label">Onboarding % *</label>
+                <input type="number" class="form-control" name="progress" min="0" max="100" required>
+              </div>
+            </div>
+            <button type="submit" class="btn btn-success">Add Purchase Record</button>
+          </form>
+        `;
+        FormHandler.createModal('Add Purchase Record', formHTML, (modal, form) => {
+          const errors = [];
+          const fd = new FormData(form);
+          if (!fd.get('billingId')) errors.push('Billing ID is required');
+          if (!fd.get('candidateName')) errors.push('Candidate name is required');
+          if (!fd.get('service')) errors.push('Service name is required');
+          if (errors.length > 0) { FormHandler.showErrors(errors); return; }
+          FormHandler.closeModal(modal);
+          FormHandler.showSuccess('Purchase record added successfully!');
+          renderPurchaseTable();
+        });
+      });
+    }
+  };
+
   renderPurchaseTable();
+  addPurchaseButtonHandler();
 });

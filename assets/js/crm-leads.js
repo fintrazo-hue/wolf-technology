@@ -1,6 +1,109 @@
 document.addEventListener('DOMContentLoaded', function() {
-  const leads = window.MOCK_DATA?.leads || [];
+  let leads = [...(window.MOCK_DATA?.leads || [])];
   const employees = window.MOCK_DATA?.employees || [];
+
+  const addLeadButtonHandler = () => {
+    const btn = document.querySelector('#addLeadBtn');
+    if (btn) {
+      btn.addEventListener('click', showAddLeadForm);
+    }
+  };
+
+  const showAddLeadForm = () => {
+    const formHTML = `
+      <form id="addLeadForm">
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <label class="form-label">Lead Name *</label>
+            <input type="text" class="form-control" name="leadName" required>
+          </div>
+          <div class="col-md-6 mb-3">
+            <label class="form-label">Email *</label>
+            <input type="email" class="form-control" name="email" required>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <label class="form-label">Phone *</label>
+            <input type="tel" class="form-control" name="phone" required>
+          </div>
+          <div class="col-md-6 mb-3">
+            <label class="form-label">Company *</label>
+            <input type="text" class="form-control" name="company" required>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-4 mb-3">
+            <label class="form-label">Lead Stage *</label>
+            <select class="form-select" name="stage" required>
+              <option value="">Select Stage</option>
+              <option value="Initial Contact">Initial Contact</option>
+              <option value="Qualified">Qualified</option>
+              <option value="In Discussion">In Discussion</option>
+              <option value="Proposal Sent">Proposal Sent</option>
+              <option value="Negotiation">Negotiation</option>
+            </select>
+          </div>
+          <div class="col-md-4 mb-3">
+            <label class="form-label">Assigned To *</label>
+            <select class="form-select" name="assignedTo" required>
+              <option value="">Select Agent</option>
+              <option value="Raj Sharma">Raj Sharma</option>
+              <option value="Priya Singh">Priya Singh</option>
+              <option value="Amit Kumar">Amit Kumar</option>
+            </select>
+          </div>
+          <div class="col-md-4 mb-3">
+            <label class="form-label">Priority *</label>
+            <select class="form-select" name="priority" required>
+              <option value="Low">Low</option>
+              <option value="Medium">Medium</option>
+              <option value="High">High</option>
+            </select>
+          </div>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Lead Value (₹) *</label>
+          <input type="number" class="form-control" name="value" min="0" required>
+        </div>
+        <button type="submit" class="btn btn-success">Add Lead</button>
+      </form>
+    `;
+
+    FormHandler.createModal('Add New Lead', formHTML, (modal, form) => {
+      const errors = [];
+      const formData = new FormData(form);
+
+      if (!formData.get('leadName')) errors.push('Lead name is required');
+      if (!formData.get('email')) errors.push('Email is required');
+      if (!formData.get('phone')) errors.push('Phone is required');
+      if (!formData.get('company')) errors.push('Company is required');
+
+      if (errors.length > 0) {
+        FormHandler.showErrors(errors);
+        return;
+      }
+
+      const newLead = {
+        id: (leads.length + 1).toString(),
+        name: formData.get('leadName'),
+        email: formData.get('email'),
+        phone: formData.get('phone'),
+        company: formData.get('company'),
+        stage: formData.get('stage'),
+        assignedToName: formData.get('assignedTo'),
+        priority: formData.get('priority'),
+        value: parseInt(formData.get('value')),
+        lastActivity: new Date().toISOString(),
+        progress: 25
+      };
+
+      leads.push(newLead);
+      FormHandler.closeModal(modal);
+      FormHandler.showSuccess('Lead added successfully!');
+      renderLeadsTable();
+    });
+  };
 
   const renderLeadsTable = () => {
     const tbody = document.querySelector('#crmLeadsTable tbody');
@@ -176,4 +279,5 @@ document.addEventListener('DOMContentLoaded', function() {
 
   renderStats();
   renderLeadsTable();
+  addLeadButtonHandler();
 });

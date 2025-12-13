@@ -69,5 +69,56 @@ document.addEventListener('DOMContentLoaded', function() {
     document.body.appendChild(modal);
   };
 
+  const addProductButtonHandler = () => {
+    const btn = document.querySelector('#addProductBtn');
+    if (btn) {
+      btn.addEventListener('click', () => {
+        const formHTML = `
+          <form id="addProductForm">
+            <div class="mb-3">
+              <label class="form-label">Product Name *</label>
+              <input type="text" class="form-control" name="productName" required>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Price (₹) *</label>
+              <input type="number" class="form-control" name="price" min="0" step="0.01" required>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Description *</label>
+              <textarea class="form-control" name="description" rows="3" required></textarea>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Departments *</label>
+              <select class="form-select" name="departments" multiple required>
+                <option value="accounts">Accounts</option>
+                <option value="technical">Technical</option>
+                <option value="marketing">Marketing</option>
+                <option value="business_development">Business Development</option>
+                <option value="sales">Sales</option>
+              </select>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Duration *</label>
+              <input type="text" class="form-control" name="duration" placeholder="e.g., 30 days" required>
+            </div>
+            <button type="submit" class="btn btn-success">Add Product</button>
+          </form>
+        `;
+        FormHandler.createModal('Add New Product', formHTML, (modal, form) => {
+          const errors = [];
+          const fd = new FormData(form);
+          if (!fd.get('productName')) errors.push('Product name is required');
+          if (!fd.get('price')) errors.push('Price is required');
+          if (!fd.get('description')) errors.push('Description is required');
+          if (errors.length > 0) { FormHandler.showErrors(errors); return; }
+          FormHandler.closeModal(modal);
+          FormHandler.showSuccess('Product added successfully!');
+          renderProductsTable();
+        });
+      });
+    }
+  };
+
   renderProductsTable();
+  addProductButtonHandler();
 });

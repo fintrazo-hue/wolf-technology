@@ -164,5 +164,51 @@ document.addEventListener('DOMContentLoaded', function() {
     document.body.appendChild(modal);
   };
 
+  const addDepartmentButtonHandler = () => {
+    const btn = document.querySelector('#addDepartmentBtn');
+    if (btn) {
+      btn.addEventListener('click', () => {
+        const formHTML = `
+          <form id="addDeptForm">
+            <div class="mb-3">
+              <label class="form-label">Department Name *</label>
+              <input type="text" class="form-control" name="deptName" required>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Department Manager *</label>
+              <input type="text" class="form-control" name="manager" required>
+            </div>
+            <div class="row">
+              <div class="col-md-4 mb-3">
+                <label class="form-label">Expected Managers *</label>
+                <input type="number" class="form-control" name="managers" min="1" required>
+              </div>
+              <div class="col-md-4 mb-3">
+                <label class="form-label">Expected Team Leaders *</label>
+                <input type="number" class="form-control" name="tls" min="1" required>
+              </div>
+              <div class="col-md-4 mb-3">
+                <label class="form-label">Expected Agents *</label>
+                <input type="number" class="form-control" name="agents" min="1" required>
+              </div>
+            </div>
+            <button type="submit" class="btn btn-success">Add Department</button>
+          </form>
+        `;
+        FormHandler.createModal('Add New Department', formHTML, (modal, form) => {
+          const errors = [];
+          const fd = new FormData(form);
+          if (!fd.get('deptName')) errors.push('Department name is required');
+          if (!fd.get('manager')) errors.push('Manager name is required');
+          if (errors.length > 0) { FormHandler.showErrors(errors); return; }
+          FormHandler.closeModal(modal);
+          FormHandler.showSuccess('Department added successfully!');
+          renderDepartmentsTable();
+        });
+      });
+    }
+  };
+
   renderDepartmentsTable();
+  addDepartmentButtonHandler();
 });
