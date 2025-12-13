@@ -104,9 +104,17 @@ let currentUser = {
 // ============================================
 // Initialize Application
 // ============================================
-$(document).ready(function() {
-    initializeApp();
-});
+if (typeof jQuery !== 'undefined') {
+    $(document).ready(function() {
+        initializeApp();
+    });
+} else {
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initializeApp);
+    } else {
+        initializeApp();
+    }
+}
 
 function initializeApp() {
     const currentPage = window.location.pathname;
