@@ -251,7 +251,99 @@ const MOCK_DATA = {
     { id: 'B008', billingId: 'BL008', customerName: 'CloudTech Solutions', serviceName: 'Basic Plan', assignedAgent: 'E007', assignedAgentName: 'Rohit Verma', assignedTL: 'E003', assignedTLName: 'Amit Patel', currentStep: 'Get Documents', completedSteps: ['Welcome to Wolf Technologies', 'Candidate Onboard', 'Get Documents'], lastUpdate: '2024-12-11T14:20:00', documents: { resume: 'uploaded', id_proof: 'uploaded', education_docs: 'pending' }, agreement: { sent_at: null, signed_at: null }, status: 'in_progress', daysInProcess: 2 },
     { id: 'B009', billingId: 'BL009', customerName: 'DataFlow Inc', serviceName: 'Enterprise Plan', assignedAgent: 'E004', assignedAgentName: 'Neha Gupta', assignedTL: 'E002', assignedTLName: 'Priya Sharma', currentStep: 'Agreement Sent', completedSteps: ['Welcome to Wolf Technologies', 'Candidate Onboard', 'Get Documents', 'Agreement Sent'], lastUpdate: '2024-12-09T10:00:00', documents: { resume: 'uploaded', id_proof: 'uploaded', education_docs: 'uploaded' }, agreement: { sent_at: '2024-12-05T13:00:00', signed_at: null }, status: 'pending', daysInProcess: 7 },
     { id: 'B010', billingId: 'BL010', customerName: 'SynergyTech Ltd', serviceName: 'Pro Plan', assignedAgent: 'E005', assignedAgentName: 'Vikram Singh', assignedTL: 'E002', assignedTLName: 'Priya Sharma', currentStep: 'Candidate Onboard', completedSteps: ['Welcome to Wolf Technologies', 'Candidate Onboard'], lastUpdate: '2024-12-11T12:30:00', documents: { resume: 'pending', id_proof: 'pending', education_docs: 'pending' }, agreement: { sent_at: null, signed_at: null }, status: 'in_progress', daysInProcess: 1 }
-  ]
+  ],
+
+  products: [
+    { id: 'P001', name: 'Java Full Stack Developer', price: 50000, currency: '₹', departments: ['technical', 'accounts'], workflowMapping: 'Technical + Accounts', status: 'active', description: 'Complete Java Full Stack Development training and placement', duration: '6 months', createdDate: '2023-01-15' },
+    { id: 'P002', name: 'React Developer', price: 45000, currency: '₹', departments: ['technical', 'accounts'], workflowMapping: 'Technical + Accounts', status: 'active', description: 'Advanced React.js development program', duration: '4 months', createdDate: '2023-02-10' },
+    { id: 'P003', name: 'Python Developer', price: 48000, currency: '₹', departments: ['technical', 'accounts'], workflowMapping: 'Technical + Accounts', status: 'active', description: 'Python development with Django/Flask', duration: '5 months', createdDate: '2023-01-20' },
+    { id: 'P004', name: 'Node.js Developer', price: 46000, currency: '₹', departments: ['technical', 'accounts'], workflowMapping: 'Technical + Accounts', status: 'active', description: 'Backend development with Node.js', duration: '4 months', createdDate: '2023-03-05' },
+    { id: 'P005', name: 'DevOps Engineer', price: 55000, currency: '₹', departments: ['technical', 'accounts'], workflowMapping: 'Technical + Accounts', status: 'active', description: 'Complete DevOps training and certification', duration: '6 months', createdDate: '2023-02-15' },
+    { id: 'P006', name: 'Data Science Professional', price: 60000, currency: '₹', departments: ['technical', 'accounts'], workflowMapping: 'Technical + Accounts', status: 'active', description: 'Data Science with ML and AI', duration: '7 months', createdDate: '2023-03-20' },
+    { id: 'P007', name: 'Cloud Architect', price: 65000, currency: '₹', departments: ['technical', 'accounts'], workflowMapping: 'Technical + Accounts', status: 'active', description: 'AWS/Azure cloud architecture training', duration: '6 months', createdDate: '2023-04-10' },
+    { id: 'P008', name: 'Business Analysis Package', price: 40000, currency: '₹', departments: ['marketing', 'accounts'], workflowMapping: 'Marketing + Accounts', status: 'active', description: 'Business analysis and consulting training', duration: '3 months', createdDate: '2023-01-25' },
+    { id: 'P009', name: 'Digital Marketing Pro', price: 35000, currency: '₹', departments: ['marketing', 'accounts'], workflowMapping: 'Marketing + Accounts', status: 'active', description: 'Complete digital marketing program', duration: '3 months', createdDate: '2023-02-20' },
+    { id: 'P010', name: 'Enterprise Sales Training', price: 42000, currency: '₹', departments: ['sales', 'accounts'], workflowMapping: 'Sales + Accounts', status: 'inactive', description: 'Advanced sales techniques and CRM', duration: '2 months', createdDate: '2023-03-15' }
+  ],
+
+  billing: [
+    { id: 'BL001', candidateId: 'C001', candidateName: 'Rahul Sharma', productId: 'P001', productName: 'Java Full Stack Developer', amount: 50000, paymentStatus: 'paid', paymentMode: 'bank_transfer', billingDate: '2024-11-15T10:00:00', paidDate: '2024-11-16T14:30:00', assignedDepartment: 'technical', onboardingProgress: 85, invoiceNumber: 'INV-2024-001' },
+    { id: 'BL002', candidateId: 'C002', candidateName: 'Priya Mehta', productId: 'P002', productName: 'React Developer', amount: 45000, paymentStatus: 'paid', paymentMode: 'upi', billingDate: '2024-11-18T11:00:00', paidDate: '2024-11-18T15:20:00', assignedDepartment: 'technical', onboardingProgress: 70, invoiceNumber: 'INV-2024-002' },
+    { id: 'BL003', candidateId: 'C003', candidateName: 'Amit Patel', productId: 'P003', productName: 'Python Developer', amount: 48000, paymentStatus: 'pending', paymentMode: null, billingDate: '2024-12-01T09:00:00', paidDate: null, assignedDepartment: 'technical', onboardingProgress: 0, invoiceNumber: 'INV-2024-003' },
+    { id: 'BL004', candidateId: 'C004', candidateName: 'Sneha Kulkarni', productId: 'P004', productName: 'Node.js Developer', amount: 46000, paymentStatus: 'paid', paymentMode: 'card', billingDate: '2024-11-20T10:30:00', paidDate: '2024-11-21T09:15:00', assignedDepartment: 'technical', onboardingProgress: 90, invoiceNumber: 'INV-2024-004' },
+    { id: 'BL005', candidateId: 'C005', candidateName: 'Vikram Singh', productId: 'P005', productName: 'DevOps Engineer', amount: 55000, paymentStatus: 'paid', paymentMode: 'bank_transfer', billingDate: '2024-11-22T14:00:00', paidDate: '2024-11-23T11:45:00', assignedDepartment: 'technical', onboardingProgress: 65, invoiceNumber: 'INV-2024-005' },
+    { id: 'BL006', candidateId: 'C006', candidateName: 'Neha Gupta', productId: 'P006', productName: 'Data Science Professional', amount: 60000, paymentStatus: 'pending', paymentMode: null, billingDate: '2024-12-03T13:00:00', paidDate: null, assignedDepartment: 'technical', onboardingProgress: 0, invoiceNumber: 'INV-2024-006' },
+    { id: 'BL007', candidateId: 'C007', candidateName: 'Rohit Verma', productId: 'P007', productName: 'Cloud Architect', amount: 65000, paymentStatus: 'paid', paymentMode: 'upi', billingDate: '2024-11-25T15:30:00', paidDate: '2024-11-26T10:00:00', assignedDepartment: 'technical', onboardingProgress: 95, invoiceNumber: 'INV-2024-007' },
+    { id: 'BL008', candidateId: 'C008', candidateName: 'Anjali Desai', productId: 'P008', productName: 'Business Analysis Package', amount: 40000, paymentStatus: 'paid', paymentMode: 'bank_transfer', billingDate: '2024-11-28T12:00:00', paidDate: '2024-11-29T14:20:00', assignedDepartment: 'marketing', onboardingProgress: 75, invoiceNumber: 'INV-2024-008' },
+    { id: 'BL009', candidateId: 'C009', candidateName: 'Karan Malhotra', productId: 'P009', productName: 'Digital Marketing Pro', amount: 35000, paymentStatus: 'pending', paymentMode: null, billingDate: '2024-12-05T10:00:00', paidDate: null, assignedDepartment: 'marketing', onboardingProgress: 0, invoiceNumber: 'INV-2024-009' },
+    { id: 'BL010', candidateId: 'C010', candidateName: 'Simran Kaur', productId: 'P001', productName: 'Java Full Stack Developer', amount: 50000, paymentStatus: 'paid', paymentMode: 'card', billingDate: '2024-11-30T11:30:00', paidDate: '2024-12-01T09:45:00', assignedDepartment: 'technical', onboardingProgress: 80, invoiceNumber: 'INV-2024-010' },
+    { id: 'BL011', candidateId: 'C011', candidateName: 'Arjun Nair', productId: 'P002', productName: 'React Developer', amount: 45000, paymentStatus: 'paid', paymentMode: 'upi', billingDate: '2024-12-02T14:00:00', paidDate: '2024-12-02T16:30:00', assignedDepartment: 'technical', onboardingProgress: 60, invoiceNumber: 'INV-2024-011' },
+    { id: 'BL012', candidateId: 'C012', candidateName: 'Divya Sharma', productId: 'P003', productName: 'Python Developer', amount: 48000, paymentStatus: 'paid', paymentMode: 'bank_transfer', billingDate: '2024-11-17T09:00:00', paidDate: '2024-11-18T10:15:00', assignedDepartment: 'technical', onboardingProgress: 100, invoiceNumber: 'INV-2024-012' }
+  ],
+
+  workflows: {
+    accounts: {
+      name: 'Accounts Onboarding',
+      steps: ['Welcome to Wolf Technologies', 'Candidate Onboard', 'Get Documents', 'Agreement Sent', 'Agreement Signed'],
+      description: 'Complete candidate onboarding and documentation workflow'
+    },
+    technical: {
+      name: 'Technical Training',
+      steps: ['Resume Creation', 'Training Schedule', 'Training Started', 'Training Completed', 'Project Assignment', 'Project Completion'],
+      description: 'Technical training and project workflow'
+    },
+    marketing: {
+      name: 'Marketing & Placement',
+      steps: ['Profile Creation', 'Job Application', 'Interview Scheduling', 'Interview Feedback', 'Offer Received', 'Placement Confirmed'],
+      description: 'Marketing and placement workflow'
+    },
+    business_development: {
+      name: 'Lead Management',
+      steps: ['Initial Contact', 'Qualification', 'Discovery', 'Proposal', 'Negotiation', 'Closing', 'Deal Won'],
+      description: 'BD lead lifecycle workflow'
+    },
+    sales: {
+      name: 'Sales Pipeline',
+      steps: ['Lead Generation', 'Lead Qualification', 'Needs Analysis', 'Proposal Sent', 'Negotiation', 'Closing', 'Deal Closed'],
+      description: 'Sales pipeline workflow'
+    }
+  },
+
+  systemLogs: [
+    { id: 'SL001', timestamp: '2024-12-11T15:45:00', level: 'error', module: 'authentication', message: 'Failed login attempt for user: admin@wolftech.com', details: 'Invalid password - 3rd attempt', ipAddress: '192.168.1.105' },
+    { id: 'SL002', timestamp: '2024-12-11T14:30:00', level: 'warning', module: 'database', message: 'Slow query detected on leads table', details: 'Query execution time: 3.2s', ipAddress: '192.168.1.1' },
+    { id: 'SL003', timestamp: '2024-12-11T13:20:00', level: 'info', module: 'api', message: 'API rate limit reached for client', details: 'Client ID: CL_12345', ipAddress: '203.45.67.89' },
+    { id: 'SL004', timestamp: '2024-12-11T12:10:00', level: 'error', module: 'email', message: 'Email delivery failed', details: 'SMTP connection timeout', ipAddress: '192.168.1.1' },
+    { id: 'SL005', timestamp: '2024-12-11T11:00:00', level: 'warning', module: 'storage', message: 'Disk space running low', details: 'Available: 12GB / 100GB', ipAddress: '192.168.1.1' },
+    { id: 'SL006', timestamp: '2024-12-11T10:30:00', level: 'info', module: 'backup', message: 'Automated backup completed successfully', details: 'Backup size: 2.4GB', ipAddress: '192.168.1.1' },
+    { id: 'SL007', timestamp: '2024-12-11T09:15:00', level: 'error', module: 'payment', message: 'Payment gateway timeout', details: 'Transaction ID: TXN_45678', ipAddress: '192.168.1.1' },
+    { id: 'SL008', timestamp: '2024-12-11T08:00:00', level: 'warning', module: 'authentication', message: 'Multiple concurrent sessions detected', details: 'User: E025', ipAddress: '192.168.1.110' },
+    { id: 'SL009', timestamp: '2024-12-10T18:45:00', level: 'info', module: 'system', message: 'System health check passed', details: 'All services operational', ipAddress: '192.168.1.1' },
+    { id: 'SL010', timestamp: '2024-12-10T17:30:00', level: 'error', module: 'api', message: 'API endpoint returned 500 error', details: 'Endpoint: /api/v1/reports', ipAddress: '192.168.1.1' }
+  ],
+
+  settings: {
+    ccEmails: ['admin@wolftech.com', 'notifications@wolftech.com', 'alerts@wolftech.com'],
+    allowedIps: ['192.168.1.0/24', '10.0.0.0/8', '203.45.67.89'],
+    paymentGateways: {
+      stripe: { enabled: true, mode: 'live' },
+      razorpay: { enabled: true, mode: 'live' },
+      paypal: { enabled: false, mode: 'test' }
+    },
+    bannerText: 'Welcome to Wolf Technologies Admin Portal - Manage your operations efficiently',
+    systemPreferences: {
+      timezone: 'Asia/Kolkata',
+      dateFormat: 'DD-MM-YYYY',
+      currency: 'INR',
+      language: 'en',
+      emailNotifications: true,
+      smsNotifications: false,
+      autoBackup: true,
+      backupFrequency: 'daily',
+      sessionTimeout: 30,
+      maxLoginAttempts: 5
+    }
+  }
 };
 
 window.mockData = MOCK_DATA;
