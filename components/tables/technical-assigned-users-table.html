@@ -1,0 +1,308 @@
+<div class="technical-assigned-users-table-wrapper">
+  <div class="table-controls">
+    <div class="search-box">
+      <input type="text" id="technicalTableSearch" placeholder="Search candidates, services...">
+    </div>
+    <div class="filter-controls">
+      <select id="technicalStageFilter" class="filter-select">
+        <option value="">All Stages</option>
+        <option value="Resume Review">Resume Review</option>
+        <option value="Training Scheduled">Training Scheduled</option>
+        <option value="Training Started">Training Started</option>
+        <option value="Project In Progress">Project In Progress</option>
+        <option value="Project Completed">Project Completed</option>
+      </select>
+      <select id="technicalInactivityFilter" class="filter-select">
+        <option value="">All Activity Status</option>
+        <option value="active">Active (< 48h)</option>
+        <option value="warning">Warning (48-72h)</option>
+        <option value="critical">Critical (> 72h)</option>
+      </select>
+    </div>
+  </div>
+
+  <table class="technical-users-table">
+    <thead>
+      <tr>
+        <th>Candidate Name</th>
+        <th>Service</th>
+        <th>Current Stage</th>
+        <th>Resume</th>
+        <th>Training</th>
+        <th>Project</th>
+        <th>Last Activity</th>
+        <th>Inactivity</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody id="technicalUsersTableBody">
+      <tr>
+        <td colspan="9" class="table-loading">Loading candidates...</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="table-pagination">
+    <button class="pagination-btn" id="technicalPrevBtn" onclick="previousPage()">Previous</button>
+    <span id="technicalPageInfo" class="page-info">Page 1</span>
+    <button class="pagination-btn" id="technicalNextBtn" onclick="nextPage()">Next</button>
+  </div>
+</div>
+
+<style>
+.technical-assigned-users-table-wrapper {
+  background: white;
+  border-radius: 10px;
+  border: 1px solid #E5E7EB;
+  overflow: hidden;
+}
+
+.table-controls {
+  padding: 16px;
+  border-bottom: 1px solid #E5E7EB;
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.search-box {
+  flex: 1;
+  min-width: 200px;
+}
+
+.search-box input {
+  width: 100%;
+  padding: 8px 12px;
+  border: 1px solid #D1D5DB;
+  border-radius: 6px;
+  font-size: 13px;
+}
+
+.search-box input:focus {
+  outline: none;
+  border-color: #0284C7;
+  box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.1);
+}
+
+.filter-controls {
+  display: flex;
+  gap: 8px;
+}
+
+.filter-select {
+  padding: 8px 12px;
+  border: 1px solid #D1D5DB;
+  border-radius: 6px;
+  font-size: 13px;
+  background: white;
+  cursor: pointer;
+}
+
+.filter-select:focus {
+  outline: none;
+  border-color: #0284C7;
+}
+
+.technical-users-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.technical-users-table th {
+  background: #F3F4F6;
+  padding: 12px;
+  text-align: left;
+  font-weight: 600;
+  color: #1F2937;
+  border-bottom: 2px solid #E5E7EB;
+}
+
+.technical-users-table td {
+  padding: 12px;
+  border-bottom: 1px solid #E5E7EB;
+  color: #4B5563;
+}
+
+.technical-users-table tbody tr:hover {
+  background: #F9FAFB;
+}
+
+.technical-users-table tbody tr.hidden {
+  display: none;
+}
+
+.table-loading {
+  text-align: center;
+  color: #9CA3AF;
+  padding: 40px !important;
+}
+
+.stage-badge {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 4px;
+  color: white;
+  font-size: 11px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.status-badge {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.status-approved {
+  background: #D1FAE5;
+  color: #047857;
+}
+
+.status-pending {
+  background: #FEF3C7;
+  color: #D97706;
+}
+
+.status-scheduled {
+  background: #E0E7FF;
+  color: #4F46E5;
+}
+
+.status-started {
+  background: #FEF3C7;
+  color: #D97706;
+}
+
+.status-completed {
+  background: #D1FAE5;
+  color: #047857;
+}
+
+.status-in-progress {
+  background: #ECE2FF;
+  color: #7C3AED;
+}
+
+.status-not-assigned {
+  background: #F3F4F6;
+  color: #6B7280;
+}
+
+.status-not-scheduled {
+  background: #F3F4F6;
+  color: #6B7280;
+}
+
+.inactivity-badge {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 4px;
+  color: white;
+  font-size: 11px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.inactivity-active {
+  background: #10B981;
+}
+
+.inactivity-warning {
+  background: #F59E0B;
+}
+
+.inactivity-critical {
+  background: #EF4444;
+}
+
+.action-btn {
+  padding: 4px 10px;
+  background: #0284C7;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.action-btn:hover {
+  background: #0369A1;
+}
+
+.table-pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  border-top: 1px solid #E5E7EB;
+}
+
+.pagination-btn {
+  padding: 6px 12px;
+  background: #E5E7EB;
+  border: none;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  color: #1F2937;
+}
+
+.pagination-btn:hover:not(:disabled) {
+  background: #D1D5DB;
+}
+
+.pagination-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.page-info {
+  font-size: 12px;
+  color: #6B7280;
+  min-width: 60px;
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  .table-controls {
+    flex-direction: column;
+  }
+
+  .search-box {
+    min-width: 100%;
+  }
+
+  .filter-controls {
+    width: 100%;
+    flex-direction: column;
+  }
+
+  .filter-select {
+    width: 100%;
+  }
+
+  .technical-users-table {
+    font-size: 11px;
+  }
+
+  .technical-users-table th,
+  .technical-users-table td {
+    padding: 8px;
+  }
+
+  .stage-badge,
+  .status-badge,
+  .inactivity-badge {
+    font-size: 10px;
+    padding: 3px 8px;
+  }
+}
+</style>

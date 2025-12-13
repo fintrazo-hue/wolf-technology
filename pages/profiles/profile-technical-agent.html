@@ -3,18 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Technical Agent - Wolf Technologies</title>
+    <title>Technical Agent Profile - Wolf Technologies</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="../../assets/css/profiles.css">
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <link rel="stylesheet" href="../../assets/css/profiles-technical.css">
+    <style>
+      body { background: #F3F4F6; margin: 0; padding: 0; }
+      .profile-container { margin-left: 260px; width: calc(100% - 260px); box-sizing: border-box; }
+      @media (max-width: 768px) {
+        .profile-container { margin-left: 0; width: 100%; }
+      }
+    </style>
 </head>
 <body>
-    <div class="profile-container">
-        <aside class="profile-sidebar"></aside>
-        <main class="profile-main">
-            <div class="profile-header"></div>
-            <div class="profile-content"></div>
-        </main>
-    </div>
-    <script src="../../assets/js/profiles.js"></script>
+    <div id="sidebar-container"></div>
+    <div class="profile-container"></div>
+    <script src="../../assets/js/mockdata.js"></script>
+    <script src="../../assets/js/load-sidebar.js"></script>
+    <script src="../../assets/js/profiles-technical.js"></script>
 </body>
 </html>
