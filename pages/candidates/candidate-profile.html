@@ -4,65 +4,116 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Candidate Profile - Wolf Technologies Admin</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="../../assets/css/style.css">
   <link rel="stylesheet" href="../../assets/css/candidate-profile.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
   <div id="sidebar-container"></div>
 
   <div class="main-content">
-    <div class="page-header">
-      <div class="header-left">
-        <h1 class="page-title">Candidate Profile</h1>
+    <!-- Header -->
+    <div class="top-header">
+      <div>
+        <h1 class="page-title" id="candidate-name-header">Candidate Profile</h1>
         <div class="breadcrumb">
           <a href="../../profiles-directory.html">Candidates</a>
           <span class="separator">/</span>
           <span id="breadcrumb-name">Loading...</span>
         </div>
       </div>
-      <div class="header-right" id="header-actions">
+      <div class="header-actions" id="header-actions">
         <!-- Role-based actions will be inserted here -->
       </div>
     </div>
 
-    <!-- Overview Summary Section -->
-    <div class="profile-overview-card">
-      <div class="overview-left">
+    <!-- Candidate Overview Card -->
+    <div class="profile-header-card">
+      <div class="profile-avatar-section">
         <div class="candidate-avatar" id="candidate-avatar">
           <i class="fas fa-user"></i>
         </div>
-        <div class="candidate-basic-info">
+        <div class="candidate-info">
           <h2 id="candidate-name">Loading...</h2>
-          <p class="candidate-id">ID: <span id="candidate-id">-</span></p>
-          <p class="candidate-service"><i class="fas fa-briefcase"></i> <span id="candidate-service">-</span></p>
-        </div>
-      </div>
-      <div class="overview-right">
-        <div class="overview-stat">
-          <label>Current Department</label>
-          <span class="stat-value" id="current-department">-</span>
-        </div>
-        <div class="overview-stat">
-          <label>Current Stage</label>
-          <span class="stat-value" id="current-stage">-</span>
-        </div>
-        <div class="overview-stat">
-          <label>Status</label>
-          <span class="status-badge" id="status-badge">-</span>
-        </div>
-        <div class="overview-stat">
-          <label>Overall Progress</label>
-          <div class="progress-container">
-            <div class="progress-bar">
-              <div class="progress-fill" id="overall-progress-fill"></div>
-            </div>
-            <span class="progress-text" id="overall-progress-text">0%</span>
+          <p class="candidate-meta">
+            <span class="candidate-id">ID: <strong id="candidate-id">-</strong></span>
+            <span class="separator-dot">•</span>
+            <span id="candidate-service">-</span>
+          </p>
+          <div class="candidate-tags">
+            <span class="status-badge" id="status-badge">-</span>
+            <span class="dept-badge" id="dept-badge">-</span>
           </div>
         </div>
-        <div class="overview-stat">
-          <label>Last Activity</label>
-          <span class="stat-value" id="last-activity">-</span>
+      </div>
+      <div class="profile-progress-section">
+        <div class="progress-info">
+          <div class="progress-header">
+            <span class="progress-label">Overall Progress</span>
+            <span class="progress-percentage" id="overall-progress-text">0%</span>
+          </div>
+          <div class="progress-bar-modern">
+            <div class="progress-fill-modern" id="overall-progress-fill"></div>
+          </div>
+          <div class="progress-meta">
+            <span><i class="fas fa-clock"></i> Last activity: <strong id="last-activity">-</strong></span>
+            <span id="current-stage-text">-</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- KPI Cards Section -->
+    <div class="kpi-section">
+      <div class="row g-3">
+        <div class="col-xl-3 col-lg-6 col-md-6">
+          <div class="kpi-card">
+            <div class="kpi-icon accounts-icon">
+              <i class="fas fa-file-invoice"></i>
+            </div>
+            <div class="kpi-content">
+              <div class="kpi-value" id="kpi-accounts-status">-</div>
+              <div class="kpi-label">Accounts Status</div>
+              <div class="kpi-trend neutral" id="kpi-accounts-detail">-</div>
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-3 col-lg-6 col-md-6">
+          <div class="kpi-card">
+            <div class="kpi-icon technical-icon">
+              <i class="fas fa-code"></i>
+            </div>
+            <div class="kpi-content">
+              <div class="kpi-value" id="kpi-technical-status">-</div>
+              <div class="kpi-label">Technical Status</div>
+              <div class="kpi-trend neutral" id="kpi-technical-detail">-</div>
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-3 col-lg-6 col-md-6">
+          <div class="kpi-card">
+            <div class="kpi-icon marketing-icon">
+              <i class="fas fa-bullhorn"></i>
+            </div>
+            <div class="kpi-content">
+              <div class="kpi-value" id="kpi-marketing-count">0</div>
+              <div class="kpi-label">Interviews</div>
+              <div class="kpi-trend neutral" id="kpi-marketing-detail">-</div>
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-3 col-lg-6 col-md-6">
+          <div class="kpi-card">
+            <div class="kpi-icon placement-icon">
+              <i class="fas fa-briefcase"></i>
+            </div>
+            <div class="kpi-content">
+              <div class="kpi-value" id="kpi-days-count">0</div>
+              <div class="kpi-label">Days in System</div>
+              <div class="kpi-trend neutral" id="kpi-days-detail">-</div>
+            </div>
+          </div>
         </div>
       </div>
     </div>

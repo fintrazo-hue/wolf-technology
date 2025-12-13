@@ -286,21 +286,47 @@ document.addEventListener('DOMContentLoaded', function() {
 
   const renderOverview = (candidate) => {
     document.getElementById('breadcrumb-name').textContent = candidate.name;
+    document.getElementById('candidate-name-header').textContent = candidate.name;
     document.getElementById('candidate-name').textContent = candidate.name;
     document.getElementById('candidate-id').textContent = candidate.id;
     document.getElementById('candidate-service').textContent = candidate.service;
-    document.getElementById('current-department').textContent = candidate.currentDepartment;
-    document.getElementById('current-stage').textContent = candidate.currentStage;
+    document.getElementById('current-stage-text').textContent = candidate.currentStage;
 
     const statusBadge = document.getElementById('status-badge');
     statusBadge.textContent = candidate.status;
     statusBadge.className = `status-badge ${candidate.status.toLowerCase().replace(' ', '-')}`;
+
+    const deptBadge = document.getElementById('dept-badge');
+    deptBadge.textContent = candidate.currentDepartment;
 
     const progressFill = document.getElementById('overall-progress-fill');
     progressFill.style.width = `${candidate.progressPercentage}%`;
     document.getElementById('overall-progress-text').textContent = `${candidate.progressPercentage}%`;
 
     document.getElementById('last-activity').textContent = calculateInactivity(candidate.lastActivityAt);
+  };
+
+  const renderKPIs = (candidate) => {
+    document.getElementById('kpi-accounts-status').textContent = candidate.accounts.workflow[4].status;
+    document.getElementById('kpi-accounts-detail').textContent = `All steps ${candidate.accounts.workflow[4].status.toLowerCase()}`;
+
+    const kpiAccountsDetail = document.getElementById('kpi-accounts-detail');
+    kpiAccountsDetail.className = candidate.accounts.workflow[4].status === 'Completed' ? 'kpi-trend positive' : 'kpi-trend neutral';
+
+    document.getElementById('kpi-technical-status').textContent = candidate.technical.projectStatus;
+    document.getElementById('kpi-technical-detail').textContent = `${candidate.technical.projectCompletion}% complete`;
+
+    const kpiTechnicalDetail = document.getElementById('kpi-technical-detail');
+    kpiTechnicalDetail.className = candidate.technical.projectCompletion === 100 ? 'kpi-trend positive' : 'kpi-trend neutral';
+
+    document.getElementById('kpi-marketing-count').textContent = candidate.marketing.interviewsAttended;
+    document.getElementById('kpi-marketing-detail').textContent = `${candidate.marketing.interviewsScheduled} scheduled`;
+
+    const startDate = new Date(candidate.journey[0].date);
+    const now = new Date();
+    const daysDiff = Math.floor((now - startDate) / (1000 * 60 * 60 * 24));
+    document.getElementById('kpi-days-count').textContent = daysDiff;
+    document.getElementById('kpi-days-detail').textContent = `Since ${formatDate(candidate.journey[0].date)}`;
   };
 
   const renderPersonalDetails = (candidate) => {
@@ -592,6 +618,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const communications = generateMockCommunications();
 
     renderOverview(candidateData);
+    renderKPIs(candidateData);
     renderPersonalDetails(candidateData);
     renderJourneyTimeline(candidateData.journey);
     renderAccountsProgress(candidateData.accounts);
