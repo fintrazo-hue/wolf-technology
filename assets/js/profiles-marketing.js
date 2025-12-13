@@ -32,7 +32,16 @@ const MarketingProfileModule = (() => {
   ];
 
   const getUserFromUrl = () => new URLSearchParams(window.location.search).get('userId');
-  const getRoleFromUrl = () => new URLSearchParams(window.location.search).get('role');
+  const getRoleFromUrl = () => {
+    const urlRole = new URLSearchParams(window.location.search).get('role');
+    if (urlRole) return urlRole;
+
+    const path = window.location.pathname;
+    if (path.includes('agent')) return 'marketing_agent';
+    if (path.includes('teamleader')) return 'marketing_tl';
+    if (path.includes('manager')) return 'marketing_manager';
+    return null;
+  };
 
   const loadMockData = () => ({
     agents: generateMockAgents(),
@@ -458,11 +467,32 @@ const MarketingProfileModule = (() => {
     `;
   };
 
+  const mapEmployeeIdToMockId = (empId, role) => {
+    const mapping = {
+      'E015': 'mgr1',
+      'E016': 'tl1',
+      'E017': 'tl2',
+      'E018': 'agent1',
+      'E019': 'agent2',
+      'E020': 'agent3',
+      'E021': 'agent3'
+    };
+    return mapping[empId] || empId;
+  };
+
   const init = () => {
-    const userId = getUserFromUrl();
+    let userId = getUserFromUrl();
     const role = getRoleFromUrl();
 
-    if (!userId || !role) return console.error('Missing userId or role');
+    if (!role) return console.error('Could not determine role from URL');
+
+    if (!userId) {
+      if (role === 'marketing_agent') userId = 'agent1';
+      else if (role === 'marketing_tl') userId = 'tl1';
+      else if (role === 'marketing_manager') userId = 'mgr1';
+    } else {
+      userId = mapEmployeeIdToMockId(userId, role);
+    }
 
     if (role === 'marketing_agent') renderAgentProfile(userId);
     else if (role === 'marketing_tl') renderTLProfile(userId);
