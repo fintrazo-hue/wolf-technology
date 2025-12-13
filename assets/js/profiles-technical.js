@@ -17,18 +17,18 @@ const TechnicalProfileModule = (() => {
   ];
 
   const generateMockAgents = () => [
-    { id: 'agent1', name: 'Priya Desai', email: 'priya@wolftech.com', phone: '9876543210', joined: '2024-01-15', status: 'active', role: 'technical_agent', photo: 'https://i.pravatar.cc/150?img=1' },
-    { id: 'agent2', name: 'Anil Kumar', email: 'anil@wolftech.com', phone: '9876543211', joined: '2024-02-10', status: 'active', role: 'technical_agent', photo: 'https://i.pravatar.cc/150?img=2' },
-    { id: 'agent3', name: 'Deepika Choudhary', email: 'deepika@wolftech.com', phone: '9876543212', joined: '2024-03-05', status: 'active', role: 'technical_agent', photo: 'https://i.pravatar.cc/150?img=3' },
+    { id: 'agent1', name: 'Deepika Joshi', email: 'deepika.joshi@wolftech.com', phone: '9876543223', joined: '2022-05-10', status: 'active', role: 'technical_agent', photo: 'https://i.pravatar.cc/150?img=44' },
+    { id: 'agent2', name: 'Karan Malhotra', email: 'karan.malhotra@wolftech.com', phone: '9876543224', joined: '2022-06-20', status: 'active', role: 'technical_agent', photo: 'https://i.pravatar.cc/150?img=51' },
+    { id: 'agent3', name: 'Simran Kaur', email: 'simran.kaur@wolftech.com', phone: '9876543225', joined: '2022-08-05', status: 'active', role: 'technical_agent', photo: 'https://i.pravatar.cc/150?img=43' },
   ];
 
   const generateMockTeamLeaders = () => [
-    { id: 'tl1', name: 'Vikram Sharma', email: 'vikram.tl@wolftech.com', phone: '9876543220', joined: '2023-06-01', status: 'active', role: 'technical_tl', agents: ['agent1', 'agent2'], photo: 'https://i.pravatar.cc/150?img=4' },
-    { id: 'tl2', name: 'Pooja Bansal', email: 'pooja.tl@wolftech.com', phone: '9876543221', joined: '2023-07-15', status: 'active', role: 'technical_tl', agents: ['agent3'], photo: 'https://i.pravatar.cc/150?img=5' },
+    { id: 'tl1', name: 'Kavita Iyer', email: 'kavita.iyer@wolftech.com', phone: '9876543221', joined: '2022-02-15', status: 'active', role: 'technical_tl', agents: ['agent1', 'agent2'], photo: 'https://i.pravatar.cc/150?img=49' },
+    { id: 'tl2', name: 'Arjun Nair', email: 'arjun.nair@wolftech.com', phone: '9876543222', joined: '2022-03-25', status: 'active', role: 'technical_tl', agents: ['agent3'], photo: 'https://i.pravatar.cc/150?img=34' },
   ];
 
   const generateMockManagers = () => [
-    { id: 'mgr1', name: 'Rajesh Krishnan', email: 'rajesh.mgr@wolftech.com', phone: '9876543230', joined: '2022-01-10', status: 'active', role: 'technical_manager', teamLeaders: ['tl1', 'tl2'], photo: 'https://i.pravatar.cc/150?img=6' },
+    { id: 'mgr1', name: 'Suresh Reddy', email: 'suresh.reddy@wolftech.com', phone: '9876543220', joined: '2021-11-10', status: 'active', role: 'technical_manager', teamLeaders: ['tl1', 'tl2'], photo: 'https://i.pravatar.cc/150?img=33' },
   ];
 
   const getUserFromUrl = () => new URLSearchParams(window.location.search).get('userId');
@@ -52,13 +52,13 @@ const TechnicalProfileModule = (() => {
 
   const mapEmployeeIdToMockId = (empId, role) => {
     const mapping = {
-      'E030': 'mgr1',
-      'E031': 'tl1',
-      'E032': 'tl2',
-      'E033': 'agent1',
-      'E034': 'agent2',
-      'E035': 'agent3',
-      'E036': 'agent3'
+      'E008': 'mgr1',
+      'E009': 'tl1',
+      'E010': 'tl2',
+      'E011': 'agent1',
+      'E012': 'agent2',
+      'E013': 'agent3',
+      'E014': 'agent3'
     };
     return mapping[empId] || empId;
   };
