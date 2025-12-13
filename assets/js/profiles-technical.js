@@ -254,6 +254,7 @@ const TechnicalProfileModule = (() => {
                 <th>Project Status</th>
                 <th>Last Activity</th>
                 <th>Inactivity</th>
+                <th>Action</th>
               </tr>
             </thead>
             <tbody id="candidatesTableBody">
@@ -269,6 +270,7 @@ const TechnicalProfileModule = (() => {
                     <td><span class="status-${c.project_status.toLowerCase().replace(/\s/g, '-')}">${c.project_status}</span></td>
                     <td>${formatDate(c.last_activity)}</td>
                     <td><span class="inactivity-badge" style="background: ${getInactivityColor(inactivity)}">${getInactivityLabel(inactivity)}</span></td>
+                    <td><a href="../../pages/candidates/candidate-profile.html?candidateId=${c.id}" class="view-btn"><i class="fas fa-eye"></i> View</a></td>
                   </tr>
                 `;
               }).join('')}
@@ -392,6 +394,7 @@ const TechnicalProfileModule = (() => {
                 <th>Project Status</th>
                 <th>Last Activity</th>
                 <th>Inactivity</th>
+                <th>Action</th>
               </tr>
             </thead>
             <tbody id="candidatesTableBody">
@@ -406,6 +409,7 @@ const TechnicalProfileModule = (() => {
                     <td><span class="status-${c.project_status.toLowerCase().replace(/\s/g, '-')}">${c.project_status}</span></td>
                     <td>${formatDate(c.last_activity)}</td>
                     <td><span class="inactivity-badge" style="background: ${getInactivityColor(inactivity)}">${getInactivityLabel(inactivity)}</span></td>
+                    <td><a href="../../pages/candidates/candidate-profile.html?candidateId=${c.id}" class="view-btn"><i class="fas fa-eye"></i> View</a></td>
                   </tr>
                 `;
               }).join('')}
@@ -524,6 +528,7 @@ const TechnicalProfileModule = (() => {
                 <th>Project Status</th>
                 <th>Last Activity</th>
                 <th>Inactivity</th>
+                <th>Action</th>
               </tr>
             </thead>
             <tbody id="candidatesTableBody">
@@ -538,6 +543,7 @@ const TechnicalProfileModule = (() => {
                     <td><span class="status-${c.project_status.toLowerCase().replace(/\s/g, '-')}">${c.project_status}</span></td>
                     <td>${formatDate(c.last_activity)}</td>
                     <td><span class="inactivity-badge" style="background: ${getInactivityColor(inactivity)}">${getInactivityLabel(inactivity)}</span></td>
+                    <td><a href="../../pages/candidates/candidate-profile.html?candidateId=${c.id}" class="view-btn"><i class="fas fa-eye"></i> View</a></td>
                   </tr>
                 `;
               }).join('')}
