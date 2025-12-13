@@ -9,16 +9,14 @@ const BDProfileModule = (() => {
 
   const loadMockData = async () => {
     try {
-      if (typeof mockData !== 'undefined' && mockData.employees) {
-        const bdEmployees = mockData.employees.filter(e => e.department === 'business_development');
+      const data = window.MOCK_DATA || window.mockData || MOCK_DATA;
+      if (data && data.employees) {
+        const bdEmployees = data.employees.filter(e => e.department === 'business_development');
         return {
           employees: bdEmployees,
-          leads: mockData.leads || [],
-          activityLogs: mockData.activityLogs || []
+          leads: data.leads || [],
+          activityLogs: data.activityLogs || []
         };
-      }
-      if (typeof MOCK_DATA !== 'undefined') {
-        return MOCK_DATA;
       }
       const response = await fetch('/data/leads.json');
       if (!response.ok) throw new Error('Failed to load mock data');
