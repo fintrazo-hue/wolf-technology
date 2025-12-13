@@ -30,6 +30,74 @@ document.addEventListener('DOMContentLoaded', function() {
       progressPercentage: 65,
       lastActivityAt: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000).toISOString(),
 
+      personalInfo: {
+        name: 'Rajesh Kumar',
+        email: 'rajesh.kumar@example.com',
+        phone: '+91 98765 43210',
+        altPhone: '+91 87654 32109',
+        dob: '1995-06-15',
+        gender: 'Male',
+        city: 'Mumbai',
+        state: 'Maharashtra',
+        country: 'India'
+      },
+
+      education: {
+        qualification: 'B.Tech',
+        specialization: 'Computer Science',
+        university: 'Mumbai Institute of Technology',
+        year: '2017'
+      },
+
+      technicalInfo: {
+        primarySkill: 'Java',
+        secondarySkills: 'Spring Boot, React, PostgreSQL',
+        experienceYears: '3',
+        primaryTechnology: 'Java Full Stack'
+      },
+
+      currentInfo: {
+        company: 'TechCore Solutions',
+        role: 'Software Developer',
+        noticePeriod: '2 weeks',
+        currentCtc: '₹8,00,000',
+        expectedCtc: '₹12,00,000'
+      },
+
+      addressInfo: {
+        currentAddress: '123 Marina Drive, Bandra',
+        permanentAddress: '45 Shivaji Nagar, Aurangabad',
+        city: 'Mumbai',
+        state: 'Maharashtra',
+        country: 'India',
+        pincode: '400050'
+      },
+
+      visaInfo: {
+        visaStatus: 'H1B Ready',
+        totalExperience: '3 years',
+        certifications: 'Oracle Java Programmer, AWS Associate Solutions Architect'
+      },
+
+      marketingInfo: {
+        marketingPhone: '+91 98765 43210',
+        marketingEmail: 'rajesh.kumar@example.com',
+        linkedinId: 'rajesh-kumar-123',
+        personalLinkedin: 'linkedin.com/in/rajesh-kumar',
+        passport: 'N1234567',
+        ssnLast4: '4321',
+        availableForInterview: 'Yes',
+        remarks: 'Strong technical background, excellent communication skills'
+      },
+
+      billingInfo: {
+        billingId: 'BILL-2024-001',
+        service: 'Java Full Stack Developer Program',
+        paymentStatus: 'Completed',
+        paymentMode: 'Bank Transfer',
+        paymentDate: '2024-01-20'
+      },
+
       journey: [
         {
           event: 'Lead Created',
@@ -166,7 +234,105 @@ document.addEventListener('DOMContentLoaded', function() {
           { stage: 'Won', date: '2024-01-20' }
         ],
         notes: 'Candidate was very interested in Java Full Stack program. Compared with 2-3 other institutes. Chose us because of project-based training and placement support.'
-      }
+      },
+
+      servicesInfo: [
+        {
+          serviceName: 'Java Full Stack Developer Program',
+          serviceStatus: 'In Progress',
+          department: 'Technical',
+          stage: 'Interview Scheduling',
+          overallProgress: 65
+        },
+        {
+          serviceName: 'Resume Building & Enhancement',
+          serviceStatus: 'Completed',
+          department: 'Technical',
+          stage: 'Completed',
+          overallProgress: 100
+        },
+        {
+          serviceName: 'Mock Interview Rounds',
+          serviceStatus: 'Scheduled',
+          department: 'Marketing',
+          stage: 'Scheduled',
+          overallProgress: 0
+        }
+      ],
+
+      agentInfo: {
+        agentName: 'Neha Gupta',
+        teamLeader: 'Anjali Mehta',
+        manager: 'Arun Verma',
+        department: 'Marketing',
+        assignedDate: '2024-02-22'
+      },
+
+      dailyUpdates: [
+        {
+          date: '2024-03-08',
+          by: 'Neha Gupta',
+          department: 'Marketing',
+          message: 'Candidate appeared for interview with TechCorp Solutions. Performance was satisfactory, waiting for feedback.'
+        },
+        {
+          date: '2024-03-07',
+          by: 'Neha Gupta',
+          department: 'Marketing',
+          message: 'Scheduled interview with GlobalTech Inc for March 10th at 2 PM. Sent interview guidelines and preparation materials.'
+        },
+        {
+          date: '2024-03-05',
+          by: 'Anjali Mehta',
+          department: 'Marketing',
+          message: 'Reviewed interview performance with candidate. Provided feedback on communication and technical aspects.'
+        },
+        {
+          date: '2024-02-28',
+          by: 'Neha Gupta',
+          department: 'Marketing',
+          message: 'Submitted candidate profile to DataSystems Inc. Profile accepted, interview to be scheduled.'
+        },
+        {
+          date: '2024-02-24',
+          by: 'Neha Gupta',
+          department: 'Marketing',
+          message: 'Completed interview preparation call. Discussed common questions and best practices.'
+        }
+      ],
+
+      notes: [
+        {
+          text: 'Candidate has excellent problem-solving skills. Strong in data structures and algorithms.',
+          by: 'Vikram Patel',
+          date: '2024-02-20',
+          department: 'Technical'
+        },
+        {
+          text: 'Good communication abilities. Can articulate technical concepts clearly to non-technical audience.',
+          by: 'Neha Gupta',
+          date: '2024-02-28',
+          department: 'Marketing'
+        },
+        {
+          text: 'Completed all documentation. Payment received successfully. Ready for marketing phase.',
+          by: 'Priya Singh',
+          date: '2024-01-26',
+          department: 'Accounts'
+        },
+        {
+          text: 'Candidate expressed interest in roles with growth opportunities and learning culture.',
+          by: 'Neha Gupta',
+          date: '2024-02-23',
+          department: 'Marketing'
+        },
+        {
+          text: 'Project quality is exceptional. Advanced features implemented with clean code.',
+          by: 'Vikram Patel',
+          date: '2024-02-15',
+          department: 'Technical'
+        }
+      ]
     };
 
     return candidateData;
@@ -899,6 +1065,156 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   };
 
+  const setupPersonalDetailsSubtabs = () => {
+    const subtabBtns = document.querySelectorAll('.personal-details-subtabs .subtab-btn');
+    const subtabContents = document.querySelectorAll('.personal-subtab-content');
+
+    subtabBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const targetSubtab = btn.getAttribute('data-subtab');
+
+        subtabBtns.forEach(b => b.classList.remove('active'));
+        subtabContents.forEach(c => c.classList.remove('active'));
+
+        btn.classList.add('active');
+        document.getElementById(`${targetSubtab}-subtab`).classList.add('active');
+      });
+    });
+  };
+
+  const renderPersonalDetailsSubtabs = (candidate) => {
+    document.getElementById('edu-qualification').textContent = candidate.education.qualification;
+    document.getElementById('edu-specialization').textContent = candidate.education.specialization;
+    document.getElementById('edu-university').textContent = candidate.education.university;
+    document.getElementById('edu-year').textContent = candidate.education.year;
+
+    document.getElementById('tech-primary-skill').textContent = candidate.technicalInfo.primarySkill;
+    document.getElementById('tech-secondary-skills').textContent = candidate.technicalInfo.secondarySkills;
+    document.getElementById('tech-experience-years').textContent = candidate.technicalInfo.experienceYears;
+    document.getElementById('tech-primary-tech').textContent = candidate.technicalInfo.primaryTechnology;
+
+    document.getElementById('curr-company').textContent = candidate.currentInfo.company;
+    document.getElementById('curr-role').textContent = candidate.currentInfo.role;
+    document.getElementById('curr-notice-period').textContent = candidate.currentInfo.noticePeriod;
+    document.getElementById('curr-ctc').textContent = candidate.currentInfo.currentCtc;
+    document.getElementById('curr-expected-ctc').textContent = candidate.currentInfo.expectedCtc;
+
+    document.getElementById('addr-current').textContent = candidate.addressInfo.currentAddress;
+    document.getElementById('addr-permanent').textContent = candidate.addressInfo.permanentAddress;
+    document.getElementById('addr-city').textContent = candidate.addressInfo.city;
+    document.getElementById('addr-state').textContent = candidate.addressInfo.state;
+    document.getElementById('addr-country').textContent = candidate.addressInfo.country;
+    document.getElementById('addr-pincode').textContent = candidate.addressInfo.pincode;
+
+    document.getElementById('visa-status').textContent = candidate.visaInfo.visaStatus;
+    document.getElementById('visa-total-exp').textContent = candidate.visaInfo.totalExperience;
+    document.getElementById('visa-certifications').textContent = candidate.visaInfo.certifications;
+
+    document.getElementById('mkt-phone').textContent = candidate.marketingInfo.marketingPhone;
+    document.getElementById('mkt-email').textContent = candidate.marketingInfo.marketingEmail;
+    document.getElementById('mkt-linkedin').textContent = candidate.marketingInfo.linkedinId;
+    document.getElementById('mkt-personal-linkedin').textContent = candidate.marketingInfo.personalLinkedin;
+    document.getElementById('mkt-passport').textContent = candidate.marketingInfo.passport;
+    document.getElementById('mkt-ssn').textContent = candidate.marketingInfo.ssnLast4;
+    document.getElementById('mkt-available').textContent = candidate.marketingInfo.availableForInterview;
+    document.getElementById('mkt-remarks').textContent = candidate.marketingInfo.remarks;
+
+    document.getElementById('bill-id').textContent = candidate.billingInfo.billingId;
+    document.getElementById('bill-service').textContent = candidate.billingInfo.service;
+    document.getElementById('bill-payment-status').textContent = candidate.billingInfo.paymentStatus;
+    document.getElementById('bill-payment-mode').textContent = candidate.billingInfo.paymentMode;
+    document.getElementById('bill-payment-date').textContent = candidate.billingInfo.paymentDate;
+  };
+
+  const renderServicesInfo = (services) => {
+    const container = document.getElementById('services-list');
+    container.innerHTML = '';
+
+    services.forEach(service => {
+      const item = document.createElement('div');
+      item.className = 'service-card';
+      const statusClass = service.serviceStatus.toLowerCase().replace(' ', '-');
+      item.innerHTML = `
+        <div class="service-header">
+          <div class="service-name">${service.serviceName}</div>
+          <span class="status-badge ${statusClass}">${service.serviceStatus}</span>
+        </div>
+        <div class="service-details">
+          <div class="service-detail-item">
+            <span class="label">Department:</span>
+            <span class="value">${service.department}</span>
+          </div>
+          <div class="service-detail-item">
+            <span class="label">Stage:</span>
+            <span class="value">${service.stage}</span>
+          </div>
+        </div>
+        <div class="service-progress-container">
+          <div class="progress-label">
+            <span>Overall Progress</span>
+            <span class="progress-value">${service.overallProgress}%</span>
+          </div>
+          <div class="progress-bar">
+            <div class="progress-fill" style="width: ${service.overallProgress}%"></div>
+          </div>
+        </div>
+      `;
+      container.appendChild(item);
+    });
+  };
+
+  const renderAgentInfo = (agent) => {
+    document.getElementById('agent-name').textContent = agent.agentName;
+    document.getElementById('agent-team-leader').textContent = agent.teamLeader;
+    document.getElementById('agent-manager').textContent = agent.manager;
+    document.getElementById('agent-department').textContent = agent.department;
+    document.getElementById('agent-assigned-date').textContent = formatDate(agent.assignedDate);
+  };
+
+  const renderDailyUpdates = (updates) => {
+    const container = document.getElementById('daily-updates-timeline');
+    container.innerHTML = '';
+
+    updates.forEach(update => {
+      const item = document.createElement('div');
+      item.className = 'timeline-item completed';
+      item.innerHTML = `
+        <div class="timeline-header">
+          <span class="timeline-title">${update.date}</span>
+          <span class="timeline-date">${update.by}</span>
+        </div>
+        <div class="timeline-details">
+          <strong>${update.department}</strong> • ${update.by}
+        </div>
+        <div class="timeline-note">${update.message}</div>
+      `;
+      container.appendChild(item);
+    });
+  };
+
+  const renderNotes = (notes) => {
+    const container = document.getElementById('notes-list');
+    container.innerHTML = '';
+
+    notes.forEach(note => {
+      const item = document.createElement('div');
+      item.className = 'note-item';
+      item.innerHTML = `
+        <div class="note-header">
+          <div class="note-meta">
+            <span class="note-author">${note.by}</span>
+            <span class="note-date">${formatDate(note.date)}</span>
+            <span class="note-dept">${note.department}</span>
+          </div>
+        </div>
+        <div class="note-content">
+          <p>${note.text}</p>
+        </div>
+      `;
+      container.appendChild(item);
+    });
+  };
+
   const init = () => {
     const candidateId = getCandidateId();
     const userRole = getCurrentUserRole();
@@ -911,6 +1227,7 @@ document.addEventListener('DOMContentLoaded', function() {
     renderOverview(candidateData);
     renderKPIs(candidateData);
     renderPersonalDetails(candidateData);
+    renderPersonalDetailsSubtabs(candidateData);
     renderJourneyTimeline(candidateData.journey);
     renderAccountsProgress(candidateData.accounts);
     renderTechnicalProgress(candidateData.technical);
@@ -919,10 +1236,15 @@ document.addEventListener('DOMContentLoaded', function() {
     renderDocuments(documents);
     renderActivities(activities);
     renderCommunications(communications);
+    renderServicesInfo(candidateData.servicesInfo);
+    renderAgentInfo(candidateData.agentInfo);
+    renderDailyUpdates(candidateData.dailyUpdates);
+    renderNotes(candidateData.notes);
     renderRoleBasedActions(userRole);
 
     setupTabSwitching();
     setupSubtabSwitching();
+    setupPersonalDetailsSubtabs();
   };
 
   init();

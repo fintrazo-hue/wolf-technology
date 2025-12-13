@@ -1481,6 +1481,218 @@
   }
 }
 
+/* Personal Details Subtabs */
+.personal-details-subtabs {
+  display: flex;
+  gap: 6px;
+  margin-bottom: var(--spacing-md);
+  background: var(--grey-50);
+  padding: 8px;
+  border-radius: var(--border-radius-sm);
+  overflow-x: auto;
+  flex-wrap: wrap;
+}
+
+.personal-details-subtabs .subtab-btn {
+  padding: 12px 20px;
+  border: none;
+  background: transparent;
+  color: var(--grey-400);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+}
+
+.personal-details-subtabs .subtab-btn:hover {
+  background: var(--brand-white);
+  color: var(--brand-black);
+}
+
+.personal-details-subtabs .subtab-btn.active {
+  background: var(--brand-black);
+  color: var(--brand-yellow);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.personal-subtab-content {
+  display: none;
+}
+
+.personal-subtab-content.active {
+  display: block;
+  animation: fadeIn 0.3s ease;
+}
+
+/* Services Info Styles */
+.services-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+.service-card {
+  background: var(--brand-white);
+  border: 2px solid var(--grey-100);
+  border-radius: var(--border-radius-sm);
+  padding: var(--spacing-md);
+  transition: all 0.3s ease;
+}
+
+.service-card:hover {
+  border-color: var(--brand-yellow);
+  box-shadow: 0 4px 12px rgba(244, 208, 63, 0.15);
+  transform: translateY(-2px);
+}
+
+.service-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--spacing-sm);
+  gap: 12px;
+}
+
+.service-name {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--brand-black);
+}
+
+.service-details {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: var(--spacing-sm);
+  margin-bottom: var(--spacing-md);
+}
+
+.service-detail-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 12px;
+  background: var(--grey-50);
+  border-radius: 6px;
+  gap: 8px;
+}
+
+.service-detail-item .label {
+  font-size: 12px;
+  color: var(--grey-400);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.service-detail-item .value {
+  font-size: 14px;
+  color: var(--brand-black);
+  font-weight: 600;
+}
+
+.service-progress-container {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.progress-label {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 12px;
+  color: var(--grey-400);
+  font-weight: 600;
+}
+
+.progress-value {
+  color: var(--brand-yellow);
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.service-card .progress-bar {
+  height: 8px;
+  background: var(--grey-200);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.service-card .progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--brand-yellow) 0%, #f5e06b 100%);
+  transition: width 0.6s ease;
+  border-radius: 4px;
+}
+
+/* Notes Styles */
+.notes-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+.note-item {
+  background: var(--grey-50);
+  border-radius: var(--border-radius-sm);
+  padding: var(--spacing-md);
+  border-left: 4px solid var(--brand-yellow);
+  transition: all 0.3s ease;
+}
+
+.note-item:hover {
+  background: var(--brand-white);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  transform: translateX(4px);
+}
+
+.note-header {
+  margin-bottom: var(--spacing-sm);
+}
+
+.note-meta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.note-author {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--brand-black);
+}
+
+.note-date {
+  font-size: 12px;
+  color: var(--grey-400);
+  font-weight: 600;
+}
+
+.note-dept {
+  display: inline-block;
+  background: linear-gradient(135deg, var(--brand-yellow) 0%, #f5e06b 100%);
+  color: var(--brand-black);
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+}
+
+.note-content {
+  margin: 0;
+}
+
+.note-content p {
+  margin: 0;
+  font-size: 14px;
+  color: var(--grey-500);
+  line-height: 1.6;
+}
+
 @media (max-width: 576px) {
   .profile-avatar-section {
     flex-direction: column;
@@ -1494,5 +1706,13 @@
 
   .candidate-tags {
     justify-content: center;
+  }
+
+  .personal-details-subtabs {
+    overflow-x: auto;
+  }
+
+  .service-details {
+    grid-template-columns: 1fr;
   }
 }

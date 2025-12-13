@@ -126,6 +126,10 @@
       <button class="tab-btn" data-tab="departments">Department Progress</button>
       <button class="tab-btn" data-tab="documents">Documents</button>
       <button class="tab-btn" data-tab="activity">Activity & Communication</button>
+      <button class="tab-btn" data-tab="services">Services Info</button>
+      <button class="tab-btn" data-tab="agent">Agent</button>
+      <button class="tab-btn" data-tab="daily-updates">Daily Updates</button>
+      <button class="tab-btn" data-tab="notes">Notes</button>
     </div>
 
     <!-- Tab Content -->
@@ -133,62 +137,295 @@
 
       <!-- Personal Details Tab -->
       <div class="tab-content active" id="personal-details-tab">
-        <div class="content-card">
-          <div class="card-header">
-            <h3>Personal Information</h3>
-            <button class="btn-icon" id="edit-personal-btn" title="Edit Details">
-              <i class="fas fa-edit"></i>
-            </button>
+        <div class="personal-details-subtabs">
+          <button class="subtab-btn active" data-subtab="personal-info">Personal Information</button>
+          <button class="subtab-btn" data-subtab="education">Education</button>
+          <button class="subtab-btn" data-subtab="technical-info">Technical Information</button>
+          <button class="subtab-btn" data-subtab="current-info">Current Information</button>
+          <button class="subtab-btn" data-subtab="address-history">Address History</button>
+          <button class="subtab-btn" data-subtab="visa-info">Visa / Experience / Certificate</button>
+          <button class="subtab-btn" data-subtab="marketing-details">Details For Marketing</button>
+          <button class="subtab-btn" data-subtab="billing-info">Billing Information</button>
+        </div>
+
+        <!-- Personal Information Subtab -->
+        <div class="personal-subtab-content active" id="personal-info-subtab">
+          <div class="content-card">
+            <div class="card-header">
+              <h3>Personal Information</h3>
+              <button class="btn-icon" id="edit-personal-btn" title="Edit Details">
+                <i class="fas fa-edit"></i>
+              </button>
+            </div>
+            <div class="card-body">
+              <div class="info-grid">
+                <div class="info-item">
+                  <label>Full Name</label>
+                  <span id="info-name">-</span>
+                </div>
+                <div class="info-item">
+                  <label>Email</label>
+                  <span id="info-email">-</span>
+                </div>
+                <div class="info-item">
+                  <label>Phone</label>
+                  <span id="info-phone">-</span>
+                </div>
+                <div class="info-item">
+                  <label>Alternate Phone</label>
+                  <span id="info-alt-phone">-</span>
+                </div>
+                <div class="info-item">
+                  <label>Date of Birth</label>
+                  <span id="info-dob">-</span>
+                </div>
+                <div class="info-item">
+                  <label>Gender</label>
+                  <span id="info-gender">-</span>
+                </div>
+                <div class="info-item">
+                  <label>City</label>
+                  <span id="info-city">-</span>
+                </div>
+                <div class="info-item">
+                  <label>State</label>
+                  <span id="info-state">-</span>
+                </div>
+                <div class="info-item">
+                  <label>Country</label>
+                  <span id="info-country">-</span>
+                </div>
+              </div>
+            </div>
           </div>
-          <div class="card-body">
-            <div class="info-grid">
-              <div class="info-item">
-                <label>Full Name</label>
-                <span id="info-name">-</span>
+        </div>
+
+        <!-- Education Subtab -->
+        <div class="personal-subtab-content" id="education-subtab">
+          <div class="content-card">
+            <div class="card-header">
+              <h3>Education</h3>
+            </div>
+            <div class="card-body">
+              <div class="info-grid">
+                <div class="info-item">
+                  <label>Qualification</label>
+                  <span id="edu-qualification">-</span>
+                </div>
+                <div class="info-item">
+                  <label>Specialization</label>
+                  <span id="edu-specialization">-</span>
+                </div>
+                <div class="info-item">
+                  <label>University</label>
+                  <span id="edu-university">-</span>
+                </div>
+                <div class="info-item">
+                  <label>Graduation Year</label>
+                  <span id="edu-year">-</span>
+                </div>
               </div>
-              <div class="info-item">
-                <label>Email</label>
-                <span id="info-email">-</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Technical Information Subtab -->
+        <div class="personal-subtab-content" id="technical-info-subtab">
+          <div class="content-card">
+            <div class="card-header">
+              <h3>Technical Information</h3>
+            </div>
+            <div class="card-body">
+              <div class="info-grid">
+                <div class="info-item">
+                  <label>Primary Skill</label>
+                  <span id="tech-primary-skill">-</span>
+                </div>
+                <div class="info-item">
+                  <label>Secondary Skills</label>
+                  <span id="tech-secondary-skills">-</span>
+                </div>
+                <div class="info-item">
+                  <label>Experience (Years)</label>
+                  <span id="tech-experience-years">-</span>
+                </div>
+                <div class="info-item">
+                  <label>Primary Technology</label>
+                  <span id="tech-primary-tech">-</span>
+                </div>
               </div>
-              <div class="info-item">
-                <label>Phone</label>
-                <span id="info-phone">-</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Current Information Subtab -->
+        <div class="personal-subtab-content" id="current-info-subtab">
+          <div class="content-card">
+            <div class="card-header">
+              <h3>Current Information</h3>
+            </div>
+            <div class="card-body">
+              <div class="info-grid">
+                <div class="info-item">
+                  <label>Company</label>
+                  <span id="curr-company">-</span>
+                </div>
+                <div class="info-item">
+                  <label>Current Role</label>
+                  <span id="curr-role">-</span>
+                </div>
+                <div class="info-item">
+                  <label>Notice Period</label>
+                  <span id="curr-notice-period">-</span>
+                </div>
+                <div class="info-item">
+                  <label>Current CTC</label>
+                  <span id="curr-ctc">-</span>
+                </div>
+                <div class="info-item">
+                  <label>Expected CTC</label>
+                  <span id="curr-expected-ctc">-</span>
+                </div>
               </div>
-              <div class="info-item">
-                <label>Alternate Phone</label>
-                <span id="info-alt-phone">-</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Address History Subtab -->
+        <div class="personal-subtab-content" id="address-history-subtab">
+          <div class="content-card">
+            <div class="card-header">
+              <h3>Address History</h3>
+            </div>
+            <div class="card-body">
+              <div class="info-grid">
+                <div class="info-item">
+                  <label>Current Address</label>
+                  <span id="addr-current">-</span>
+                </div>
+                <div class="info-item">
+                  <label>Permanent Address</label>
+                  <span id="addr-permanent">-</span>
+                </div>
+                <div class="info-item">
+                  <label>City</label>
+                  <span id="addr-city">-</span>
+                </div>
+                <div class="info-item">
+                  <label>State</label>
+                  <span id="addr-state">-</span>
+                </div>
+                <div class="info-item">
+                  <label>Country</label>
+                  <span id="addr-country">-</span>
+                </div>
+                <div class="info-item">
+                  <label>Pin Code</label>
+                  <span id="addr-pincode">-</span>
+                </div>
               </div>
-              <div class="info-item">
-                <label>Date of Birth</label>
-                <span id="info-dob">-</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Visa / Experience / Certificate Subtab -->
+        <div class="personal-subtab-content" id="visa-info-subtab">
+          <div class="content-card">
+            <div class="card-header">
+              <h3>Visa / Experience / Certificate</h3>
+            </div>
+            <div class="card-body">
+              <div class="info-grid">
+                <div class="info-item">
+                  <label>Visa Status</label>
+                  <span id="visa-status">-</span>
+                </div>
+                <div class="info-item">
+                  <label>Total Experience</label>
+                  <span id="visa-total-exp">-</span>
+                </div>
+                <div class="info-item">
+                  <label>Certifications</label>
+                  <span id="visa-certifications">-</span>
+                </div>
               </div>
-              <div class="info-item">
-                <label>Gender</label>
-                <span id="info-gender">-</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Details For Marketing Subtab -->
+        <div class="personal-subtab-content" id="marketing-details-subtab">
+          <div class="content-card">
+            <div class="card-header">
+              <h3>Details For Marketing</h3>
+            </div>
+            <div class="card-body">
+              <div class="info-grid">
+                <div class="info-item">
+                  <label>Marketing Phone</label>
+                  <span id="mkt-phone">-</span>
+                </div>
+                <div class="info-item">
+                  <label>Marketing Email</label>
+                  <span id="mkt-email">-</span>
+                </div>
+                <div class="info-item">
+                  <label>LinkedIn ID</label>
+                  <span id="mkt-linkedin">-</span>
+                </div>
+                <div class="info-item">
+                  <label>Personal LinkedIn</label>
+                  <span id="mkt-personal-linkedin">-</span>
+                </div>
+                <div class="info-item">
+                  <label>Passport</label>
+                  <span id="mkt-passport">-</span>
+                </div>
+                <div class="info-item">
+                  <label>SSN Last 4</label>
+                  <span id="mkt-ssn">-</span>
+                </div>
+                <div class="info-item">
+                  <label>Available for Interview</label>
+                  <span id="mkt-available">-</span>
+                </div>
+                <div class="info-item">
+                  <label>Remarks</label>
+                  <span id="mkt-remarks">-</span>
+                </div>
               </div>
-              <div class="info-item">
-                <label>City</label>
-                <span id="info-city">-</span>
-              </div>
-              <div class="info-item">
-                <label>State</label>
-                <span id="info-state">-</span>
-              </div>
-              <div class="info-item">
-                <label>Country</label>
-                <span id="info-country">-</span>
-              </div>
-              <div class="info-item">
-                <label>Education</label>
-                <span id="info-education">-</span>
-              </div>
-              <div class="info-item">
-                <label>Experience (Years)</label>
-                <span id="info-experience">-</span>
-              </div>
-              <div class="info-item">
-                <label>Visa Status</label>
-                <span id="info-visa">-</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Billing Information Subtab -->
+        <div class="personal-subtab-content" id="billing-info-subtab">
+          <div class="content-card">
+            <div class="card-header">
+              <h3>Billing Information</h3>
+            </div>
+            <div class="card-body">
+              <div class="info-grid">
+                <div class="info-item">
+                  <label>Billing ID</label>
+                  <span id="bill-id">-</span>
+                </div>
+                <div class="info-item">
+                  <label>Service</label>
+                  <span id="bill-service">-</span>
+                </div>
+                <div class="info-item">
+                  <label>Payment Status</label>
+                  <span id="bill-payment-status">-</span>
+                </div>
+                <div class="info-item">
+                  <label>Payment Mode</label>
+                  <span id="bill-payment-mode">-</span>
+                </div>
+                <div class="info-item">
+                  <label>Payment Date</label>
+                  <span id="bill-payment-date">-</span>
+                </div>
               </div>
             </div>
           </div>
@@ -479,6 +716,81 @@
           <div class="card-body">
             <div class="activity-list" id="activity-list">
               <!-- Activities will be inserted here -->
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Services Info Tab -->
+      <div class="tab-content" id="services-tab">
+        <div class="content-card">
+          <div class="card-header">
+            <h3>Services Information</h3>
+          </div>
+          <div class="card-body">
+            <div class="services-list" id="services-list">
+              <!-- Services will be inserted here -->
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Agent Tab -->
+      <div class="tab-content" id="agent-tab">
+        <div class="content-card">
+          <div class="card-header">
+            <h3>Agent Information</h3>
+          </div>
+          <div class="card-body">
+            <div class="info-grid">
+              <div class="info-item">
+                <label>Agent Name</label>
+                <span id="agent-name">-</span>
+              </div>
+              <div class="info-item">
+                <label>Team Leader</label>
+                <span id="agent-team-leader">-</span>
+              </div>
+              <div class="info-item">
+                <label>Manager</label>
+                <span id="agent-manager">-</span>
+              </div>
+              <div class="info-item">
+                <label>Department</label>
+                <span id="agent-department">-</span>
+              </div>
+              <div class="info-item">
+                <label>Assigned Date</label>
+                <span id="agent-assigned-date">-</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Daily Updates Tab -->
+      <div class="tab-content" id="daily-updates-tab">
+        <div class="content-card">
+          <div class="card-header">
+            <h3>Daily Updates</h3>
+          </div>
+          <div class="card-body">
+            <div class="timeline-container" id="daily-updates-timeline">
+              <!-- Daily updates will be inserted here -->
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Notes Tab -->
+      <div class="tab-content" id="notes-tab">
+        <div class="content-card">
+          <div class="card-header">
+            <h3>Notes</h3>
+          </div>
+          <div class="card-body">
+            <div class="notes-list" id="notes-list">
+              <!-- Notes will be inserted here -->
             </div>
           </div>
         </div>
