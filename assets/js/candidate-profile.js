@@ -873,6 +873,30 @@ document.addEventListener('DOMContentLoaded', function() {
         }
       });
     });
+
+    const searchInput = document.getElementById('employee-search-input');
+    if (searchInput) {
+      searchInput.addEventListener('input', (e) => {
+        const searchTerm = e.target.value.toLowerCase();
+        const employeeItems = document.querySelectorAll('.employee-list-item');
+        let visibleCount = 0;
+
+        employeeItems.forEach(item => {
+          const employeeName = item.getAttribute('data-employee').toLowerCase();
+          if (employeeName.includes(searchTerm)) {
+            item.style.display = 'flex';
+            visibleCount++;
+          } else {
+            item.style.display = 'none';
+          }
+        });
+
+        const countElement = document.getElementById('employee-count');
+        if (countElement) {
+          countElement.textContent = visibleCount;
+        }
+      });
+    }
   };
 
   const init = () => {
