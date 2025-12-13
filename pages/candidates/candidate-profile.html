@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Candidate Profile - Wolf Technologies Admin</title>
+  <link rel="stylesheet" href="../../assets/css/style.css">
+  <link rel="stylesheet" href="../../assets/css/candidate-profile.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+  <div id="sidebar-container"></div>
+
+  <div class="main-content">
+    <div class="page-header">
+      <div class="header-left">
+        <h1 class="page-title">Candidate Profile</h1>
+        <div class="breadcrumb">
+          <a href="../../profiles-directory.html">Candidates</a>
+          <span class="separator">/</span>
+          <span id="breadcrumb-name">Loading...</span>
+        </div>
+      </div>
+      <div class="header-right" id="header-actions">
+        <!-- Role-based actions will be inserted here -->
+      </div>
+    </div>
+
+    <!-- Overview Summary Section -->
+    <div class="profile-overview-card">
+      <div class="overview-left">
+        <div class="candidate-avatar" id="candidate-avatar">
+          <i class="fas fa-user"></i>
+        </div>
+        <div class="candidate-basic-info">
+          <h2 id="candidate-name">Loading...</h2>
+          <p class="candidate-id">ID: <span id="candidate-id">-</span></p>
+          <p class="candidate-service"><i class="fas fa-briefcase"></i> <span id="candidate-service">-</span></p>
+        </div>
+      </div>
+      <div class="overview-right">
+        <div class="overview-stat">
+          <label>Current Department</label>
+          <span class="stat-value" id="current-department">-</span>
+        </div>
+        <div class="overview-stat">
+          <label>Current Stage</label>
+          <span class="stat-value" id="current-stage">-</span>
+        </div>
+        <div class="overview-stat">
+          <label>Status</label>
+          <span class="status-badge" id="status-badge">-</span>
+        </div>
+        <div class="overview-stat">
+          <label>Overall Progress</label>
+          <div class="progress-container">
+            <div class="progress-bar">
+              <div class="progress-fill" id="overall-progress-fill"></div>
+            </div>
+            <span class="progress-text" id="overall-progress-text">0%</span>
+          </div>
+        </div>
+        <div class="overview-stat">
+          <label>Last Activity</label>
+          <span class="stat-value" id="last-activity">-</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tab Navigation -->
+    <div class="profile-tabs">
+      <button class="tab-btn active" data-tab="personal-details">Personal Details</button>
+      <button class="tab-btn" data-tab="journey">Journey Timeline</button>
+      <button class="tab-btn" data-tab="departments">Department Progress</button>
+      <button class="tab-btn" data-tab="documents">Documents</button>
+      <button class="tab-btn" data-tab="activity">Activity & Communication</button>
+    </div>
+
+    <!-- Tab Content -->
+    <div class="profile-content">
+
+      <!-- Personal Details Tab -->
+      <div class="tab-content active" id="personal-details-tab">
+        <div class="content-card">
+          <div class="card-header">
+            <h3>Personal Information</h3>
+            <button class="btn-icon" id="edit-personal-btn" title="Edit Details">
+              <i class="fas fa-edit"></i>
+            </button>
+          </div>
+          <div class="card-body">
+            <div class="info-grid">
+              <div class="info-item">
+                <label>Full Name</label>
+                <span id="info-name">-</span>
+              </div>
+              <div class="info-item">
+                <label>Email</label>
+                <span id="info-email">-</span>
+              </div>
+              <div class="info-item">
+                <label>Phone</label>
+                <span id="info-phone">-</span>
+              </div>
+              <div class="info-item">
+                <label>Alternate Phone</label>
+                <span id="info-alt-phone">-</span>
+              </div>
+              <div class="info-item">
+                <label>Date of Birth</label>
+                <span id="info-dob">-</span>
+              </div>
+              <div class="info-item">
+                <label>Gender</label>
+                <span id="info-gender">-</span>
+              </div>
+              <div class="info-item">
+                <label>City</label>
+                <span id="info-city">-</span>
+              </div>
+              <div class="info-item">
+                <label>State</label>
+                <span id="info-state">-</span>
+              </div>
+              <div class="info-item">
+                <label>Country</label>
+                <span id="info-country">-</span>
+              </div>
+              <div class="info-item">
+                <label>Education</label>
+                <span id="info-education">-</span>
+              </div>
+              <div class="info-item">
+                <label>Experience (Years)</label>
+                <span id="info-experience">-</span>
+              </div>
+              <div class="info-item">
+                <label>Visa Status</label>
+                <span id="info-visa">-</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Journey Timeline Tab -->
+      <div class="tab-content" id="journey-tab">
+        <div class="content-card">
+          <div class="card-header">
+            <h3>Candidate Journey Timeline</h3>
+          </div>
+          <div class="card-body">
+            <div class="timeline-container" id="journey-timeline">
+              <!-- Timeline items will be inserted here -->
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Department Progress Tab -->
+      <div class="tab-content" id="departments-tab">
+        <div class="department-subtabs">
+          <button class="subtab-btn active" data-subtab="accounts">Accounts</button>
+          <button class="subtab-btn" data-subtab="technical">Technical</button>
+          <button class="subtab-btn" data-subtab="marketing">Marketing</button>
+          <button class="subtab-btn" data-subtab="bd-sales">BD/Sales</button>
+        </div>
+
+        <!-- Accounts Subtab -->
+        <div class="subtab-content active" id="accounts-subtab">
+          <div class="content-card">
+            <div class="card-header">
+              <h3>Accounts Department Progress</h3>
+            </div>
+            <div class="card-body">
+              <div class="workflow-steps" id="accounts-workflow">
+                <!-- Workflow steps will be inserted here -->
+              </div>
+              <div class="section-divider"></div>
+              <h4>Assigned Team</h4>
+              <div class="info-grid">
+                <div class="info-item">
+                  <label>Agent</label>
+                  <span id="accounts-agent">-</span>
+                </div>
+                <div class="info-item">
+                  <label>Team Leader</label>
+                  <span id="accounts-tl">-</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Technical Subtab -->
+        <div class="subtab-content" id="technical-subtab">
+          <div class="content-card">
+            <div class="card-header">
+              <h3>Technical Department Progress</h3>
+            </div>
+            <div class="card-body">
+              <div class="info-grid">
+                <div class="info-item">
+                  <label>Resume Status</label>
+                  <span class="status-badge" id="tech-resume-status">-</span>
+                </div>
+                <div class="info-item">
+                  <label>Training Status</label>
+                  <span class="status-badge" id="tech-training-status">-</span>
+                </div>
+                <div class="info-item">
+                  <label>Trainer Name</label>
+                  <span id="tech-trainer">-</span>
+                </div>
+                <div class="info-item">
+                  <label>Project Status</label>
+                  <span class="status-badge" id="tech-project-status">-</span>
+                </div>
+              </div>
+              <div class="section-divider"></div>
+              <h4>Project Completion</h4>
+              <div class="progress-container">
+                <div class="progress-bar">
+                  <div class="progress-fill" id="tech-project-progress"></div>
+                </div>
+                <span class="progress-text" id="tech-project-percent">0%</span>
+              </div>
+              <div class="section-divider"></div>
+              <h4>Technical Notes</h4>
+              <div class="notes-box" id="tech-notes">
+                No notes available.
+              </div>
+              <div class="section-divider"></div>
+              <h4>Assigned Team</h4>
+              <div class="info-grid">
+                <div class="info-item">
+                  <label>Agent</label>
+                  <span id="technical-agent">-</span>
+                </div>
+                <div class="info-item">
+                  <label>Team Leader</label>
+                  <span id="technical-tl">-</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Marketing Subtab -->
+        <div class="subtab-content" id="marketing-subtab">
+          <div class="content-card">
+            <div class="card-header">
+              <h3>Marketing Department Progress</h3>
+            </div>
+            <div class="card-body">
+              <div class="info-grid">
+                <div class="info-item">
+                  <label>Marketing Start Date</label>
+                  <span id="marketing-start-date">-</span>
+                </div>
+                <div class="info-item">
+                  <label>Profiles Submitted</label>
+                  <span id="marketing-profiles-count">0</span>
+                </div>
+                <div class="info-item">
+                  <label>Interviews Scheduled</label>
+                  <span id="marketing-interviews-scheduled">0</span>
+                </div>
+                <div class="info-item">
+                  <label>Interviews Attended</label>
+                  <span id="marketing-interviews-attended">0</span>
+                </div>
+                <div class="info-item">
+                  <label>Placement Status</label>
+                  <span class="status-badge" id="marketing-placement-status">-</span>
+                </div>
+                <div class="info-item">
+                  <label>Next Followup</label>
+                  <span id="marketing-next-followup">-</span>
+                </div>
+              </div>
+              <div class="section-divider"></div>
+              <h4>Interview Feedback</h4>
+              <div class="notes-box" id="marketing-feedback">
+                No feedback available.
+              </div>
+              <div class="section-divider"></div>
+              <h4>Assigned Team</h4>
+              <div class="info-grid">
+                <div class="info-item">
+                  <label>Agent</label>
+                  <span id="marketing-agent">-</span>
+                </div>
+                <div class="info-item">
+                  <label>Team Leader</label>
+                  <span id="marketing-tl">-</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- BD/Sales Subtab -->
+        <div class="subtab-content" id="bd-sales-subtab">
+          <div class="content-card">
+            <div class="card-header">
+              <h3>BD/Sales Information</h3>
+            </div>
+            <div class="card-body">
+              <div class="info-grid">
+                <div class="info-item">
+                  <label>Lead Source</label>
+                  <span id="bd-lead-source">-</span>
+                </div>
+                <div class="info-item">
+                  <label>Calls Made</label>
+                  <span id="bd-calls-made">0</span>
+                </div>
+                <div class="info-item">
+                  <label>Followups Done</label>
+                  <span id="bd-followups">0</span>
+                </div>
+                <div class="info-item">
+                  <label>Conversion Date</label>
+                  <span id="bd-conversion-date">-</span>
+                </div>
+              </div>
+              <div class="section-divider"></div>
+              <h4>Deal Stage History</h4>
+              <div class="timeline-container small" id="bd-stage-history">
+                <!-- Stage history will be inserted here -->
+              </div>
+              <div class="section-divider"></div>
+              <h4>Conversion Notes</h4>
+              <div class="notes-box" id="bd-notes">
+                No notes available.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Documents Tab -->
+      <div class="tab-content" id="documents-tab">
+        <div class="content-card">
+          <div class="card-header">
+            <h3>Documents & Files</h3>
+            <button class="btn btn-primary" id="upload-doc-btn">
+              <i class="fas fa-upload"></i> Upload Document
+            </button>
+          </div>
+          <div class="card-body">
+            <div class="documents-categories">
+              <div class="doc-category">
+                <h4>Personal Documents</h4>
+                <div class="documents-list" id="docs-personal">
+                  <!-- Documents will be inserted here -->
+                </div>
+              </div>
+              <div class="doc-category">
+                <h4>Resume Versions</h4>
+                <div class="documents-list" id="docs-resume">
+                  <!-- Documents will be inserted here -->
+                </div>
+              </div>
+              <div class="doc-category">
+                <h4>Agreements</h4>
+                <div class="documents-list" id="docs-agreements">
+                  <!-- Documents will be inserted here -->
+                </div>
+              </div>
+              <div class="doc-category">
+                <h4>Certificates</h4>
+                <div class="documents-list" id="docs-certificates">
+                  <!-- Documents will be inserted here -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Activity & Communication Tab -->
+      <div class="tab-content" id="activity-tab">
+        <div class="content-card">
+          <div class="card-header">
+            <h3>Activity Log</h3>
+            <button class="btn btn-primary" id="add-activity-btn">
+              <i class="fas fa-plus"></i> Add Activity
+            </button>
+          </div>
+          <div class="card-body">
+            <div class="activity-list" id="activity-list">
+              <!-- Activities will be inserted here -->
+            </div>
+          </div>
+        </div>
+        <div class="content-card">
+          <div class="card-header">
+            <h3>Communication Log</h3>
+          </div>
+          <div class="card-body">
+            <div class="communication-list" id="communication-list">
+              <!-- Communications will be inserted here -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="../../assets/js/load-sidebar.js"></script>
+  <script src="../../assets/js/mockdata.js"></script>
+  <script src="../../assets/js/candidate-profile.js"></script>
+</body>
+</html>
