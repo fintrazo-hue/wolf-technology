@@ -9,16 +9,14 @@ const SalesProfileModule = (() => {
 
   const loadMockData = async () => {
     try {
-      if (typeof mockData !== 'undefined' && mockData.employees) {
-        const salesEmployees = mockData.employees.filter(e => e.department === 'sales');
+      const data = window.MOCK_DATA || window.mockData || MOCK_DATA;
+      if (data && data.employees) {
+        const salesEmployees = data.employees.filter(e => e.department === 'sales');
         return {
           employees: salesEmployees,
-          leads: mockData.leads || [],
-          activityLogs: mockData.activityLogs || []
+          leads: data.leads || [],
+          activityLogs: data.activityLogs || []
         };
-      }
-      if (typeof MOCK_DATA !== 'undefined') {
-        return MOCK_DATA;
       }
       const response = await fetch('/data/leads.json');
       if (!response.ok) throw new Error('Failed to load mock data');

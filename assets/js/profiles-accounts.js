@@ -9,8 +9,9 @@ const AccountsProfileModule = (() => {
   ];
 
   const loadMockData = async () => {
-    if (typeof MOCK_DATA !== 'undefined') {
-      return MOCK_DATA;
+    const data = window.MOCK_DATA || window.mockData || (typeof MOCK_DATA !== 'undefined' ? MOCK_DATA : null);
+    if (data) {
+      return data;
     }
     return {};
   };
